@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">항공편</a>
+            <a class="nav-link active"  aria-current="page" href="#">항공편</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">숙박</a>
@@ -19,7 +19,7 @@
             <a class="nav-link active" aria-current="page" href="#">렌트카</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
               게시판
             </a>
             <ul class="dropdown-menu">
@@ -29,7 +29,7 @@
               <li><a class="dropdown-item" href="#">숙소 후기</a></li>
             </ul>
           </li>
-        </ul>
+          </ul>
         <div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

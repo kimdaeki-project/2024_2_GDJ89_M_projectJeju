@@ -20,8 +20,6 @@
               <button class="btn btn-primary" style="width: 100px;" type="submit">검색</button>
             </form>
 			
-			
-			
 		</div>
 	</div>
 
