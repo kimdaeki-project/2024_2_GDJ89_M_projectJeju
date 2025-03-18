@@ -9,9 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- header -->
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
-
+	
+	<!-- body -->
 	<div class="container-fluid my-5">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
@@ -23,7 +25,11 @@
 	</div>
 
 
+
+
 	<!-- footer -->
+	<c:import url="/WEB-INK/views/templates/footer.jsp"></c:import>
+
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>
 </html>
