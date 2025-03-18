@@ -120,6 +120,13 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		<!--  https://mvnrepository.com/artifact/org.springframework/spring-test  -->
+		<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>${org.springframework-version}</version>
+		<scope>test</scope>
+		</dependency>
 				
 		<!-- Servlet -->
 		<dependency>

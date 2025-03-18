@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<head>
+		<c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>

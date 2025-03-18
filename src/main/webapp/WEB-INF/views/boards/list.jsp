@@ -24,8 +24,7 @@
 				<select name="kind" class="form-select" id="inlineFormSelectPref">
 				  <option value="t1">제목</option>
 				  <option value="t2">내용</option>
-				  <option value="t3">제목+내용</option>
-				  <option value="t4">위치</option>
+				  <option value="t3">위치</option>
 				</select>
 			  </div>
 			  
@@ -36,38 +35,54 @@
 			  <div class="col-12">
 				<button type="submit" class="btn btn-primary">검색</button>
 			  </div>
-			</form>
-
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 				<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-				<label class="btn btn-outline-primary" for="btnradio1"><i class="bi bi-border-all"></i></label>
+				<label class="btn btn-outline-primary" for="btnradio1"><i class="bi bi-card-list"></i></label>
 			  
 				<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-				<label class="btn btn-outline-primary" for="btnradio2"><i class="bi bi-card-list"></i></label>
+				<label class="btn btn-outline-primary" for="btnradio2"><i class="bi bi-border-all"></i></label>
 			</div>
+			<select name="kind" class="form-select" id="inlineFormSelectPref">
+				<option value="o1">작성 날짜 순</option>
+				<option value="o2">즐겨찾기 많은 순</option>
+				<option value="o3">조회수 많은 순</option>
+			  </select>
+			</form>
 
-			<table class="table">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>좋아요</th>
+						<th>조회수</th>
+					</tr>
 				<tbody>
 					<tr>
-						<td><img src="/resources/images/test.png"></td>
+						<td>1</td>
 						<td>TestTitle</td>
-						<td>TestContents</td><br>
 						<td>TestuserID</td>
 						<td>TestDate</td>
+						<td>999</td>
+						<td>999</td>
 					</tr>
 					<tr>
-						<td><img src="/resources/images/test.png"></td>
+						<td>2</td>
 						<td>TestTitle</td>
-						<td>TestContents</td><br>
 						<td>TestuserID</td>
 						<td>TestDate</td>
+						<td>999</td>
+						<td>999</td>
 					</tr>
 					<tr>
-						<td><img src="/resources/images/test.png"></td>
+						<td>3</td>
 						<td>TestTitle</td>
-						<td>TestContents</td><br>
 						<td>TestuserID</td>
 						<td>TestDate</td>
+						<td>999</td>
+						<td>999</td>
 					</tr>
 				</tbody>
 			</table>
