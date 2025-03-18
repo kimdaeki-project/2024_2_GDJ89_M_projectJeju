@@ -44,8 +44,44 @@
 			    <option value="1">숙박</option>
 			    <option value="2">렌트카</option>
 			  </select>
-			  <button class="btn btn-outline-secondary" type="button" id="button-addon2">검색</button>
+			  <button class="btn btn-primary" type="button" id="button-addon2">검색</button>
 			</div>
+		</div>
+		<div>
+			<table class="table table-striped" style="width: 35%;" >
+				<thead>
+					<tr>
+						<th colspan="3">공지사항</th>
+						<th><a>더보기</a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>관리자</td>
+						<td>공지</td>
+						<td>공지사항</td><br>
+						<td>2025-03-18</td>
+					</tr>
+					<tr>
+						<td>관리자</td>
+						<td>공지</td>
+						<td>공지사항</td><br>
+						<td>2025-03-18</td>
+					</tr>
+					<tr>
+						<td>관리자</td>
+						<td>공지</td>
+						<td>공지사항</td><br>
+						<td>2025-03-18</td>
+					</tr>
+					<tr>
+						<td>관리자</td>
+						<td>공지</td>
+						<td>공지사항</td><br>
+						<td>2025-03-18</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		
 	</div>
