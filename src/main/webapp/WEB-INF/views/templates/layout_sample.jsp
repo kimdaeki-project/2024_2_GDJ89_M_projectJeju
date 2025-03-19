@@ -29,6 +29,7 @@
 
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header class="row">
-  <nav class="navbar navbar-expand-md border-bottom border-body navbar-dark fixed-top bg-dark">
+<div>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">JEJU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
             <a class="nav-link active" aria-current="page" href="/">홈페이지</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/flights/search">항공</a>
+            <a class="nav-link" href="#">항공</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">숙박</a>
@@ -42,4 +42,4 @@
       </div>
     </div>
   </nav>
-</header>
+</div>
