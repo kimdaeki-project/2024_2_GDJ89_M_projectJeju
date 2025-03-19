@@ -28,9 +28,9 @@
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">list group item</li>
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">list group item</li>
 				</div>
-			
+				
 				<div style="display: flex; justify-content: space-between; height: 50px;">
-					<i class="bi bi-arrow-bar-left" style="font-size: 2rem;"></i><i class="bi bi-arrow-bar-right" style="font-size: 2rem;"></i>
+					<i class="bi bi-arrow-bar-left" width="32" height="32"></i><i class="bi bi-arrow-bar-right" width="32" height="32"></i>
 				</div>
 				
 				<div class="">
@@ -45,8 +45,6 @@
 					</div>
 				</div>
 			</div>
-			
-
 			
 			
 			

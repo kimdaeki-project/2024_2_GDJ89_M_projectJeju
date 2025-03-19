@@ -28,12 +28,12 @@
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">list group item</li>
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">list group item</li>
 				</div>
-			
-				<div style="display: flex; justify-content: space-between; height: 50px;">
-					<i class="bi bi-arrow-bar-left" style="font-size: 2rem;"></i><i class="bi bi-arrow-bar-right" style="font-size: 2rem;"></i>
+				<div>
+					<div>
+						<i class="bi bi-arrow-bar-left" style="margin-left: 5px;"></i><i class="bi bi-arrow-bar-right" style="margin-right: 5px;"></i>
+					</div>
 				</div>
-				
-				<div class="">
+				<div class="row">
 					<div class="tab-content" id="nav-tabContent">
 						<div class="tab-pane fade" id="list-1" role="tabpanel">1</div>
 						<div class="tab-pane fade" id="list-2" role="tabpanel">2</div>
@@ -45,8 +45,6 @@
 					</div>
 				</div>
 			</div>
-			
-
 			
 			
 			

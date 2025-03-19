@@ -17,7 +17,7 @@
 	<div class="container-fluid my-5">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			 
+			 <div>3</div>
 			<div class="container text-center mt-5">
 				<div class="list-group list-group-horizontal">
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1">list group item</li>
@@ -28,12 +28,7 @@
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">list group item</li>
 					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">list group item</li>
 				</div>
-			
-				<div style="display: flex; justify-content: space-between; height: 50px;">
-					<i class="bi bi-arrow-bar-left" style="font-size: 2rem;"></i><i class="bi bi-arrow-bar-right" style="font-size: 2rem;"></i>
-				</div>
-				
-				<div class="">
+				<div class="row">
 					<div class="tab-content" id="nav-tabContent">
 						<div class="tab-pane fade" id="list-1" role="tabpanel">1</div>
 						<div class="tab-pane fade" id="list-2" role="tabpanel">2</div>
@@ -45,8 +40,6 @@
 					</div>
 				</div>
 			</div>
-			
-
 			
 			
 			

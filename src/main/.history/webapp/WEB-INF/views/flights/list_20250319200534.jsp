@@ -34,7 +34,7 @@
 				</div>
 				
 				<div class="">
-					<div class="tab-content" id="nav-tabContent">
+					<div class="" id="nav-tabContent">
 						<div class="tab-pane fade" id="list-1" role="tabpanel">1</div>
 						<div class="tab-pane fade" id="list-2" role="tabpanel">2</div>
 						<div class="tab-pane fade" id="list-3" role="tabpanel">3</div>
@@ -45,8 +45,6 @@
 					</div>
 				</div>
 			</div>
-			
-
 			
 			
 			
