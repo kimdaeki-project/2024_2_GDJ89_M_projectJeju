@@ -14,7 +14,7 @@
             <a class="nav-link active" aria-current="page" href="/">홈페이지</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/flights/search">항공</a>
+            <a class="nav-link" href="/products/flights/search">항공</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">숙박</a>
