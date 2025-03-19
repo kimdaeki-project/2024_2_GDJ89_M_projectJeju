@@ -11,8 +11,7 @@
 <body>
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
-
-	<div class="container-fluid my-5">
+	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			<h1>TestList</h1>
@@ -22,9 +21,9 @@
 			  <div class="col-12">
 				<label class="visually-hidden" for="inlineFormSelectPref">test</label>
 				<select name="kind" class="form-select" id="inlineFormSelectPref">
-				  <option value="t1">제목</option>
-				  <option value="t2">내용</option>
-				  <option value="t3">위치</option>
+				  <option value="k1">제목</option>
+				  <option value="k2">내용</option>
+				  <option value="k3">위치</option>
 				</select>
 			  </div>
 			  
@@ -42,10 +41,10 @@
 				<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
 				<label class="btn btn-outline-primary" for="btnradio2"><a href="/boards/cardlist"><i class="bi bi-border-all"></i></a></label>
 			</div>
-			<select name="kind" class="form-select" id="inlineFormSelectPref">
-				<option value="o1">작성 날짜 순</option>
-				<option value="o2">즐겨찾기 많은 순</option>
-				<option value="o3">조회수 많은 순</option>
+			<select name="searchKind" class="form-select" id="inlineFormSelectPref">
+				<option value="sk1">작성 날짜 순</option>
+				<option value="sk2">즐겨찾기 많은 순</option>
+				<option value="sk3">조회수 많은 순</option>
 			  </select>
 			</form>
 
@@ -60,34 +59,21 @@
 						<th>조회수</th>
 					</tr>
 				<tbody>
+				<c:forEach items="${list}" var="i">
 					<tr>
-						<td>1</td>
-						<td>TestTitle</td>
-						<td>TestuserID</td>
-						<td>TestDate</td>
-						<td>999</td>
-						<td>999</td>
+						<td>${i.boardNum}</td>
+						<td>${i.boardTitle}</td>
+						<td>${i.userID}</td>
+						<td>${i.boardDate}</td>
+						<td>${i.favorite}</td>
+						<td>${i.boardHits}</td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>TestTitle</td>
-						<td>TestuserID</td>
-						<td>TestDate</td>
-						<td>999</td>
-						<td>999</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>TestTitle</td>
-						<td>TestuserID</td>
-						<td>TestDate</td>
-						<td>999</td>
-						<td>999</td>
-					</tr>
+				</c:forEach>
+					
 				</tbody>
 			</table>
-			<div >
-				<nav aria-label="Page navigation example">
+			<div>
+				<nav aria-label="Page navigation example" style="width: 300px; margin: 0px auto;">
 					<ul class="pagination">
 					  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 					  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -96,6 +82,7 @@
 					  <li class="page-item"><a class="page-link" href="#">Next</a></li>
 					</ul>
 				</nav>
+				<a class="btn btn-success" href="add">글쓰기</a>
 			</div>
 
 		</div>

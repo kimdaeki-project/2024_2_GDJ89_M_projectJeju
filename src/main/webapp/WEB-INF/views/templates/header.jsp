@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<header class="row">
+  <nav class="navbar navbar-expand-md border-bottom border-body navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">JEJU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,4 +42,4 @@
       </div>
     </div>
   </nav>
-</div>
+</header>

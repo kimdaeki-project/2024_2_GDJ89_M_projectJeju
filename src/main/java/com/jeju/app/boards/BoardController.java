@@ -20,6 +20,7 @@ public class BoardController {
 		BoardDTO boardDTO = new BoardDTO();
 		
 		List<BoardDTO> ar = boardService.getList(boardDTO);
+		model.addAttribute("list", ar);
 	}
 	
 	@RequestMapping(value = "cardlist", method = RequestMethod.GET)
