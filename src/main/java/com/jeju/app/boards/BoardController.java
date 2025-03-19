@@ -22,6 +22,13 @@ public class BoardController {
 		List<BoardDTO> ar = boardService.getList(boardDTO);
 	}
 	
+	@RequestMapping(value = "cardlist", method = RequestMethod.GET)
+	public void getCardList(Model model) throws Exception {
+		BoardDTO boardDTO = new BoardDTO();
+		
+		List<BoardDTO> ar = boardService.getList(boardDTO);
+	}
+	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public void add(BoardDTO boardDTO, Model model) throws Exception {
 		int result = boardService.add(boardDTO);
