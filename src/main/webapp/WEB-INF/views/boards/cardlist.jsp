@@ -12,7 +12,7 @@
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
 
-	<div class="container-fluid my-5">
+	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			<h1>TestCardList</h1>
@@ -36,10 +36,10 @@
 				<button type="submit" class="btn btn-primary">검색</button>
 			  </div>
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+				<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
 				<label class="btn btn-outline-primary" for="btnradio1"><a href="/boards/list"><i class="bi bi-card-list"></i></a></label>
 			  
-				<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+				<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
 				<label class="btn btn-outline-primary" for="btnradio2"><a href="/boards/cardlist"><i class="bi bi-border-all"></i></a></label>
 			</div>
 			<select name="kind" class="form-select" id="inlineFormSelectPref">
@@ -51,44 +51,47 @@
 
 			<table class="table table-striped">
 				<tbody id="tbody">
-					<tr>
-						<td>
-							<div class="container text-center">
-								<div class="row">
-								  <div class="col">
-									<div class="card" style="width: 18rem;">
-										<img src="..." class="card-img-top" alt="...">
-										<div class="card-body">
-										  <h5 class="card-title">Card title</h5>
-										  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-										  <a href="#" class="btn btn-primary">Go somewhere</a>
-										</div>
-										  </div>
-								  </div>
-								  <div class="col">
-									<div class="card" style="width: 18rem;">
-										<img src="..." class="card-img-top" alt="...">
-										<div class="card-body">
-										  <h5 class="card-title">Card title</h5>
-										  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-										  <a href="#" class="btn btn-primary">Go somewhere</a>
-										</div>
-										  </div>
-								  </div>
-								  <div class="col">
-									<div class="card" style="width: 18rem;">
-										<img src="..." class="card-img-top" alt="...">
-										<div class="card-body">
-										  <h5 class="card-title">Card title</h5>
-										  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-										  <a href="#" class="btn btn-primary">Go somewhere</a>
-										</div>
-										  </div>
-								  </div>
+					<c:forEach begin="1" end="3">
+						<tr>
+							<td>
+								<div class="container text-center">
+									<div class="row">
+									<div class="col">
+										<div class="card" style="width: 18rem;">
+											<img src="..." class="card-img-top" alt="...">
+											<div class="card-body">
+											<h5 class="card-title">Card title</h5>
+											<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											<a href="#" class="btn btn-primary">Go somewhere</a>
+											</div>
+											</div>
+									</div>
+									<div class="col">
+										<div class="card" style="width: 18rem;">
+											<img src="..." class="card-img-top" alt="...">
+											<div class="card-body">
+											<h5 class="card-title">Card title</h5>
+											<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											<a href="#" class="btn btn-primary">Go somewhere</a>
+											</div>
+											</div>
+									</div>
+									<div class="col">
+										<div class="card" style="width: 18rem;">
+											<img src="..." class="card-img-top" alt="...">
+											<div class="card-body">
+											<h5 class="card-title">Card title</h5>
+											<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											<a href="#" class="btn btn-primary">Go somewhere</a>
+											</div>
+											</div>
+									</div>
+									</div>
 								</div>
-							  </div>
-						</td>
-					</tr>
+							</td>
+						</tr>
+					</c:forEach>
+						
 				</tbody>
 			</table>
 			<div >
