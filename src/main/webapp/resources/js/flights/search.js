@@ -1,5 +1,5 @@
 const btnSearch = document.getElementById("btnSearch")
-const depAirportNm = document.getElementById("depAirportNm")
+const depAirportId = document.getElementById("depAirportId")
 const plandGoDate = document.getElementById("plandGoDate")
 const plandComeDate = document.getElementById("plandComeDate")
 const person = document.getElementById("person")
@@ -32,7 +32,7 @@ function getAirportList () {
       }
       opt.value = e.airportId
       opt.innerHTML = e.airportNm
-      depAirportNm.appendChild(opt)
+      depAirportId.appendChild(opt)
 
     }
       
