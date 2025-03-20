@@ -47,7 +47,29 @@
 						<div class="tab-pane fade" id="list-7" role="tabpanel"><div></div></div>
 					</div>
 				</div>
+
+				<nav aria-label="Page navigation example">
+					<input type="hidden" name="page" id="pageNo">
+					<input type="hidden" name="perPage" id="numOfRows">
+					<input type="hidden" name="totalCount" id="totalCount">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
+
 		
 			
 		</div>

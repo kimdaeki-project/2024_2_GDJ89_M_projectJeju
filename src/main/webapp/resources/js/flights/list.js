@@ -1,5 +1,9 @@
 // init
 
+const pageNo = document.getElementById("pageNo")
+const numOfRows = document.getElementById("numOfRows")
+const totalCount = document.getElementById("totalCount")
+
 const depAirportId = document.getElementById("depAirportId")
 const arrAirportId = 'NAARKPC'
 
@@ -68,6 +72,9 @@ function getList() {
     .then(r=>{
 
       let total = r.response.body.totalCount
+      let page = r.response.body.pageNo
+      let perPage = r.response.body.numOfRows
+      
       let items = r.response.body.items.item
       
       if(total == 0) {
@@ -230,12 +237,9 @@ function createTables(target, items, idx){
   target.appendChild(table)
 }
 
-// function createTable(target, idx) {
-//   let table = document.createElement("table")
-//   table.classList.add("table", "table-hover")
-//   table.id = "tab"+idx
-//   target.appendChild(table)
-// }
+function createPage(target, idx) {
+  
+}
 
 
 try {

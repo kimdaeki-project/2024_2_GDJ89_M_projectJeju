@@ -13,11 +13,10 @@ import com.jeju.app.reservs.SearchDTO;
 @RequestMapping(value = "flights/*")
 public class FlightController {
 	
-	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList() throws Exception {
 		System.out.println("list");
 		
 	}
-
+	
 }
