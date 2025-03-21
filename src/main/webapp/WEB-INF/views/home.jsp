@@ -82,8 +82,8 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1">Test <span class="text-body-secondary">게시판 인기 글1 제목</span></h2>
-        <p class="lead">Test 게시판 인기글1 내용</p>
+        <h2 class="featurette-heading fw-normal lh-1">${list.boardNum}<span class="text-body-secondary">${list.boardTitle}</span></h2>
+        <p class="lead">${list.boardContents}</p>
       </div>
       <div class="col-md-5">
         <img src="/resources/images/woojin/waring.png">
@@ -94,8 +94,8 @@
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading fw-normal lh-1">Test <span class="text-body-secondary">게시판 인기 글2 제목</span></h2>
-        <p class="lead">Test 게시판 인기글2 내용</p>
+        <h2 class="featurette-heading fw-normal lh-1">${list2.boardNum}<span class="text-body-secondary">${list2.boardTitle}</span></h2>
+        <p class="lead">${list2.boardContents}</p>
       </div>
       <div class="col-md-5 order-md-1">
         <img src="/resources/images/woojin/waring.png">
@@ -106,8 +106,8 @@
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading fw-normal lh-1">Test <span class="text-body-secondary">게시판 인기 글3 제목</span></h2>
-        <p class="lead">Test 게시판 인기글3 내용</p>
+        <h2 class="featurette-heading fw-normal lh-1">${notice.boardNum}<span class="text-body-secondary">${notice.boardTitle}</span></h2>
+        <p class="lead">${notice.boardContents}</p>
       </div>
       <div class="col-md-5">
         <img src="/resources/images/woojin/waring.png">

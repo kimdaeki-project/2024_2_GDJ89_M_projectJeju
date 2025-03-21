@@ -28,6 +28,12 @@
               <li><a class="dropdown-item" href="/boards/list">testBoard</a></li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/notice/list">공지사항</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">문의게시판</a>
+          </li>
         </ul>
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropdown">

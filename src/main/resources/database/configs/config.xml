@@ -6,6 +6,11 @@
 <!-- mybatis 설정 -->
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.jeju.app.pages.Pager" alias="Pager"/>
+		<typeAlias type="com.jeju.app.pages.PB_Pager" alias="PB_Pager"/>
 		<typeAlias type="com.jeju.app.boards.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.jeju.app.publicBoards.PB_DTO" alias="PB_DTO"/>
+		<typeAlias type="com.jeju.app.publicBoards.notice.NoticeDTO" alias="NoticeDTO"/>
+		<typeAlias type="com.jeju.app.publicBoards.qna.QnaDTO" alias="QnaDTO"/>
 	</typeAliases>
 </configuration>
