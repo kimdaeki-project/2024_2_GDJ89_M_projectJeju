@@ -2,11 +2,10 @@ package com.jeju.app.products.flights;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jeju.app.reservs.SearchDTO;
+
 
 
 @Controller
@@ -18,5 +17,7 @@ public class FlightController {
 		System.out.println("list");
 		
 	}
+	
+	
 	
 }

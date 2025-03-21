@@ -237,10 +237,6 @@ function createTables(target, items, idx){
   target.appendChild(table)
 }
 
-function createPage(target, idx) {
-  
-}
-
 
 try {
   depAirportId.addEventListener("change", ()=>{

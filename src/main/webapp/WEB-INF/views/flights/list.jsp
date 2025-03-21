@@ -49,9 +49,6 @@
 				</div>
 
 				<nav aria-label="Page navigation example">
-					<input type="hidden" name="page" id="pageNo">
-					<input type="hidden" name="perPage" id="numOfRows">
-					<input type="hidden" name="totalCount" id="totalCount">
 					<ul class="pagination justify-content-center">
 						<li class="page-item">
 							<a class="page-link" href="#" aria-label="Previous">
