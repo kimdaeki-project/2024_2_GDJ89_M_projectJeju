@@ -1,4 +1,4 @@
-package com.jeju.app.products.flights;
+package com.jeju.app.flights;
 
 
 import org.springframework.stereotype.Controller;

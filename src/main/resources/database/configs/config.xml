@@ -7,5 +7,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.jeju.app.boards.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.jeju.app.apis.ApiDTO" alias="ApiDTO"/>
 	</typeAliases>
 </configuration>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.apis.ApisDAO">
+	<insert id="getApiData" parameterType="ApiDTO">
+		INSERT INTO FLIGHTS (FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE)
+		VALUES (PDT_SEQ.NEXTVAL, #{vihicleId}, #{airlineNm}, TO_DATE(#{depPlandTime}, 'YYYYMMDDHH24MI'), TO_DATE(#{arrPlandTime}, 'YYYYMMDDHH24MI'), #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
+	</insert>
+
+</mapper>
