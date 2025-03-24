@@ -18,6 +18,9 @@ public class FlightController {
 		
 	}
 	
-	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public void search() throws Exception {
+		System.out.println("search");
+	}
 	
 }

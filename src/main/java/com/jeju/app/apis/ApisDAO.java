@@ -1,5 +1,7 @@
 package com.jeju.app.apis;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,8 +13,12 @@ public class ApisDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.jeju.app.apis.ApisDAO.";
 	
-	public int getApiData(ApiDTO apiDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE+"getApiData", apiDTO);
+	public List<ApiItemDTO> getList() throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getList");
+	}
+	
+	public int getApiData(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"getApiData", dtos);
 	}
 
 }

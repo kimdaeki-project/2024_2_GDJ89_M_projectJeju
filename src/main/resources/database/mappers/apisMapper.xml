@@ -4,9 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.jeju.app.apis.ApisDAO">
-	<insert id="getApiData" parameterType="ApiDTO">
-		INSERT INTO FLIGHTS (FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE)
-		VALUES (PDT_SEQ.NEXTVAL, #{vihicleId}, #{airlineNm}, TO_DATE(#{depPlandTime}, 'YYYYMMDDHH24MI'), TO_DATE(#{arrPlandTime}, 'YYYYMMDDHH24MI'), #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
+	<insert id="getApiData" parameterType="List">
+		INSERT ALL
+			<foreach collection="list" item="ApiItemDTO">
+				INTO FLIGHTSUPDATE (FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE)
+				VALUES (#{ApiItemDTO.flightNum}, #{ApiItemDTO.vihicleId}, #{ApiItemDTO.airlineNm}, TO_DATE(#{ApiItemDTO.depPlandTime}, 'YYYYMMDDHH24MI'), TO_DATE(#{ApiItemDTO.arrPlandTime}, 'YYYYMMDDHH24MI'), #{ApiItemDTO.depAirportNm}, #{ApiItemDTO.arrAirportNm}, #{ApiItemDTO.economyCharge}, #{ApiItemDTO.prestigeCharge})
+			</foreach>
+		SELECT * FROM DUAL
 	</insert>
+	
+	<select id="getList" resultType="ApiItemDTO">
+		SELECT * FROM FLIGHTSUPDATE
+	</select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.jeju.app.apis;
 
 public class ApiItemDTO {
 	
+	private String flightNum;
 	private String airlineId;
 	private String airlineNm;
 	private String vihicleId;
@@ -15,6 +16,12 @@ public class ApiItemDTO {
 	private String airportId;
 	
 	
+	public String getFlightNum() {
+		return flightNum;
+	}
+	public void setFlightNum(String flightNum) {
+		this.flightNum = flightNum;
+	}
 	public String getAirlineId() {
 		return airlineId;
 	}
