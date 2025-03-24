@@ -58,5 +58,10 @@
 		INSERT INTO BOARD 
 		VALUES ('test', board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE, #{boardHits}, 1, #{rating}, #{favorite}, 1)
 	</insert>
+	
+<!-- 	<insert id="addFile" parameterType="BoardFileDTO">
+		INSERT INTO IMAGES
+		VALUES (file_seq.nextval, #{boardNum}, #{fileName}, #{oldName})
+	</insert> -->
 
 </mapper>
