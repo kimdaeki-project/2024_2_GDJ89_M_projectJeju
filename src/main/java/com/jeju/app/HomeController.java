@@ -50,6 +50,13 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping(value = "/information/carplace")
+	public String parking() throws Exception {
+		System.out.println("parking");
+		
+		return "information/carplace";
+	}
 
 	
 }

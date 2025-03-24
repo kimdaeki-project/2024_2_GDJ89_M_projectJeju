@@ -17,17 +17,6 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 
-			<div id="map" style="width: 500px;height: 400px;"></div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d0be5a9ddf569996a9dad17ac2a5db"></script>
-			<script>
-				var container = document.getElementById('map');
-				var options = {
-					center : new kakao.maps.LatLng(33.450701, 126.570667),
-					level : 3
-				};
-
-				var map = new kakao.maps.Map(container, options);
-			</script>
 			<h1>공지사항</h1>
 			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">

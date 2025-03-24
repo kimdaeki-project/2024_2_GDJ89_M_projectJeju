@@ -34,9 +34,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#">문의게시판</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/information/carplace">Test Parking</a>
+          </li>
         </ul>
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-sm-0 dropdown">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Test Login</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#">로그인</a>
             </li>
