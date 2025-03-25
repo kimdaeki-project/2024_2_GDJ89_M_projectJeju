@@ -13,12 +13,13 @@ public class ApisDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.jeju.app.apis.ApisDAO.";
 	
-	public List<ApiItemDTO> getList() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getList");
-	}
 	
 	public int getApiData(List<ApiItemDTO> dtos) throws Exception {
 		return sqlSession.insert(NAMESPACE+"getApiData", dtos);
+	}
+	
+	public int deleteAll() throws Exception {
+		return sqlSession.delete(NAMESPACE+"deleteAll");
 	}
 
 }

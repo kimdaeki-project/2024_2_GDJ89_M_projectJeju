@@ -3,7 +3,6 @@ package com.jeju.app.apis;
 public class ApiItemDTO {
 	
 	private String flightNum;
-	private String airlineId;
 	private String airlineNm;
 	private String vihicleId;
 	private String depAirportNm;
@@ -14,6 +13,7 @@ public class ApiItemDTO {
 	private Long prestigeCharge;
 	private String airportNm;
 	private String airportId;
+	private String airlineId;
 	
 	
 	public String getFlightNum() {
