@@ -13,5 +13,7 @@
 		<typeAlias type="com.jeju.app.publicBoards.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.jeju.app.publicBoards.qna.QnaDTO" alias="QnaDTO"/>
 		<!-- <typeAlias type="com.jeju.app.boards.BoardFileDTO" alias="BoardFileDTO"/> -->
+		<typeAlias type="com.jeju.app.apis.ApiItemDTO" alias="ApiItemDTO"/>
+		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
 </configuration>

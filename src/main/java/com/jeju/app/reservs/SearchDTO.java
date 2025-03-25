@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class SearchDTO {
 	
-	private String depAirportNm;
+	private String depAirportId;
 	private Date plandGoDate;
 	private Date plandComeDate;
 	private Long person;
 	
 	
-	public String getDepAirportNm() {
-		return depAirportNm;
+	public String getDepAirportId() {
+		return depAirportId;
 	}
-	public void setDepAirportNm(String depAirportNm) {
-		this.depAirportNm = depAirportNm;
+	public void setDepAirportId(String depAirportId) {
+		this.depAirportId = depAirportId;
 	}
 	public Date getPlandGoDate() {
 		return plandGoDate;
