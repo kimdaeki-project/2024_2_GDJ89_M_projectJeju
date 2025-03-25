@@ -4,12 +4,64 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.jeju.app.boards.BoardDAO">
-	<select id="getList" resultType="BoardDTO">
-		SELECT * FROM BOARD
+	<select id="getList" resultType="BoardDTO" parameterType="Pager">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD
+					<include refid="search"></include>
+					<choose>
+						<when test="searchKind=='sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind=='sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+				) M
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
+	
+	<sql id="search">
+		<where>
+			BOARDNUM > 0 AND
+			
+				<choose>
+					<when test="kind=='k2'">
+						BOARDCONTENTS LIKE '%'||#{search}||'%'
+					</when>
+					<when test="kind=='k3'">
+						BOARDLOCATION LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						BOARDTITLE LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+		</where>
+	</sql>
+	
+	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+		SELECT COUNT(boardNum) FROM BOARD
+		<include refid="search"></include>
+	</select>
+	
+	<select id="getMaxHits" resultType="BoardDTO">
+		SELECT * FROM board WHERE boardHits = (SELECT max(boardhits) FROM board) OR BOARDHITS = (SELECT (MAX(BOARDHITS)-1) FROM BOARD)
+	</select>
+	
 	<insert id="add">
 		INSERT INTO BOARD 
-		VALUES ('test', board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE, 1, 1, #{rating}, 1, 1)
+		VALUES ('test', board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE, #{boardHits}, 1, #{rating}, #{favorite}, 1)
 	</insert>
+	
+<!-- 	<insert id="addFile" parameterType="BoardFileDTO">
+		INSERT INTO IMAGES
+		VALUES (file_seq.nextval, #{boardNum}, #{fileName}, #{oldName})
+	</insert> -->
 
 </mapper>

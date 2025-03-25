@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.HomeDAO">
+		
+	<select id="getMaxHit" resultType="BoardDTO">
+		SELECT * FROM board WHERE boardHits = (SELECT max(boardhits) FROM board)
+	</select>
+	
+	<select id="getMaxHit2" resultType="BoardDTO">
+		SELECT * FROM board WHERE FAVORITE = (SELECT (MAX(favorite)) FROM BOARD)
+	</select>
+	
+	<select id="getNotice" resultType="PB_DTO">
+		SELECT * FROM NOTICE WHERE BOARDDATE = (SELECT MAX(BOARDDATE) FROM NOTICE)
+	</select>
+
+</mapper>

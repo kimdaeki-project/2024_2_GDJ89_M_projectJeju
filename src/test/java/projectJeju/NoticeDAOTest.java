@@ -1,7 +1,5 @@
 package projectJeju;
 
-import static org.junit.Assert.*;
-
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Random;
@@ -15,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jeju.app.boards.BoardDAO;
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.publicBoards.PB_DTO;
+import com.jeju.app.publicBoards.notice.NoticeDAO;
 
-public class BoardDAOTest extends Sample {
+public class NoticeDAOTest extends Sample {
 	
 	@Autowired
-	private BoardDAO boardDAO;
+	private NoticeDAO noticeDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,33 +36,19 @@ public class BoardDAOTest extends Sample {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	public void addtest() throws Exception {
-		BoardDTO boardDTO = new BoardDTO();
+		PB_DTO dto = new PB_DTO();
 		Calendar ca = Calendar.getInstance();
-		Random rg = new Random();
 		
 		for (int i=0; i<115; i++) {
-			boardDTO.setUserID("test"+i);
-			boardDTO.setBoardDate(new Date(ca.getTimeInMillis()));
-			boardDTO.setBoardContents("testContents" +i);
-			boardDTO.setBoardTitle("testTitle" +i);
-			boardDTO.setCategory(1L);
-			boardDTO.setFavorite(1L*i);
-			boardDTO.setBoardHits(200L-(1L*i));
+			dto.setUserID("test"+i);
+			dto.setBoardDate(new Date(ca.getTimeInMillis()));
+			dto.setBoardContents("testContents" +i);
+			dto.setBoardTitle("testTitle" +i);
 			
-			double r = Math.random();
-			
-			r = r*100;
-			
-			int ri = (int)r;
-			
-			r = ri/100.0;
-			
-			boardDTO.setRating(r);
-			
-			boardDAO.add(boardDTO);
+			noticeDAO.add(dto);
 			
 			if (i%100==0) {
 				Thread.sleep(100);

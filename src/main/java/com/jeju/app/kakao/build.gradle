@@ -1,0 +1,51 @@
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//Webflux
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+// lombok 설정 추가 시작
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+// lombok 설정 추가 끝
+
+repositories {
+	mavenCentral()
+}
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+
+	//lombok 라이브러리 추가 시작
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	//lombok 라이브러리 추가 끝
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+test {
+	useJUnitPlatform()
+}
+출처: https://icandoitprogramming.tistory.com/entry/43-롬복과-최신-트랜드-RequiredArgsConstructor [Dev:티스토리]
