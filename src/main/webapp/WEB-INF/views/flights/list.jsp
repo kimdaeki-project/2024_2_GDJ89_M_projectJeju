@@ -36,30 +36,32 @@
 				</div>
 			</div>
 			 
-			<div class="container text-center" id="selectBox">
-				<div class="list-group list-group-horizontal">
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1">
-						<c:if test="${day.b3Day ge day.today }">${day.b3Day }</c:if>
-					</a>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-2-list" role="tab" href="#list-2">
-						<c:if test="${day.b2Day ge day.today }">${day.b2Day }</c:if>
-					</a>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-3-list" role="tab" href="#list-3">
-						<c:if test="${day.b1Day ge day.today }">${day.b1Day }</c:if>
-					</a>
-					<a class="list-group-item list-group-item-action active" data-bs-toggle="list" id="list-4-list" role="tab" href="#list-4">
-						${day.searchDay }
-					</a>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-5-list" role="tab" href="#list-5">
-						<c:if test="${day.a1Day  ge day.today }">${day.a1Day }</c:if>
-					</a>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">
-						<c:if test="${day.a2Day ge day.today }">${day.a2Day }</c:if>
-					</a>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">
-						<c:if test="${day.a3Day ge day.today }">${day.a3Day }</c:if>
-					</a>
-				</div>
+			<form id="reForm">
+				<div class="container text-center" id="selectBox">
+					<div class="list-group list-group-horizontal">
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1">
+							<c:if test="${day.b3Day ge day.today }">${day.b3Day }</c:if>
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-2-list" role="tab" href="#list-2">
+							<c:if test="${day.b2Day ge day.today }">${day.b2Day }</c:if>
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-3-list" role="tab" href="#list-3">
+							<c:if test="${day.b1Day ge day.today }">${day.b1Day }</c:if>
+						</a>
+						<a class="list-group-item list-group-item-action active" data-bs-toggle="list" id="list-4-list" role="tab" href="#list-4">
+							${day.searchDay }
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-5-list" role="tab" href="#list-5">
+							<c:if test="${day.a1Day  ge day.today }">${day.a1Day }</c:if>
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">
+							<c:if test="${day.a2Day ge day.today }">${day.a2Day }</c:if>
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">
+							<c:if test="${day.a3Day ge day.today }">${day.a3Day }</c:if>
+						</a>
+					</div>
+			</form>
 				
 				<div class="">
 					<div class="tab-content" id="nav-tabContent">

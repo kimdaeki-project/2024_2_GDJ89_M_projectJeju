@@ -1,8 +1,6 @@
 // init
 
-const pageNo = document.getElementById("pageNo")
-const numOfRows = document.getElementById("numOfRows")
-const totalCount = document.getElementById("totalCount")
+const selectBox = document.getElementById("selectBox")
 
 const depAirportId = document.getElementById("depAirportId")
 const airlineNm = document.getElementById("airlineNm")
@@ -41,33 +39,26 @@ function init (){
 
   getAirlineList();
   getAirportList();
-  getList();
 
 
 }
 
 init();
 
-function getList() {
-  
-  
-  for(let i = 0; i < 7; i++){
-    if(lis[i].innerText != "") {
-      console.log(lis[i].innerText)
-      let params = new FormData();
-      params.append("depPlandTime", lis[i].innerText)
-      fetch("./list", {
-        method: "post",
-        body: params
-      })
-      .then(r=>r.text())
-      .then(r=>{
-      })
-    }
-
+selectBox.addEventListener("click", (e)=>{
+  if(e.target.classList.contains("list-group-item")) {
+    let params = new FormData();
+    params.append("depPlandTime", e.target.innerText)
+    fetch("./list", {
+      method: "post",
+      body: params
+    })
+    .then(r=>r.text())
+    .then(r=>{
+      location.reload();
+    })
   }
-
-}
+})
 
 // getAirportList
 
