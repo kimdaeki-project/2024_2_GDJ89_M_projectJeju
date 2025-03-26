@@ -12,11 +12,18 @@ public class Pager {
 	private String kind;
 	private String search;
 	private String searchKind;
+	private String locationKind;
 	
-	
+	public String getLocationKind() {
+		return locationKind;
+	}
+	public void setLocationKind(String locationKind) {
+		this.locationKind = locationKind;
+	}
 	public Long getStartNum() {
 		return startNum;
 	}
+	
 	public void setStartNum(Long startNum) {
 		this.startNum = startNum;
 	}

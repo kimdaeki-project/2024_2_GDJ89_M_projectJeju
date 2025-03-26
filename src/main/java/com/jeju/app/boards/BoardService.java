@@ -32,7 +32,7 @@ public class BoardService {
 		
 		pager.make(totalCount);
 		pager.makeNum();
-		List<BoardDTO> ar = boardDAO.getList(pager);
+		List<BoardDTO> ar = boardDAO.getHotelList(pager);
 		
 		return ar;
 	}
@@ -48,45 +48,50 @@ public class BoardService {
 		pager.cardMake(totalCount);
 		pager.makeNum();
 		
-		List<BoardDTO> ar = boardDAO.getCardList(pager);
+		List<BoardDTO> ar = boardDAO.getHotelList(pager);
 		
 		return ar;
 	}
 
 	
-//	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
-//		int result = boardDAO.add(boardDTO);
-//		
-//		for (MultipartFile attach : attaches) {
-//			if (attach.isEmpty()) {
-//				continue;
-//			}
-//			BoardFileDTO boardFileDTO = this.fileSave(attach, session.getServletContext());
-//			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
-//			result = boardDAO.addFiles(boardFileDTO);
-//		}
-//		
-//		return result;
-//	}
-//	
-//	public BoardFileDTO fileSave(MultipartFile attach, ServletContext context) throws Exception {
-//		String path = context.getRealPath("/resources/images/");
-//		
-//		System.out.println(path);
-//		
-//		File file = new File(path);
-//		
-//		if (!file.exists()) {
-//			file.mkdirs();
-//		}
-//		
-//		String fileName = fileManager.fileSave(path, attach);
-//		
-//		BoardFileDTO boardFileDTO = new BoardFileDTO();
-//		
-//		boardFileDTO.setFileName(fileName);
-//		boardFileDTO.setOldName(attach.getOriginalFilename());
-//		
-//		return boardFileDTO;
-//	}
+	public int add(BoardDTO boardDTO) throws Exception{
+		return boardDAO.add(boardDTO);
+	}
+	
+	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
+		int result = boardDAO.add(boardDTO);
+		System.out.println("fileAdd");
+		for (MultipartFile attach : attaches) {
+			if (attach.isEmpty()) {
+				System.out.println("fileEmpty");
+				continue;
+			}
+			BoardFileDTO boardFileDTO = this.fileSave(attach, session.getServletContext());
+			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
+			result = boardDAO.addFiles(boardFileDTO);
+		}
+		
+		return result;
+	}
+	
+	public BoardFileDTO fileSave(MultipartFile attach, ServletContext context) throws Exception {
+		String path = context.getRealPath("/resources/images/");
+		
+		System.out.println(path);
+		
+		File file = new File(path);
+		
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		
+		String fileName = fileManager.fileSave(path, attach);
+		
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		
+		boardFileDTO.setFileName(fileName);
+		boardFileDTO.setOldName(attach.getOriginalFilename());
+		
+		return boardFileDTO;
+	}
 }

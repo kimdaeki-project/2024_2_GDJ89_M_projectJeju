@@ -23,7 +23,7 @@ public class BoardController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Model model, Pager pager) throws Exception{
 		
-		System.out.println("controller List");
+		System.out.println("hotel List");
 		
 		List<BoardDTO> ar = boardService.getList(pager);
 		
@@ -34,7 +34,7 @@ public class BoardController {
 	@RequestMapping(value = "cardlist", method = RequestMethod.GET)
 	public void getCardList(Model model, Pager pager) throws Exception {
 		
-		System.out.println("controller cardList");
+		System.out.println("diner cardList");
 		
 		List<BoardDTO> ar = boardService.getcardList(pager);
 		
@@ -42,19 +42,24 @@ public class BoardController {
 		model.addAttribute("list", ar);
 	}
 	
-
-//	
-//	@RequestMapping(value = "add", method = RequestMethod.POST)
-//	public void add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
-//		//user부분 C/S/DA/DT가 들어오면 구동
-//		//UserDTO userDTO = (UserDTO)session.getAttribute("user");
-//		boardDTO.setUserID("test");
-//		
-//		int result = boardService.add(boardDTO, session, attaches);
-//	}
-//	
-//	@RequestMapping(value = "add", method = RequestMethod.GET)
-//	public String add() throws Exception{
-//		return "board/add";
-//	}
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
+		//user부분 C/S/DA/DT가 들어오면 구동
+		//UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		boardDTO.setUserID("test");
+		
+		int result = boardService.add(boardDTO, session, attaches);
+		
+		return "redirect:./list";
+	}
+	
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String add() throws Exception{
+		return "boards/add";
+	}
+	
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String detail() throws Exception {
+		return "boards/detail";
+	}
 }

@@ -14,22 +14,35 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			<h1>TestList</h1>
+			<h1>${kind}</h1>
 			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">
-
+				<div class="col-12">
+					<select id="loc" name="locationKind" class="form-select" onchange="locat()">
+						<option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>전체 지역</option>
+					   <option value="lo2" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
+					   <option value="lo3" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
+						<option value="lo4" ${pager.locationKind eq 'lo4' ? 'selected': ''}>서귀포</option>
+						<option value="lo5" ${pager.locationKind eq 'lo5' ? 'selected': ''}>남원</option>
+						<option value="lo6" ${pager.locationKind eq 'lo6' ? 'selected': ''}>조천</option>
+						<option value="lo7" ${pager.locationKind eq 'lo7' ? 'selected': ''}>중문</option>
+						<option value="lo8" ${pager.locationKind eq 'lo8' ? 'selected': ''}>한림</option>
+					</select>
+				</div>
+					
 			  <div class="col-12">
 				<label class="visually-hidden" for="inlineFormSelectPref">test</label>
-				<select name="kind" class="form-select" id="inlineFormSelectPref">
+				<select name="kind" class="form-select" id="sKind">
 				  <option value="k1" ${pager.kind eq 'k1' ? 'selected': ''}>제목</option>
 				  <option value="k2" ${pager.kind eq 'k2' ? 'selected': ''}>내용</option>
 				  <option value="k3" ${pager.kind eq 'k3' ? 'selected': ''}>위치</option>
 				</select>
 			  </div>
 			  
-			<div class="col-12">
-				  <input type="text" value="${pager.search}" name="search" class="form-control" id="inlineFormInputGroupUsername" placeholder="검색어 입력">
-			  </div>
+				<div class="col-12">
+				  	<input type="text" value="${pager.search}" name="search" class="form-control" id="inlineFormInputGroupUsername search" placeholder="검색어 입력">
+				</div>
+				
 			
 			  <div class="col-12">
 				<button type="submit" class="btn btn-primary">검색</button>
@@ -57,7 +70,7 @@
 					</tr>
 				<tbody>
 				<c:forEach items="${list}" var="i">
-					<tr>
+					<tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
 						<td>${i.boardNum}</td>
 						<td>${i.boardTitle}</td>
 						<td>${i.userID}</td>
@@ -89,7 +102,7 @@
 			  </li>
 			</ul>
 			  </nav>
-				<a class="btn btn-success" href="add">글쓰기</a>
+				<a class="btn btn-success" href="/boards/add">글쓰기</a>
 			
 
 		</div>
@@ -97,6 +110,7 @@
 
 
 	<!-- footer -->
+	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 	<script src="/resources/js/boards/list.js"></script>
 </body>

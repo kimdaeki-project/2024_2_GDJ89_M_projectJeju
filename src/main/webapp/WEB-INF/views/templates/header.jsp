@@ -22,9 +22,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true">게시판</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">명소 후기</a></li>
-              <li><a class="dropdown-item" href="#">맛집 후기</a></li>
-              <li><a class="dropdown-item" href="#">숙소 후기</a></li>
+              <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
+              <li><a class="dropdown-item" href="/boards/diner/list">맛집 후기</a></li>
+              <li><a class="dropdown-item" href="/boards/hotel/list">숙소 후기</a></li>
               <li><a class="dropdown-item" href="/boards/list">testBoard</a></li>
             </ul>
           </li>
