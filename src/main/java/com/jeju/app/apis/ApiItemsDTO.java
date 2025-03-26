@@ -12,4 +12,5 @@ public class ApiItemsDTO {
 		this.item = item;
 	}
 
+	
 }

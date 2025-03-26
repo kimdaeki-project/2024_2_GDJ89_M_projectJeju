@@ -17,54 +17,77 @@
 	<div class="container-fluid my-5">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			
-			<div class="input-group mb-3 mt-5" style="width: 30%;">
-				<label class="input-group-text" for="depAirportId">출발지</label>
-				<select	class="form-select" id="depAirportId" name="depAirportId">
-					
-				</select>
+			<div class="row">
+				<div class="col">
+					<div class="input-group mb-3 mt-5" style="width: 80%;">
+						<label class="input-group-text" for="depAirportId">출발지</label>
+						<select	class="form-select" id="depAirportId" name="depAirportId">
+							<option selected>출발 공항 선택</option>
+						</select>
+					</div>
+				</div>
+				<div class="col">
+					<div class="input-group mb-3 mt-5" style="width: 80%;">
+						<label class="input-group-text" for="airlineNm">여행사</label>
+						<select	class="form-select" id="airlineNm" name="airlineNm">
+							<option selected>항공사별 조회</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			 
 			<div class="container text-center" id="selectBox">
 				<div class="list-group list-group-horizontal">
-					<a class="list-group-item list-group-item-action active" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-2-list" role="tab" href="#list-2"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-3-list" role="tab" href="#list-3"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-4-list" role="tab" href="#list-4"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-5-list" role="tab" href="#list-5"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6"></li>
-					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7"></li>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1">
+						<c:if test="${day.b3Day ge day.today }">${day.b3Day }</c:if>
+					</a>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-2-list" role="tab" href="#list-2">
+						<c:if test="${day.b2Day ge day.today }">${day.b2Day }</c:if>
+					</a>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-3-list" role="tab" href="#list-3">
+						<c:if test="${day.b1Day ge day.today }">${day.b1Day }</c:if>
+					</a>
+					<a class="list-group-item list-group-item-action active" data-bs-toggle="list" id="list-4-list" role="tab" href="#list-4">
+						${day.searchDay }
+					</a>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-5-list" role="tab" href="#list-5">
+						<c:if test="${day.a1Day  ge day.today }">${day.a1Day }</c:if>
+					</a>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-6-list" role="tab" href="#list-6">
+						<c:if test="${day.a2Day ge day.today }">${day.a2Day }</c:if>
+					</a>
+					<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-7-list" role="tab" href="#list-7">
+						<c:if test="${day.a3Day ge day.today }">${day.a3Day }</c:if>
+					</a>
 				</div>
 				
 				<div class="">
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show active" id="list-1" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-2" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-3" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-4" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-5" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-6" role="tabpanel"><div></div></div>
-						<div class="tab-pane fade" id="list-7" role="tabpanel"><div></div></div>
+						<div class="tab-pane fade" id="list-1" role="tabpanel">
+							<div id="list1"></div>
+						</div>
+						<div class="tab-pane fade" id="list-2" role="tabpanel">
+							<div id="list2"></div>
+						</div>
+						<div class="tab-pane fade" id="list-3" role="tabpanel">
+							<div id="list3"></div>
+						</div>
+						<div class="tab-pane fade show active" id="list-4" role="tabpanel">
+							<div id="list4"></div>
+						</div>
+						<div class="tab-pane fade" id="list-5" role="tabpanel">
+							<div id="list5"></div>
+						</div>
+						<div class="tab-pane fade" id="list-6" role="tabpanel">
+							<div id="list6"></div>
+						</div>
+						<div class="tab-pane fade" id="list-7" role="tabpanel">
+							<div id="list7"></div>
+						</div>
 					</div>
 				</div>
 
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				
 			</div>
 
 		

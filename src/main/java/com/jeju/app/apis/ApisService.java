@@ -23,12 +23,16 @@ public class ApisService {
 	private ApisDAO apisDAO;
 	private final String SERVICEKEY = "J0mHq1R1fL8PBzcOJXPlaICPhvWctJpIQoAUJNzx1fUeMzFU9bjNRoAuwfN%2FC1w79pvPN5onz8835x6feTa2yA%3D%3D";
 	
-	public List<ApiItemDTO> getList() throws Exception {
-		return apisDAO.getList();
+	
+	public int deleteAll() throws Exception {
+		return apisDAO.deleteAll();
 	}
 	
-	public int getApiData(ApiItemDTO dto, Pager pager, String date) throws Exception {
-		ApiBodyDTO apiBodyDTO = this.jsonToObject(dto, pager, date);
+	public int getApiData(ApiItemDTO dto, String date) throws Exception {
+		ApiBodyDTO apiBodyDTO = this.jsonToObject(dto, date);
+		if(apiBodyDTO == null) {
+			return 0;
+		}
 		List<ApiItemDTO> ar = new ArrayList<ApiItemDTO>();
 		
 		for(ApiItemDTO apiItemDTO : apiBodyDTO.getItems().getItem()) {
@@ -49,9 +53,14 @@ public class ApisService {
 		
 	}
 	
-	public ApiBodyDTO jsonToObject(ApiItemDTO dto, Pager pager, String date) throws Exception {
+	public ApiBodyDTO jsonToObject(ApiItemDTO dto, String date) throws Exception {
 		String json = this.getFlightsList(dto, date);
 		json = json.substring(json.indexOf("body")+6, json.lastIndexOf("}")-1);
+		
+		if(json.substring(json.lastIndexOf(":")+1, json.lastIndexOf("}")).equals("0")) {
+			ApiBodyDTO apiBodyDTO = new ApiBodyDTO();
+			return null;
+		}
 		
 		ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ApiBodyDTO apiBodyDTO = mapper.readValue(json, ApiBodyDTO.class);
@@ -63,7 +72,7 @@ public class ApisService {
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getFlightOpratInfoList"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + SERVICEKEY); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*데이터 타입(xml, json)*/
-        urlBuilder.append("&" + URLEncoder.encode("depAirportId","UTF-8") + "=" + URLEncoder.encode(dto.getDepAirportNm(), "UTF-8")); /*출발공항ID*/
+        urlBuilder.append("&" + URLEncoder.encode("depAirportId","UTF-8") + "=" + URLEncoder.encode(dto.getAirportId(), "UTF-8")); /*출발공항ID*/
         urlBuilder.append("&" + URLEncoder.encode("arrAirportId","UTF-8") + "=" + URLEncoder.encode("NAARKPC", "UTF-8")); /*도착공항ID*/
         urlBuilder.append("&" + URLEncoder.encode("depPlandTime","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*출발일(YYYYMMDD)*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("150", "UTF-8")); /*한 페이지 결과 수*/

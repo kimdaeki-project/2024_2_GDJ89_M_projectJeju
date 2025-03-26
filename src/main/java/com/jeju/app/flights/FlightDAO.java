@@ -1,5 +1,22 @@
 package com.jeju.app.flights;
 
-public class FlightDAO {
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class FlightDAO {
+	
+	@Autowired
+	private SqlSession sqlSession;
+	private final String NAMESPACE = "com.jeju.app.flights.FlightDAO.";
+	
+	
+	public List<FlightDTO> getList(Map<String, String> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList", map);
+	}
+	
 }

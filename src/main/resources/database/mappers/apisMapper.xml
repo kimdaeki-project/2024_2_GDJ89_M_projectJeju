@@ -13,8 +13,8 @@
 		SELECT * FROM DUAL
 	</insert>
 	
-	<select id="getList" resultType="ApiItemDTO">
-		SELECT * FROM FLIGHTSUPDATE
-	</select>
+	<delete id="deleteAll">
+		DELETE FLIGHTSUPDATE
+	</delete>
 
 </mapper>

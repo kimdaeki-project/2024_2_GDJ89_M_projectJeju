@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeju.app.apis.ApiBodyDTO;
-import com.jeju.app.apis.ApiDTO;
 import com.jeju.app.apis.ApiItemDTO;
 import com.jeju.app.apis.ApisService;
+import com.jeju.app.flights.FlightDTO;
+import com.jeju.app.flights.FlightService;
 import com.jeju.app.pages.Pager;
 
 import projectJeju.Sample;
@@ -23,16 +26,24 @@ public class TestJackson extends Sample{
 	private ProductApiTest productApiTest;
 	@Autowired
 	private ApisService apisService;
+	@Autowired
+	private FlightService flightService;
 	
+	
+	@Test
+	public void deleteInsert() throws Exception {
+		
+	}
 	
 //	@Test
 //	public void getListTest() throws Exception {
-//		List<ApiItemDTO> ar = apisService.getList();
+//		List<FlightDTO> ar = flightService.getList();
 //		
-//		for(ApiItemDTO dto : ar) {
+//		for(FlightDTO dto : ar) {
 //			System.out.println(dto.getFlightNum());
 //			System.out.println(dto.getEconomyCharge());
 //			System.out.println(dto.getVihicleId());
+//			System.out.println(dto.getDepPlandTime());
 //		}
 //	}
 	
@@ -53,7 +64,7 @@ public class TestJackson extends Sample{
 //		
 //		System.out.println(result);
 //	}
-	
+//	
 	
 	
 //	@Test
