@@ -28,6 +28,10 @@ public class BoardDAO {
 		return sqlSession.selectList(NAMESPACE+"getHotelList", pager);
 	}
 	
+	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
+	}
+	
 	public int add(BoardDTO boardDTO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"add", boardDTO);
 	}
@@ -38,5 +42,13 @@ public class BoardDAO {
 	
 	public int addFiles(BoardFileDTO boardFileDTO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"addFile", boardFileDTO);
+	}
+	
+	public int updateHits(BoardDTO boardDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"updateHits", boardDTO);
+	}
+	
+	public int update(BoardDTO boardDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"update", boardDTO);
 	}
 }

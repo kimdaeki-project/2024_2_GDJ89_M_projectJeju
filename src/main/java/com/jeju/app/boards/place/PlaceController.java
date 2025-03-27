@@ -1,6 +1,9 @@
 package com.jeju.app.boards.place;
 
+import java.util.HashSet;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,5 +41,28 @@ public class PlaceController {
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
+	}
+	
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String getDetail(BoardDTO boardDTO, Model model, HttpSession session) throws Exception{
+		Object obj = session.getAttribute("board");
+		boolean check = false;
+			if (obj != null) {
+				HashSet<Long> ar = (HashSet<Long>)obj;
+				if (!ar.contains(boardDTO.getBoardNum())) {
+					check=true;
+				}else {
+					ar.add(boardDTO.getBoardNum());
+				}
+			}else {
+				HashSet<Long> num = new HashSet<Long>();
+				num.add(boardDTO.getBoardNum());
+				session.setAttribute("board", num);
+				check=true;
+			}
+		boardDTO = placeService.getDetail(boardDTO, false);
+		model.addAttribute("dto", boardDTO);
+		
+		return "board/detail";
 	}
 }

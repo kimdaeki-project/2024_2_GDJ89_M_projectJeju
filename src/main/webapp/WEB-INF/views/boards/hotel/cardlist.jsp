@@ -11,18 +11,12 @@
 <body>
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
+
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb" style="margin-bottom: 3%; ">
-				  <li class="breadcrumb-item"><a href="/">메인화면</a></li>
-				  <li class="breadcrumb-item active" aria-current="page">숙소 후기 게시판</li>
-				</ol>
-			  </nav>
 			<h1>숙소 후기 게시판</h1>
-
-			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center" style="margin-top: 3px;">
+			<form action="cardlist" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">
 				<div class="col-12">
 					<select id="loc" name="locationKind" class="form-select" onchange="locat()">
@@ -36,20 +30,18 @@
 						<option value="lo8" ${pager.locationKind eq 'lo8' ? 'selected': ''}>한림</option>
 					</select>
 				</div>
-					
 			  <div class="col-12">
 				<label class="visually-hidden" for="inlineFormSelectPref">test</label>
-				<select name="kind" class="form-select" id="sKind">
+				<select name="kind" class="form-select" id="inlineFormSelectPref">
 				  <option value="k1" ${pager.kind eq 'k1' ? 'selected': ''}>제목</option>
 				  <option value="k2" ${pager.kind eq 'k2' ? 'selected': ''}>내용</option>
 				  <option value="k3" ${pager.kind eq 'k3' ? 'selected': ''}>위치</option>
 				</select>
 			  </div>
 			  
-				<div class="col-12">
-				  	<input type="text" value="${pager.search}" name="search" class="form-control" id="inlineFormInputGroupUsername search" placeholder="검색어 입력">
-				</div>
-				
+			<div class="col-12">
+				  <input type="text" value="${pager.search}" name="search" class="form-control" id="inlineFormInputGroupUsername" placeholder="검색어 입력">
+			  </div>
 			
 			  <div class="col-12">
 				<button type="submit" class="btn btn-primary">검색</button>
@@ -58,7 +50,7 @@
 				<a href="/boards/hotel/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
 				<a href="/boards/hotel/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
 			  </div>
-			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 1">
+			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 2">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>
 				<option value="sk2" id="sk2" ${pager.searchKind eq 'sk2' ? 'selected': ''}>즐겨찾기 많은 순</option>
 				<option value="sk3" id="sk3" ${pager.searchKind eq 'sk3' ? 'selected': ''}>조회수 많은 순</option>
@@ -66,30 +58,29 @@
 			</form>
 
 			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>좋아요</th>
-						<th>조회수</th>
-					</tr>
-				<tbody>
-				<c:forEach items="${list}" var="i">
-					<tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
-						<td>${i.boardNum}</td>
-						<td>${i.boardTitle}</td>
-						<td>${i.userID}</td>
-						<td>${i.boardDate}</td>
-						<td>${i.favorite}</td>
-						<td>${i.boardHits}</td>
-					</tr>
-				</c:forEach>
-					
+				<tbody id="tbody">
+						<tr>
+							<td>
+								<div class="container text-center">
+									<div class="row row-cols-3">
+										<c:forEach items="${list}" var="i" begin="0" end="8">
+											<div class="col" style="padding-left: 7%; padding-bottom: 5%;">
+												<div class="card" style="width: 75%;">
+													<img src="/resources/images/woojin/flower.png" class="card-img-top">
+													<div class="card-body">
+													<h5 class="card-title">${i.boardTitle}</h5>
+													<p class="card-text">${i.boardDate}</p>
+													<h6 class="card-text">조회수 : ${i.boardHits} 즐겨찾기 : ${i.favorite}</h6>
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</td>
+						</tr>
 				</tbody>
 			</table>
-			
 			<nav aria-label="Page navigation example" style="width: 300px; margin: 0px auto;">
 				<ul class="pagination">
 				  <li class="page-item">
@@ -109,8 +100,7 @@
 			  </li>
 			</ul>
 			  </nav>
-				<a class="btn btn-success" href="/boards/add">글쓰기</a>
-			
+			  <a class="btn btn-success" href="/boards/add">글쓰기</a>
 
 		</div>
 	</div>

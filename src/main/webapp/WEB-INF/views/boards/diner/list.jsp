@@ -14,14 +14,21 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
+			 <nav aria-label="breadcrumb">
+				<ol class="breadcrumb" style="margin-bottom: 3%; ">
+				  <li class="breadcrumb-item"><a href="/">메인화면</a></li>
+				  <li class="breadcrumb-item active" aria-current="page">맛집 후기 게시판</li>
+				</ol>
+			  </nav>
 			<h1>맛집 후기 게시판</h1>
-			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
+			
+			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center" style="margin-top: 3px;">
 				<input type="hidden" name="page" id="pageNum">
 				<div class="col-12">
 					<select id="loc" name="locationKind" class="form-select" onchange="locat()">
 						<option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>전체 지역</option>
-					   <option value="lo2" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
-					   <option value="lo3" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
+					    <option value="lo2" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
+					    <option value="lo3" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
 						<option value="lo4" ${pager.locationKind eq 'lo4' ? 'selected': ''}>서귀포</option>
 						<option value="lo5" ${pager.locationKind eq 'lo5' ? 'selected': ''}>남원</option>
 						<option value="lo6" ${pager.locationKind eq 'lo6' ? 'selected': ''}>조천</option>
@@ -48,8 +55,8 @@
 				<button type="submit" class="btn btn-primary">검색</button>
 			  </div>
 			  <div class="btn-group">
-				<a href="/place/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
-				<a href="/place/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
+				<a href="/boards/diner/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
+				<a href="/boards/diner/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
 			  </div>
 			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 1">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>

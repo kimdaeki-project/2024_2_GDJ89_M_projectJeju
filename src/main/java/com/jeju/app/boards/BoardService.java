@@ -22,42 +22,6 @@ public class BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
-	public List<BoardDTO> getList(Pager pager) throws Exception{
-		
-		System.out.println("service List");
-		
-		pager.setKind("k1");
-		
-		Long totalCount = boardDAO.getTotalcount(pager);
-		
-		pager.make(totalCount);
-		pager.makeNum();
-		List<BoardDTO> ar = boardDAO.getHotelList(pager);
-		
-		return ar;
-	}
-	
-	public List<BoardDTO> getcardList(Pager pager) throws Exception{
-		
-		System.out.println("service CardList");
-		
-		pager.setKind("k1");
-		
-		Long totalCount = boardDAO.getTotalcount(pager);
-		
-		pager.cardMake(totalCount);
-		pager.makeNum();
-		
-		List<BoardDTO> ar = boardDAO.getHotelList(pager);
-		
-		return ar;
-	}
-
-	
-	public int add(BoardDTO boardDTO) throws Exception{
-		return boardDAO.add(boardDTO);
-	}
-	
 	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
 		int result = boardDAO.add(boardDTO);
 		System.out.println("fileAdd");
@@ -72,6 +36,14 @@ public class BoardService {
 		}
 		
 		return result;
+	}
+	
+	public BoardDTO getDetail(BoardDTO boardDTO, boolean check) throws Exception{
+		
+		if (check) {
+			boardDAO.updateHits(boardDTO);
+		}
+		return boardDAO.getDetail(boardDTO);
 	}
 	
 	public BoardFileDTO fileSave(MultipartFile attach, ServletContext context) throws Exception {
@@ -93,5 +65,21 @@ public class BoardService {
 		boardFileDTO.setOldName(attach.getOriginalFilename());
 		
 		return boardFileDTO;
+	}
+	
+	public int update(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception{
+		int result = boardDAO.update(boardDTO);
+		for (MultipartFile attach : attaches) {
+			if (attach.isEmpty()) {
+				continue;
+			}
+			BoardFileDTO boardFileDTO = this.fileSave(attach, session.getServletContext());
+			
+			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
+			result = boardDAO.addFiles(boardFileDTO);
+		}
+		
+		return result;
+		
 	}
 }

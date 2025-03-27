@@ -45,4 +45,13 @@ public class PlaceService {
 		
 		return ar;
 	}
+	
+	public BoardDTO getDetail(BoardDTO boardDTO, boolean check) throws Exception{
+		
+		if(check) {
+			boardDAO.updateHits(boardDTO);
+		}
+		
+		return boardDAO.getDetail(boardDTO);
+	}
 }
