@@ -2,9 +2,11 @@
 
 const selectBox = document.getElementById("selectBox")
 
-const depAirportId = document.getElementById("depAirportId")
+const airportId = document.getElementById("airportId")
 const airlineNm = document.getElementById("airlineNm")
 const arrAirportId = 'NAARKPC'
+const accordion = document.getElementById("accordion")
+const reForm = document.getElementById("reForm")
 
 const li1 = document.getElementById("list-1-list")
 const li2 = document.getElementById("list-2-list")
@@ -45,32 +47,17 @@ function init (){
 
 init();
 
-selectBox.addEventListener("click", (e)=>{
-  if(e.target.classList.contains("list-group-item")) {
-    let params = new FormData();
-    params.append("depPlandTime", e.target.innerText)
-    fetch("./list", {
-      method: "post",
-      body: params
-    })
-    .then(r=>r.text())
-    .then(r=>{
-      location.reload();
-    })
-  }
-})
-
 // getAirportList
 
 function getAirportList () {
   let url = "http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getArprtList?serviceKey=J0mHq1R1fL8PBzcOJXPlaICPhvWctJpIQoAUJNzx1fUeMzFU9bjNRoAuwfN%2FC1w79pvPN5onz8835x6feTa2yA%3D%3D&_type=json"
-
+  
   fetch(url)
   .then(r=>r.json())
   .then(r=>{
-
+    
     let ar = r.response.body.items.item
-
+    
     for(let e of ar){
       
       if(e.airportId=="NAARKPC"){
@@ -79,10 +66,10 @@ function getAirportList () {
       let opt = document.createElement("option")
       opt.value = e.airportId
       opt.innerHTML = e.airportNm
-      depAirportId.appendChild(opt)
-
-    }
+      airportId.appendChild(opt)
       
+    }
+    
   })
 }
 
@@ -91,12 +78,12 @@ function getAirportList () {
 
 function getAirlineList() {
   let url = "http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getAirmanList?serviceKey=J0mHq1R1fL8PBzcOJXPlaICPhvWctJpIQoAUJNzx1fUeMzFU9bjNRoAuwfN%2FC1w79pvPN5onz8835x6feTa2yA%3D%3D&_type=json"
-
+  
   fetch(url)
   .then(r=>r.json())
   .then(r=>{
     let ar = r.response.body.items.item
-
+    
     for(let e of ar) {
 
       let opt = document.createElement("option")
@@ -109,4 +96,17 @@ function getAirlineList() {
 
 // list
 
+selectBox.addEventListener("click", (e)=>{
+  if(e.target.id == 'list-1-list' || e.target.id == 'list-7-list') {
+    let input = document.createElement("input")
+    input.setAttribute("type", "hidden")
+    input.setAttribute("value", e.target.innerText)
+    input.setAttribute("name", "depPlandTime")
+    selectBox.appendChild(input)
+    
+    reForm.setAttribute("action", './list')
+    reForm.setAttribute("method", "post")
+    reForm.submit();
+  }
+})
 

@@ -4,11 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.jeju.app.apis.ApisDAO">
-	<insert id="getApiData" parameterType="List">
+	<insert id="getFlightsList" parameterType="List">
 		INSERT ALL
 			<foreach collection="list" item="ApiItemDTO">
 				INTO FLIGHTSUPDATE (FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE)
 				VALUES (#{ApiItemDTO.flightNum}, #{ApiItemDTO.vihicleId}, #{ApiItemDTO.airlineNm}, TO_DATE(#{ApiItemDTO.depPlandTime}, 'YYYYMMDDHH24MI'), TO_DATE(#{ApiItemDTO.arrPlandTime}, 'YYYYMMDDHH24MI'), #{ApiItemDTO.depAirportNm}, #{ApiItemDTO.arrAirportNm}, #{ApiItemDTO.economyCharge}, #{ApiItemDTO.prestigeCharge})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<insert id="getAirlinesList" parameterType="List">
+		INSERT ALL
+			<foreach collection="list" item="dto">
+				INTO AIRLINE
+				VALUES (#{dto.airlineId}, #{dto.airlineNm})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<insert id="getAirportsList" parameterType="List">
+		INSERT ALL
+			<foreach collection="list" item="dto">
+				INTO AIRPORT
+				VALUES (#{dto.airportId}, #{dto.airportNm})
 			</foreach>
 		SELECT * FROM DUAL
 	</insert>

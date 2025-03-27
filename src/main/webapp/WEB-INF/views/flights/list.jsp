@@ -17,26 +17,26 @@
 	<div class="container-fluid my-5">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			<div class="row">
-				<div class="col">
-					<div class="input-group mb-3 mt-5" style="width: 80%;">
-						<label class="input-group-text" for="depAirportId">출발지</label>
-						<select	class="form-select" id="depAirportId" name="depAirportId">
-							<option selected>출발 공항 선택</option>
-						</select>
-					</div>
-				</div>
-				<div class="col">
-					<div class="input-group mb-3 mt-5" style="width: 80%;">
-						<label class="input-group-text" for="airlineNm">여행사</label>
-						<select	class="form-select" id="airlineNm" name="airlineNm">
-							<option selected>항공사별 조회</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			 
 			<form id="reForm">
+				<div class="row">
+					<div class="col">
+						<div class="input-group mb-3 mt-5" style="width: 80%;">
+							<label class="input-group-text" for="airportId">출발지</label>
+							<select	class="form-select" id="airportId" name="airportId">
+								<option selected value="${airportId}">출발 공항 선택</option>
+							</select>
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-group mb-3 mt-5" style="width: 80%;">
+							<label class="input-group-text" for="airlineNm">여행사</label>
+							<select	class="form-select" id="airlineNm" name="airlineNm">
+								<option selected>항공사별 조회</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
 				<div class="container text-center" id="selectBox">
 					<div class="list-group list-group-horizontal">
 						<a class="list-group-item list-group-item-action" data-bs-toggle="list" id="list-1-list" role="tab" href="#list-1">
@@ -69,19 +69,94 @@
 							<div id="list1"></div>
 						</div>
 						<div class="tab-pane fade" id="list-2" role="tabpanel">
-							<div id="list2"></div>
+							<div id="list2">
+								<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+									<c:forEach items="${list1 }" var="v" varStatus="i">
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
+													${v.vihicleId }
+												</button>
+											</h2>
+											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+												<div class="accordion-body">${v.depPlandTime } ${v.arrPlandTime }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 						<div class="tab-pane fade" id="list-3" role="tabpanel">
-							<div id="list3"></div>
+							<div id="list3">
+								<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+									<c:forEach items="${list2 }" var="v" varStatus="i">
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
+													${v.vihicleId }
+												</button>
+											</h2>
+											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+												<div class="accordion-body">${v.depPlandTime } ${v.arrPlandTime }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 						<div class="tab-pane fade show active" id="list-4" role="tabpanel">
-							<div id="list4"></div>
+							<div id="list4">
+								<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+									<c:forEach items="${list3 }" var="v" varStatus="i">
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
+													${v.vihicleId }
+												</button>
+											</h2>
+											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+												<div class="accordion-body">${v.depPlandTime } ${v.arrPlandTime }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 						<div class="tab-pane fade" id="list-5" role="tabpanel">
-							<div id="list5"></div>
+							<div id="list5">
+								<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+									<c:forEach items="${list4 }" var="v" varStatus="i">
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
+													${v.vihicleId }
+												</button>
+											</h2>
+											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+												<div class="accordion-body">${v.depPlandTime } ${v.arrPlandTime }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>			
 						</div>
 						<div class="tab-pane fade" id="list-6" role="tabpanel">
-							<div id="list6"></div>
+							<div id="list6">
+								<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+									<c:forEach items="${list5 }" var="v" varStatus="i">
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i.count }" aria-expanded="false" aria-controls="flush-collapse-${i.count }">
+													${v.vihicleId }
+												</button>
+											</h2>
+											<div id="flush-collapse-${i.count }" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+												<div class="accordion-body">${v.depPlandTime } ${v.arrPlandTime }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
 						</div>
 						<div class="tab-pane fade" id="list-7" role="tabpanel">
 							<div id="list7"></div>
@@ -92,11 +167,12 @@
 				
 			</div>
 
-		
 			
+			
+			
+
 		</div>
 	</div>
-
 
 
 

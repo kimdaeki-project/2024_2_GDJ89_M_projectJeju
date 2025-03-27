@@ -13,9 +13,16 @@ public class ApisDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.jeju.app.apis.ApisDAO.";
 	
+	public int getAirportsList(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"getAirportsList", dtos);
+	}
 	
-	public int getApiData(List<ApiItemDTO> dtos) throws Exception {
-		return sqlSession.insert(NAMESPACE+"getApiData", dtos);
+	public int getAirlinesList(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"getAirlinesList", dtos);
+	}
+	
+	public int getFlightsList(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"getFlightsList", dtos);
 	}
 	
 	public int deleteAll() throws Exception {

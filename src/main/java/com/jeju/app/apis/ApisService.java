@@ -28,7 +28,35 @@ public class ApisService {
 		return apisDAO.deleteAll();
 	}
 	
-	public int getApiData(ApiItemDTO dto, String date) throws Exception {
+	public int getAirportsList() throws Exception {
+		ApiBodyDTO apiBodyDTO = this.jsonToObject();
+		if(apiBodyDTO == null) {
+			return 0;
+		}
+		List<ApiItemDTO> ar = new ArrayList<ApiItemDTO>();
+		
+		for(ApiItemDTO apiItemDTO : apiBodyDTO.getItems().getItem()) {
+			ar.add(apiItemDTO);
+		}
+		
+		return apisDAO.getAirportsList(ar);
+	}
+	
+	public int getAirlinesList() throws Exception {
+		ApiBodyDTO apiBodyDTO = this.jsonToObject();
+		if(apiBodyDTO == null) {
+			return 0;
+		}
+		List<ApiItemDTO> ar = new ArrayList<ApiItemDTO>();
+		
+		for(ApiItemDTO apiItemDTO : apiBodyDTO.getItems().getItem()) {
+			ar.add(apiItemDTO);
+		}
+		
+		return apisDAO.getAirlinesList(ar);
+	}
+	
+	public int getFlightsList(ApiItemDTO dto, String date) throws Exception {
 		ApiBodyDTO apiBodyDTO = this.jsonToObject(dto, date);
 		if(apiBodyDTO == null) {
 			return 0;
@@ -49,12 +77,12 @@ public class ApisService {
 		}
 		
 		
-		return apisDAO.getApiData(ar);
+		return apisDAO.getFlightsList(ar);
 		
 	}
 	
-	public ApiBodyDTO jsonToObject(ApiItemDTO dto, String date) throws Exception {
-		String json = this.getFlightsList(dto, date);
+	public ApiBodyDTO jsonToObject() throws Exception {
+		String json = this.getAirportList();
 		json = json.substring(json.indexOf("body")+6, json.lastIndexOf("}")-1);
 		
 		if(json.substring(json.lastIndexOf(":")+1, json.lastIndexOf("}")).equals("0")) {
@@ -68,7 +96,22 @@ public class ApisService {
 		return apiBodyDTO;
 	}
 	
-	private String getFlightsList(ApiItemDTO dto, String date) throws Exception {
+	public ApiBodyDTO jsonToObject(ApiItemDTO dto, String date) throws Exception {
+		String json = this.getFlightList(dto, date);
+		json = json.substring(json.indexOf("body")+6, json.lastIndexOf("}")-1);
+		
+		if(json.substring(json.lastIndexOf(":")+1, json.lastIndexOf("}")).equals("0")) {
+			ApiBodyDTO apiBodyDTO = new ApiBodyDTO();
+			return null;
+		}
+		
+		ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		ApiBodyDTO apiBodyDTO = mapper.readValue(json, ApiBodyDTO.class);
+		
+		return apiBodyDTO;
+	}
+	
+	private String getFlightList(ApiItemDTO dto, String date) throws Exception {
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getFlightOpratInfoList"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + SERVICEKEY); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*데이터 타입(xml, json)*/
@@ -101,6 +144,58 @@ public class ApisService {
 		
 		
 		return sb.toString();
+	}
+	
+	private String getAirlineList() throws Exception {
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getAirmanList"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + SERVICEKEY); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*데이터 타입(xml, json)*/
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        System.out.println("Response code: " + conn.getResponseCode());
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        return sb.toString();
+	}
+	
+	private String getAirportList() throws Exception {
+		 StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getArprtList"); /*URL*/
+	        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + SERVICEKEY); /*Service Key*/
+	        urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*데이터 타입(xml, json)*/
+	        URL url = new URL(urlBuilder.toString());
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Content-type", "application/json");
+	        System.out.println("Response code: " + conn.getResponseCode());
+	        BufferedReader rd;
+	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        String line;
+	        while ((line = rd.readLine()) != null) {
+	            sb.append(line);
+	        }
+	        rd.close();
+	        conn.disconnect();
+	        
+	        return sb.toString();
 	}
 
 }

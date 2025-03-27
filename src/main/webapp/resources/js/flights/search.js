@@ -43,10 +43,13 @@ flightSearch.addEventListener("click", ()=>{
     method: "post",
     body: params
   })
-
-  searchForm.setAttribute("action", "./list")
-  searchForm.setAttribute("method", "post")
-  searchForm.submit();
+  .then(r=>r.text())
+  .then(r=> {
+    
+    searchForm.setAttribute("action", "./list")
+    searchForm.setAttribute("method", "post")
+    searchForm.submit();
+  })
 
 })
 

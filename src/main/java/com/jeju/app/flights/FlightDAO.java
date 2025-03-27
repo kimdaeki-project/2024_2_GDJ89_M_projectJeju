@@ -1,5 +1,6 @@
 package com.jeju.app.flights;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,30 @@ public class FlightDAO {
 	private final String NAMESPACE = "com.jeju.app.flights.FlightDAO.";
 	
 	
-	public List<FlightDTO> getList(Map<String, String> map) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList", map);
+	public List<List<FlightDTO>> getList(Map<String, String> map) throws Exception{
+		List<List<FlightDTO>> ars = new ArrayList<List<FlightDTO>>();
+		
+		List<FlightDTO> ar = new ArrayList<FlightDTO>();
+		ar = sqlSession.selectList(NAMESPACE+"getListB2", map);
+		ars.add(ar);
+		
+		ar = new ArrayList<FlightDTO>();
+		ar = sqlSession.selectList(NAMESPACE+"getListB1", map);
+		ars.add(ar);
+		
+		ar = new ArrayList<FlightDTO>();
+		ar = sqlSession.selectList(NAMESPACE+"getListDd", map);
+		ars.add(ar);
+		
+		ar = new ArrayList<FlightDTO>();
+		ar = sqlSession.selectList(NAMESPACE+"getListA1", map);
+		ars.add(ar);
+		
+		ar = new ArrayList<FlightDTO>();
+		ar = sqlSession.selectList(NAMESPACE+"getListA2", map);
+		ars.add(ar);
+		
+		return ars;
 	}
 	
 }

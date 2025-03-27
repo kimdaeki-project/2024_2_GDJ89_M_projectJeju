@@ -25,12 +25,26 @@ public class FlightService {
 	@Autowired
 	private ApisService apisService;
 	
-	public List<FlightDTO> getList() throws Exception {
+	public List<List<FlightDTO>> getList(HttpServletRequest request) throws Exception {
 		
 		Calendar ca = Calendar.getInstance();
-		String now = ca.get(Calendar.YEAR)+"0"+(ca.get(Calendar.MONTH)+1)+""+ca.get(Calendar.DATE)+""+ca.get(Calendar.HOUR_OF_DAY)+""+ca.get(Calendar.MINUTE);
+		int h = ca.get(Calendar.HOUR_OF_DAY);
+		int m = ca.get(Calendar.MINUTE);
+		String hour = h+"";
+		String minute = m+"";
+		if(h<10) {
+			hour = "0"+h;
+		}
+		if(m < 10) {
+			minute = "0"+m;
+		}
+		String now = new Date(ca.getTimeInMillis()).toString().replace("-", "")+hour+minute;
+
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("today", now);
+		map.put("depPlandTime", request.getParameter("depPlandTime"));
+		map.put("airportId", request.getParameter("airportId"));
+
 		
 		return flightDAO.getList(map);
 	}
@@ -57,7 +71,7 @@ public class FlightService {
 			Date d = new Date(ca.getTimeInMillis());
 			String date = d.toString().replace("-", "");
 			
-			result = result + apisService.getApiData(dto, date);
+			result = result + apisService.getFlightsList(dto, date);
 			System.out.println("insert : "+result);
 		}
 		
