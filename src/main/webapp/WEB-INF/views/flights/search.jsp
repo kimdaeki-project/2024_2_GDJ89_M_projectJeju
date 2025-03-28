@@ -9,6 +9,9 @@
 		<c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
 </head>
 <body>
+
+
+
 	<!-- header -->
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
@@ -118,18 +121,13 @@
 								<button type="button" style="float: inline-end;" class="btn btn-primary" id="flightSearch">검색하기</button>
 							</div>
 						</form>
+
+						
 							
 						</div>
 					</div>
 				</div>
-
-					
-				<div class="tab-pane fade" id="pills-hotels" role="tabpanel" aria-labelledby="pills-hotels-tab" tabindex="0">
-
-				</div>
 			</div>
-			
-			
 			
 		</div>
 	</div>

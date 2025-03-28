@@ -30,6 +30,8 @@ public class FlightController {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public void getList(HttpServletRequest request, Model model) throws Exception {
 		
+		flightService.flightsUpdate(request);
+		
 		Days days =  new Days();
 		days.setSearchDay(request.getParameter("depPlandTime"));
 		model.addAttribute("day", days);
@@ -53,12 +55,12 @@ public class FlightController {
 		System.out.println("searchGET");
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public void search(HttpServletRequest request) throws Exception {
-		System.out.println(request.getParameter("airportId"));
-		System.out.println(request.getParameter("depPlandTime"));
-		flightService.flightsUpdate(request);
-		System.out.println("searchPOST");
-	}
+//	@RequestMapping(value = "search", method = RequestMethod.POST)
+//	public void search(HttpServletRequest request) throws Exception {
+//		System.out.println(request.getParameter("airportId"));
+//		System.out.println(request.getParameter("depPlandTime"));
+//		flightService.flightsUpdate(request);
+//		System.out.println("searchPOST");
+//	}
 	
 }

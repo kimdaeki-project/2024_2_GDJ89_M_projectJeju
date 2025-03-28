@@ -13,12 +13,20 @@ public class ApisDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.jeju.app.apis.ApisDAO.";
 	
-	public int getAirportsList(List<ApiItemDTO> dtos) throws Exception {
-		return sqlSession.insert(NAMESPACE+"getAirportsList", dtos);
+	public List<ApiItemDTO> getAirportList() throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getAirportList");
 	}
 	
-	public int getAirlinesList(List<ApiItemDTO> dtos) throws Exception {
-		return sqlSession.insert(NAMESPACE+"getAirlinesList", dtos);
+	public List<ApiItemDTO> getAirlineList() throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getAirlineList");
+	}
+	
+	public int addAirportsList(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"addAirportsList", dtos);
+	}
+	
+	public int addAirlinesList(List<ApiItemDTO> dtos) throws Exception {
+		return sqlSession.insert(NAMESPACE+"addAirlinesList", dtos);
 	}
 	
 	public int getFlightsList(List<ApiItemDTO> dtos) throws Exception {

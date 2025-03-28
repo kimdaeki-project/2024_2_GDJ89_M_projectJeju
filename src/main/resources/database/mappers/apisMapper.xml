@@ -13,7 +13,15 @@
 		SELECT * FROM DUAL
 	</insert>
 	
-	<insert id="getAirlinesList" parameterType="List">
+	<select id="getAirportList" resultType="ApiItemDTO">
+		SELECT * FROM AIRPORT
+	</select>
+	
+	<select id="getAirlineList" resultType="ApiItemDTO">
+		SELECT * FROM AIRLINE
+	</select>
+	
+	<insert id="addAirlinesList" parameterType="List">
 		INSERT ALL
 			<foreach collection="list" item="dto">
 				INTO AIRLINE
@@ -22,7 +30,7 @@
 		SELECT * FROM DUAL
 	</insert>
 	
-	<insert id="getAirportsList" parameterType="List">
+	<insert id="addAirportsList" parameterType="List">
 		INSERT ALL
 			<foreach collection="list" item="dto">
 				INTO AIRPORT

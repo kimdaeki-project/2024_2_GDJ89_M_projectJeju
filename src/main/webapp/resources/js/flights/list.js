@@ -107,6 +107,8 @@ selectBox.addEventListener("click", (e)=>{
     reForm.setAttribute("action", './list')
     reForm.setAttribute("method", "post")
     reForm.submit();
+
+
   }
 })
 
