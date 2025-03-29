@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.flights.FlightDAO">
+
+	<select id="getListB2" parameterType="Map" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE F
+		JOIN AIRPORT A
+		ON F.DEPAIRPORTNM = A.AIRPORTNM
+		WHERE DEPPLANDTIME > TO_DATE(#{today}, 'YYYYMMDDHH24MI')
+		AND DEPPLANDTIME BETWEEN TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')-2 AND TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')-1.00001
+		AND A.AIRPORTID = #{airportId}
+		AND F.ECONOMYCHARGE > 0
+		ORDER BY DEPPLANDTIME ASC
+	</select>
+	
+	<select id="getListB1" parameterType="Map" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE F
+		JOIN AIRPORT A
+		ON F.DEPAIRPORTNM = A.AIRPORTNM
+		WHERE DEPPLANDTIME > TO_DATE(#{today}, 'YYYYMMDDHH24MI')
+		AND DEPPLANDTIME BETWEEN TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')-1 AND TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')-0.00001
+		AND A.AIRPORTID = #{airportId}
+		AND F.ECONOMYCHARGE > 0
+		ORDER BY DEPPLANDTIME ASC
+	</select>
+	
+	<select id="getListDd" parameterType="Map" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE F
+		JOIN AIRPORT A
+		ON F.DEPAIRPORTNM = A.AIRPORTNM
+		WHERE DEPPLANDTIME > TO_DATE(#{today}, 'YYYYMMDDHH24MI')
+		AND DEPPLANDTIME BETWEEN TO_DATE(#{depPlandTime}, 'YYYY-MM-DD') AND TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')+0.99999
+		AND A.AIRPORTID = #{airportId}
+		AND F.ECONOMYCHARGE > 0
+		ORDER BY DEPPLANDTIME ASC
+	</select>
+	
+	<select id="getListA1" parameterType="Map" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE F
+		JOIN AIRPORT A
+		ON F.DEPAIRPORTNM = A.AIRPORTNM
+		WHERE DEPPLANDTIME > TO_DATE(#{today}, 'YYYYMMDDHH24MI')
+		AND DEPPLANDTIME BETWEEN TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')+1 AND TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')+1.99999
+		AND A.AIRPORTID = #{airportId}
+		AND F.ECONOMYCHARGE > 0
+		ORDER BY DEPPLANDTIME ASC
+	</select>
+	
+	<select id="getListA2" parameterType="Map" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE F
+		JOIN AIRPORT A
+		ON F.DEPAIRPORTNM = A.AIRPORTNM
+		WHERE DEPPLANDTIME > TO_DATE(#{today}, 'YYYYMMDDHH24MI')
+		AND DEPPLANDTIME BETWEEN TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')+2 AND TO_DATE(#{depPlandTime}, 'YYYY-MM-DD')+2.99999
+		AND A.AIRPORTID = #{airportId}
+		AND F.ECONOMYCHARGE > 0
+		ORDER BY DEPPLANDTIME ASC
+	</select>
+
+</mapper>
