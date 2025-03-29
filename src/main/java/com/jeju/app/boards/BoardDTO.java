@@ -1,6 +1,7 @@
 package com.jeju.app.boards;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,16 @@ public class BoardDTO {
 	private Double rating;
 	private Long favorite;
 	private Long category;
+	private List<BoardFileDTO> boardFileDTOs;
 	
+	
+	
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
+	}
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
+	}
 	public String getUserID() {
 		return userID;
 	}

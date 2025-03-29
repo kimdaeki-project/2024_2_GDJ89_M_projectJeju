@@ -43,14 +43,15 @@ public class BoardDAOTest extends Sample {
 		Calendar ca = Calendar.getInstance();
 		Random rg = new Random();
 		
-		for (int i=0; i<115; i++) {
+		for (int i=0; i<12; i++) {
 			boardDTO.setUserID("test"+i);
 			boardDTO.setBoardDate(new Date(ca.getTimeInMillis()));
-			boardDTO.setBoardContents("testContents" +i);
+			boardDTO.setBoardContents("제주시" +i);
 			boardDTO.setBoardTitle("testTitle" +i);
-			boardDTO.setCategory(1L);
 			boardDTO.setFavorite(1L*i);
-			boardDTO.setBoardHits(200L-(1L*i));
+			boardDTO.setBoardHits(300L-(1L*i));
+			boardDTO.setLocation("제주시");
+			boardDTO.setCategory(3L);
 			
 			double r = Math.random();
 			
@@ -65,7 +66,7 @@ public class BoardDAOTest extends Sample {
 			boardDAO.add(boardDTO);
 			
 			if (i%100==0) {
-				Thread.sleep(100);
+				Thread.sleep(10);
 			}
 			
 			System.out.println("Finish");

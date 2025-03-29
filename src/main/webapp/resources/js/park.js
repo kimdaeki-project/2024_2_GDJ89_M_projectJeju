@@ -69,7 +69,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places(); 
 
 
-// 키워드로 장소를 검색합니다
 select.addEventListener('change', async ()=>{
     if (select.value=='김포'){
         ps.keywordSearch('김포공항 근처 주차장', placesSearchCB);
@@ -110,6 +109,12 @@ select.addEventListener('change', async ()=>{
     }else if (select.value=='제주'){
         ps.keywordSearch('제주공항 근처 주차장', placesSearchCB);
         var code = 'CJU'
+    }else if (select.value=='포항'){
+        ps.keywordSearch('포항공항 근처 주차장', placesSearchCB);
+        var code = '';
+    }else if (select.value=='원주'){
+        ps.keywordSearch('원주공항 근처 주차장', placesSearchCB);
+        var code = 'WJU';
     }
     getParkDetail(code);
 })

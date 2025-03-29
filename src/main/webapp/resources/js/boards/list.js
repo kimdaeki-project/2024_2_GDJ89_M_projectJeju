@@ -4,6 +4,7 @@ const pageNum = document.getElementById("pageNum");
 const sklist = document.getElementById("sklist");
 const tbody = document.getElementById("tbody");
 const cardlist = document.getElementById("cardlist");
+const loc = document.getElementById("loc");
 
 for (let p of pages) {
     p.addEventListener("click", function(){
@@ -18,6 +19,14 @@ function change(){
 
     var selectValue = select.options[select.selectedIndex].value;
     console.log(selectValue)
+    list_form.submit();
+}
+
+function locat(){
+    var lcselect = document.getElementById("loc");
+
+    var lcselectValue = lcselect.options[lcselect.selectedIndex].value;
+    console.log(lcselectValue)
     list_form.submit();
 }
 

@@ -6,11 +6,25 @@
 <mapper namespace="com.jeju.app.HomeDAO">
 		
 	<select id="getMaxHit" resultType="BoardDTO">
-		SELECT * FROM board WHERE boardHits = (SELECT max(boardhits) FROM board)
+		SELECT * FROM	
+			(
+				SELECT ROWNUM R , M.* FROM
+					(
+						SELECT * FROM BOARD WHERE FAVORITE = (SELECT (MAX(FAVORITE)) FROM BOARD)
+					) M
+			)
+		WHERE R = 1
 	</select>
 	
 	<select id="getMaxHit2" resultType="BoardDTO">
-		SELECT * FROM board WHERE FAVORITE = (SELECT (MAX(favorite)) FROM BOARD)
+		SELECT * FROM	
+			(
+				SELECT ROWNUM R , M.* FROM
+					(
+						SELECT * FROM BOARD WHERE BOARDHITS = (SELECT (MAX(BOARDHITS)) FROM BOARD)
+					) M
+			)
+		WHERE R = 1
 	</select>
 	
 	<select id="getNotice" resultType="PB_DTO">
