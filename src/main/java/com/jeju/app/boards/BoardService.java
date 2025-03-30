@@ -1,7 +1,9 @@
 package com.jeju.app.boards;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jeju.app.boards.hearts.HeartDTO;
 import com.jeju.app.files.FileManager;
 import com.jeju.app.pages.Pager;
 
@@ -82,4 +85,43 @@ public class BoardService {
 		return result;
 		
 	}
+	
+	public int delete(BoardDTO boardDTO, HttpSession session) throws Exception{
+		int result = boardDAO.delete(boardDTO);
+		
+		return result;
+	}
+	
+	//좋아요 기능
+	public HeartDTO findHeart(HeartDTO heartDTO) throws Exception{
+		
+		return boardDAO.findHeart(heartDTO);
+	}
+	
+	public int plusHeart(HeartDTO heart) throws Exception{
+		return boardDAO.plusHeart(heart);
+	}
+	
+	public int minusHeart(HeartDTO heart) throws Exception{
+		return boardDAO.minusHeart(heart);
+	}
+	
+	public int insertHeart(HeartDTO heart) throws Exception{
+		int result = 0;
+		HeartDTO search = boardDAO.findHeart(heart);
+		if (search==null) {
+			result = boardDAO.insertHeart(heart);
+			result = boardDAO.plusHeart(heart);
+		}else {
+			boardDAO.deleteHeart(heart);
+			boardDAO.minusHeart(heart);
+		}
+		
+		return result;
+	}
+	
+	public int deleteHeart(HeartDTO heart) throws Exception{
+		return boardDAO.deleteHeart(heart);
+	}
+	
 }

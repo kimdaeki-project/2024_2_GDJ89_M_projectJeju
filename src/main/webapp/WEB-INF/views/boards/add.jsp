@@ -20,11 +20,11 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			 <h1>Test Add</h1><i class="fa-sharp fa-solid fa-star-half"></i>
+			 <h1>Test Add</h1>
 			 <form action="" class="align-items-center" method="post" enctype="multipart/form-data">
 				<div class="row col-12" style="margin-top: 20px; margin-left: 0px;">
 					<input type="hidden" value="${dto.boardNum}" name="boardNum">
-					<select id="loc" style="width: 250px;" name="location" class="form-select">
+					<select id="loc" style="width:	 250px;" name="location" class="form-select">
 					    <option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>지역을 선택하세요.</option>
 					    <option value="제주시" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
 						<option value="애월" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
@@ -75,8 +75,6 @@
 				  console.log(m)
 				})
 			</script>
-			
-			
 			
 		</div>
 	</div>

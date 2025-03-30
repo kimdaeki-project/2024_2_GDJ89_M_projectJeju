@@ -181,5 +181,34 @@
 			BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}, RATING=#{rating}, LOCATION=#{location}, CATEGORY=#{category}
 		WHERE BOARDNUM=#{boardNum}
 	</update>
+	
+	<delete id="delete" parameterType="BoardDTO">
+		DELETE BOARD WHERE BOARDNUM=#{boardNum}
+	</delete>
+	
+	<!-- 좋아요 기능 -->
+	<select id="findHeart" parameterType="HeartDTO" resultType="HeartDTO">
+		SELECT * FROM HEART WHERE USERID='test' AND BOARDNUM=#{boardNum}
+	</select>
+	
+	<update id="plusHeart" parameterType="HeartDTO">
+		UPDATE BOARD SET 
+			FAVORITE = FAVORITE+1 WHERE BOARDNUM=#{boardNum}
+	</update>
+	
+	<update id="minusHeart" parameterType="HeartDTO">
+		UPDATE BOARD SET 
+			FAVORITE = FAVORITE-1 WHERE BOARDNUM=#{boardNum}
+	</update>
+	
+	<insert id="insertHeart" parameterType="HeartDTO">
+		INSERT INTO HEART VALUES
+			('test', #{boardNum}, 1)
+	</insert>
+	
+	<update id="deleteHeart" parameterType="HeartDTO">
+		DELETE HEART WHERE BOARDNUM=#{boardNum} AND USERID='test'
+	</update>
+	
 
 </mapper>

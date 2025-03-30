@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+	
 	<style>
 		.post_info{
 			font-size: 0;
@@ -25,7 +26,6 @@
 <body>
 	<!-- header -->
 	<c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
-
 	
 	<!-- body -->
 	<div style="margin-top: 100px;">
@@ -34,20 +34,55 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb" style="margin-bottom: 3%;">
 				  <li class="breadcrumb-item"><a href="/">메인화면</a></li>
-				  <li class="breadcrumb-item"><a href="/boards/place/list">게시판</a></li>
+				  <li class="breadcrumb-item">
+				  	<c:choose>
+				  		<c:when test="${dto.category eq 3}">
+							<a href="/boards/hotel/list">숙소 후기 게시판</a>
+				  		</c:when>
+				  		<c:when test="${dto.category eq 2}">
+							<a href="/boards/diner/list">맛집 후기게시판</a>
+				  		</c:when>
+				  		<c:otherwise>
+				  			<a href="/boards/place/list">명소 후기 게시판</a>
+				  		</c:otherwise>
+				  	</c:choose>
+				  </li>
 				  <li class="breadcrumb-item active" aria-current="page">${dto.boardTitle}</li>
 				</ol>
 			</nav>
 			<div>
 				<div>
 					<div style="display: inline-block;">
-						<h1>${dto.boardTitle}</h1>
+						<h1>${dto.boardTitle}</h1> 
 						<span hidden>${dto.boardNum}</span>
 					</div>
-					<div style="margin-left: 85%; display: inline-block;">
+					<div style="float: right; display: inline-block; width: 180px;">
+						<form action="" method="post" style="width: 48px; float: left;">
+							<c:choose>
+								<c:when test="${heart.boardNum eq null}">
+									<button id="btnHeart" class="btn btn-outline-danger" type="submit" data-heart-num="${heart.heart}">
+										<img src="/resources/icon/heart.svg">
+									</button>		
+								</c:when>
+								<c:otherwise>
+									<button id="btnHeart" class="btn btn-danger" type="submit" data-heart-num="${heart.heart}">
+										<img src="/resources/icon/heart-fill.svg">
+									</button>
+								</c:otherwise>
+							</c:choose>
+						</form>
 						<a class="btn btn-primary" href="/boards/update?boardNum=${dto.boardNum}">수정</a>
-						<a class="btn btn-danger" href="/boards/list">삭제</a>
-					
+						<c:choose>
+							<c:when test="${dto.category eq 1}">
+								<a id="btnDelete" class="btn btn-danger" href="/boards/place/list">삭제</a>
+								</c:when>
+							<c:when test="${dto.category eq 2}">
+								<a id="btnDelete" class="btn btn-danger" href="/boards/diner/list">삭제</a>
+							</c:when>
+							<c:otherwise>
+								<a id="btnDelete" class="btn btn-danger" href="/boards/hotel/list">삭제</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div>
@@ -62,21 +97,16 @@
 			</div>
 			<div>
 				<div style="text-align: center;">
-					<span>${dto.boardContents}</span>
+					<h3>${dto.boardContents}</h3>
 				</div>
 			</div>
-			
-			
 			
 		</div>
 	</div>
 
-
-
-
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-
+	<script src="/resources/js/boards/detail.js"></script>
 	<c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
 </body>
 </html>

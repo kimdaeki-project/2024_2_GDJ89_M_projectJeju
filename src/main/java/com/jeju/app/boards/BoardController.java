@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jeju.app.boards.hearts.HeartDTO;
 import com.jeju.app.pages.Pager;
 
 @Controller
@@ -55,7 +57,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String detail(BoardDTO boardDTO, Model model, HttpSession session) throws Exception {
+	public String detail(BoardDTO boardDTO, Model model, HttpSession session, @RequestParam("boardNum") Long boardNum, HeartDTO heartDTO) throws Exception {
 		Object obj = session.getAttribute("board");
 		boolean check = false;
 		if (obj != null) {
@@ -73,8 +75,21 @@ public class BoardController {
 		}
 		boardDTO=boardService.getDetail(boardDTO, check);
 		model.addAttribute("dto", boardDTO);
+		
+		//좋아요 기능
+		heartDTO = boardService.findHeart(heartDTO);
+		model.addAttribute("heart", heartDTO);
 		return "boards/detail";
 	}
+	
+	@RequestMapping(value = "detail", method = RequestMethod.POST)
+	public String heart(HeartDTO heartDTO) throws Exception{
+			boardService.insertHeart(heartDTO);
+		
+		
+		return "redirect:./detail?boardNum="+heartDTO.getBoardNum();
+	}
+	
 	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String update(BoardDTO boardDTO, Model model) throws Exception{
