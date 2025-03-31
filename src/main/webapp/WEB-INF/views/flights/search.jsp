@@ -30,8 +30,8 @@
 						<div class="tab-pane fade show active" id="pills-flights" role="tabpanel" aria-labelledby="pills-flights-tab" tabindex="0">
 							
 							<div class="input-group mb-1 mt-1" style="width: 30%;">
-								<label class="input-group-text" for="airportId">출발지</label>
-							<select	class="form-select" id="airportId" name="airportId">
+								<label class="input-group-text" for="depAirportId">출발지</label>
+							<select	class="form-select" id="depAirportId" name="depAirportId">
 								
 							</select>
 						</div>
@@ -45,8 +45,8 @@
 							</div>
 							<div class="col">
 								<div class="input-group mb-1 mt-1" style="width: 80%;">
-									<label class="input-group-text" for="arrPlandTime">오는 날</label>
-									<input type="date" class="form-control" id="arrPlandTime" name="arrPlandTime">
+									<label class="input-group-text" for="depPlandTimeToCome">오는 날</label>
+									<input type="date" class="form-control" id="depPlandTimeToCome" name="depPlandTimeToCome">
 								</div>
 							</div>
 						</div>

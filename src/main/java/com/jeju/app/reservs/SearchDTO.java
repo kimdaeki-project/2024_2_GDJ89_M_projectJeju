@@ -5,9 +5,12 @@ import java.sql.Date;
 public class SearchDTO {
 	
 	private String depAirportId;
-	private Date plandGoDate;
-	private Date plandComeDate;
-	private Long person;
+	private String arrAirportId;
+	private String depPlandTime;
+	private String depPlandTimeToCome;
+	private Long adult;
+	private Long child;
+	private Long infant;
 	
 	
 	public String getDepAirportId() {
@@ -16,23 +19,42 @@ public class SearchDTO {
 	public void setDepAirportId(String depAirportId) {
 		this.depAirportId = depAirportId;
 	}
-	public Date getPlandGoDate() {
-		return plandGoDate;
+	public String getArrAirportId() {
+		return arrAirportId;
 	}
-	public void setPlandGoDate(Date plandGoDate) {
-		this.plandGoDate = plandGoDate;
+	public void setArrAirportId(String arrAirportId) {
+		this.arrAirportId = arrAirportId;
 	}
-	public Date getPlandComeDate() {
-		return plandComeDate;
+	public String getDepPlandTime() {
+		return depPlandTime;
 	}
-	public void setPlandComeDate(Date plandComeDate) {
-		this.plandComeDate = plandComeDate;
+	public void setDepPlandTime(String depPlandTime) {
+		this.depPlandTime = depPlandTime;
 	}
-	public Long getPerson() {
-		return person;
+	public String getDepPlandTimeToCome() {
+		return depPlandTimeToCome;
 	}
-	public void setPerson(Long person) {
-		this.person = person;
+	public void setDepPlandTimeToCome(String depPlandTimeToCome) {
+		this.depPlandTimeToCome = depPlandTimeToCome;
 	}
+	public Long getAdult() {
+		return adult;
+	}
+	public void setAdult(Long adult) {
+		this.adult = adult;
+	}
+	public Long getChild() {
+		return child;
+	}
+	public void setChild(Long child) {
+		this.child = child;
+	}
+	public Long getInfant() {
+		return infant;
+	}
+	public void setInfant(Long infant) {
+		this.infant = infant;
+	}	
+	
 
 }

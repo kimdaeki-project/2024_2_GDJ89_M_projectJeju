@@ -37,7 +37,7 @@ public class ApisService {
 		
 		List<ApiItemDTO> ar = apisDAO.getAirportList();
 		
-		
+		result = 0;
 		for(ApiItemDTO a : ar) {
 			ApiItemDTO apiItemDTO = new ApiItemDTO();
 			apiItemDTO.setAirportId(a.getAirportId());
@@ -47,10 +47,10 @@ public class ApisService {
 				Date d = new Date(ca.getTimeInMillis());
 				String date = d.toString().replace("-", "");
 				result = result + this.getFlightsList(apiItemDTO, date);
-				System.out.println("insert : " + result);
 			}
 		}
 		
+		System.out.println("insert : " + result);
 		return result;
 		
 	}
@@ -128,6 +128,7 @@ public class ApisService {
 		
 		ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ApiBodyDTO apiBodyDTO = new ApiBodyDTO();
+		
 		
 		if(json.substring(json.lastIndexOf(":")+1, json.lastIndexOf("}")-2).equals("0")) {
 			return null;

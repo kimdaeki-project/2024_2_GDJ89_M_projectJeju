@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.aspectj.lang.reflect.CatchClauseSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeju.app.apis.ApiItemDTO;
+import com.jeju.app.reservs.SearchDTO;
 import com.jeju.app.search.Days;
 
 
@@ -30,17 +33,12 @@ public class FlightController {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public void getList(HttpServletRequest request, Model model) throws Exception {
 		
-		flightService.flightsUpdate(request);
-		
 		Days days =  new Days();
 		days.setSearchDay(request.getParameter("depPlandTime"));
 		model.addAttribute("day", days);
-		model.addAttribute("airportId", request.getParameter("airportId"));
-		model.addAttribute("list1", flightService.getList(request).get(0));
-		model.addAttribute("list2", flightService.getList(request).get(1));
-		model.addAttribute("list3", flightService.getList(request).get(2));
-		model.addAttribute("list4", flightService.getList(request).get(3));
-		model.addAttribute("list5", flightService.getList(request).get(4));
+		model.addAttribute("airportId", request.getParameter("depAirportId"));
+		model.addAttribute("list", flightService.getList(request));
+
 	}
 	
 //	@RequestMapping(value = "updateList", method = RequestMethod.POST)
@@ -55,12 +53,10 @@ public class FlightController {
 		System.out.println("searchGET");
 	}
 	
-//	@RequestMapping(value = "search", method = RequestMethod.POST)
-//	public void search(HttpServletRequest request) throws Exception {
-//		System.out.println(request.getParameter("airportId"));
-//		System.out.println(request.getParameter("depPlandTime"));
-//		flightService.flightsUpdate(request);
-//		System.out.println("searchPOST");
-//	}
+	@RequestMapping(value = "search", method = RequestMethod.POST)
+	public void search(SearchDTO searchDTO, HttpSession session) throws Exception {
+		searchDTO.setArrAirportId("NAARKPC");
+		session.setAttribute("search", searchDTO);
+	}
 	
 }

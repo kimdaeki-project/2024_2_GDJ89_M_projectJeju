@@ -2,11 +2,12 @@
 
 const selectBox = document.getElementById("selectBox")
 
-const airportId = document.getElementById("airportId")
+const depAirportId = document.getElementById("depAirportId")
 const airlineNm = document.getElementById("airlineNm")
 const arrAirportId = 'NAARKPC'
 const accordion = document.getElementById("accordion")
 const reForm = document.getElementById("reForm")
+const btns = document.getElementsByClassName("btn")
 
 const li1 = document.getElementById("list-1-list")
 const li2 = document.getElementById("list-2-list")
@@ -42,6 +43,12 @@ function init (){
   getAirlineList();
   getAirportList();
 
+  for(let btn of btns){
+    btn.addEventListener("click", (e)=>{
+      let flightNum = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling
+      console.log(flightNum.value)
+    })
+  }
 
 }
 
@@ -66,7 +73,7 @@ function getAirportList () {
       let opt = document.createElement("option")
       opt.value = e.airportId
       opt.innerHTML = e.airportNm
-      airportId.appendChild(opt)
+      depAirportId.appendChild(opt)
       
     }
     
@@ -97,18 +104,46 @@ function getAirlineList() {
 // list
 
 selectBox.addEventListener("click", (e)=>{
-  if(e.target.id == 'list-1-list' || e.target.id == 'list-7-list') {
+  if(e.target.classList.contains("list-group-item")) {
     let input = document.createElement("input")
     input.setAttribute("type", "hidden")
     input.setAttribute("value", e.target.innerText)
     input.setAttribute("name", "depPlandTime")
     selectBox.appendChild(input)
+
     
     reForm.setAttribute("action", './list')
     reForm.setAttribute("method", "post")
     reForm.submit();
 
-
   }
+})
+
+depAirportId.addEventListener("change", ()=>{
+
+  let input = document.createElement("input")
+  input.setAttribute("type", "hidden")
+  input.setAttribute("value", li4.innerText)
+  input.setAttribute("name", "depPlandTime")
+  selectBox.appendChild(input)
+
+  reForm.setAttribute("action", './list')
+  reForm.setAttribute("method", "post")
+  reForm.submit();
+
+})
+
+airlineNm.addEventListener("change", ()=>{
+  
+  let input = document.createElement("input")
+  input.setAttribute("type", "hidden")
+  input.setAttribute("value", li4.innerText)
+  input.setAttribute("name", "depPlandTime")
+  selectBox.appendChild(input)
+
+  reForm.setAttribute("action", './list')
+  reForm.setAttribute("method", "post")
+  reForm.submit();
+  
 })
 

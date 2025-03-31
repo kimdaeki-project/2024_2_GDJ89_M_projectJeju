@@ -25,7 +25,7 @@ public class FlightService {
 	@Autowired
 	private ApisService apisService;
 	
-	public List<List<FlightDTO>> getList(HttpServletRequest request) throws Exception {
+	public List<FlightDTO> getList(HttpServletRequest request) throws Exception {
 		
 		Calendar ca = Calendar.getInstance();
 		int h = ca.get(Calendar.HOUR_OF_DAY);
@@ -43,38 +43,43 @@ public class FlightService {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("today", now);
 		map.put("depPlandTime", request.getParameter("depPlandTime"));
-		map.put("airportId", request.getParameter("airportId"));
+		map.put("airportId", request.getParameter("depAirportId"));
+		
+		if(request.getParameter("airlineNm") != "" && request.getParameter("airlineNm") != null) {
+			map.put("airlineId", request.getParameter("airlineNm"));
+			return flightDAO.getListByAirline(map);
+		}
 
 		
 		return flightDAO.getList(map);
 	}
 	
-	public void flightsUpdate(HttpServletRequest request) throws Exception {
-		
-		int result = apisService.deleteAll();
-		
-		System.out.println("delete : "+result);
-		result = 0;
-		
-		ApiItemDTO dto = new ApiItemDTO();
-		dto.setAirportId((String)request.getParameter("airportId"));
-		
-		Days days = new Days();
-		
-		days.setSearchDay(request.getParameter("depPlandTime"));
-		
-		for(int i = 0; i < 7; i++) {
-			
-			Calendar ca = days.stringToCalendar(days.getB3Day().toString());
-			ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
-			
-			Date d = new Date(ca.getTimeInMillis());
-			String date = d.toString().replace("-", "");
-			
-			result = result + apisService.getFlightsList(dto, date);
-			System.out.println("insert : "+result);
-		}
-		
-	}
+//	public void flightsUpdate(HttpServletRequest request) throws Exception {
+//		
+//		int result = apisService.deleteAll();
+//		
+//		System.out.println("delete : "+result);
+//		result = 0;
+//		
+//		ApiItemDTO dto = new ApiItemDTO();
+//		dto.setAirportId((String)request.getParameter("airportId"));
+//		
+//		Days days = new Days();
+//		
+//		days.setSearchDay(request.getParameter("depPlandTime"));
+//		
+//		for(int i = 0; i < 7; i++) {
+//			
+//			Calendar ca = days.stringToCalendar(days.getB3Day().toString());
+//			ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
+//			
+//			Date d = new Date(ca.getTimeInMillis());
+//			String date = d.toString().replace("-", "");
+//			
+//			result = result + apisService.getFlightsList(dto, date);
+//			System.out.println("insert : "+result);
+//		}
+//		
+//	}
 
 }
