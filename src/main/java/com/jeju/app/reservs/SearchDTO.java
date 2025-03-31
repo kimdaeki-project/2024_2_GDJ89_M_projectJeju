@@ -8,11 +8,25 @@ public class SearchDTO {
 	private String arrAirportId;
 	private String depPlandTime;
 	private String depPlandTimeToCome;
+	private String flightNumGo;
+	private String flightNumCome;
 	private Long adult;
 	private Long child;
 	private Long infant;
 	
 	
+	public String getFlightNumGo() {
+		return flightNumGo;
+	}
+	public void setFlightNumGo(String flightNumGo) {
+		this.flightNumGo = flightNumGo;
+	}
+	public String getFlightNumCome() {
+		return flightNumCome;
+	}
+	public void setFlightNumCome(String flightNumCome) {
+		this.flightNumCome = flightNumCome;
+	}
 	public String getDepAirportId() {
 		return depAirportId;
 	}

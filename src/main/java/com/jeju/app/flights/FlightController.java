@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.reflect.CatchClauseSignature;
@@ -36,8 +37,22 @@ public class FlightController {
 		Days days =  new Days();
 		days.setSearchDay(request.getParameter("depPlandTime"));
 		model.addAttribute("day", days);
-		model.addAttribute("airportId", request.getParameter("depAirportId"));
+		model.addAttribute("depAirportId", request.getParameter("depAirportId"));
 		model.addAttribute("list", flightService.getList(request));
+
+	}
+	
+	@RequestMapping(value = "list2", method = RequestMethod.POST)
+	public void getListCome(HttpServletRequest request, Model model, SearchDTO searchDTO, HttpSession session) throws Exception {
+		
+		searchDTO = (SearchDTO)session.getAttribute("searchInfo");
+		System.out.println(request.getParameter("flightNum"));
+		
+		Days days =  new Days();
+		days.setSearchDay(searchDTO.getDepPlandTimeToCome());
+		model.addAttribute("day", days);
+		model.addAttribute("depAirportId", searchDTO.getArrAirportId());
+		model.addAttribute("list", flightService.getListCome(request, searchDTO, session));
 
 	}
 	
@@ -55,8 +70,9 @@ public class FlightController {
 	
 	@RequestMapping(value = "search", method = RequestMethod.POST)
 	public void search(SearchDTO searchDTO, HttpSession session) throws Exception {
-		searchDTO.setArrAirportId("NAARKPC");
-		session.setAttribute("search", searchDTO);
+		
+		session.setAttribute("searchInfo", searchDTO);
 	}
+	
 	
 }

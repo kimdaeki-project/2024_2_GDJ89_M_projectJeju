@@ -21,6 +21,7 @@
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			 <form id="searchForm">
+				<input type="hidden" name="arrAirportId" id="arrAirportId" value="NAARKPC">
 				 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 					 <li class="nav-item" role="presentation">
 						 <button class="nav-link active" id="pills-flights-tab" data-bs-toggle="pill" data-bs-target="#pills-flights" type="button" role="tab" aria-controls="pills-flights" aria-selected="true">항공권 예매</button>

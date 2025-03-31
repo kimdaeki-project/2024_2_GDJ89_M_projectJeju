@@ -19,7 +19,7 @@
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			 <div class="row mt-5">
-				 <legend style="font-weight: bolder; font-size: xx-large;">가는 편 선택</legend>
+				 <legend style="font-weight: bolder; font-size: xx-large;">오는 편 선택</legend>
 			 </div>
 			<form id="reForm">
 				<div class="row">

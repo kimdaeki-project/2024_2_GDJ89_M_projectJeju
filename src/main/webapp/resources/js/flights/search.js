@@ -1,6 +1,7 @@
 const flightSearch = document.getElementById("flightSearch")
 const person = document.getElementById("person")
 const depAirportId = document.getElementById("depAirportId")
+const arrAirportId = document.getElementById("arrAirportId")
 const depPlandTime = document.getElementById("depPlandTime")
 const depPlandTimeToCome = document.getElementById("depPlandTimeToCome")
 const searchForm = document.getElementById("searchForm")
@@ -40,6 +41,7 @@ getAirportList();
 flightSearch.addEventListener("click", ()=>{
     
     let params = new FormData();
+    params.append("arrAirportId", arrAirportId.value)
     params.append("depAirportId", depAirportId.value)
     params.append("depPlandTime", depPlandTime.value)
     params.append("depPlandTimeToCome", depPlandTimeToCome.value)

@@ -3,8 +3,8 @@
 const selectBox = document.getElementById("selectBox")
 
 const depAirportId = document.getElementById("depAirportId")
+const arrAirportId = document.getElementById("arrAirportId")
 const airlineNm = document.getElementById("airlineNm")
-const arrAirportId = 'NAARKPC'
 const accordion = document.getElementById("accordion")
 const reForm = document.getElementById("reForm")
 const btns = document.getElementsByClassName("btn")
@@ -46,7 +46,15 @@ function init (){
   for(let btn of btns){
     btn.addEventListener("click", (e)=>{
       let flightNum = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling
-      console.log(flightNum.value)
+      let input = document.createElement("input")
+      input.setAttribute("type", "hidden")
+      input.setAttribute("name", "flightNum")
+      input.setAttribute("value", flightNum.value)
+      reForm.appendChild(input)
+      
+      reForm.setAttribute("action", './list2')
+      reForm.setAttribute("method", "post")
+      reForm.submit();
     })
   }
 

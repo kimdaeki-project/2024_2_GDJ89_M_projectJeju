@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.reservs.SearchDTO;
 
 @Service
 public class ApisService {
@@ -46,7 +47,8 @@ public class ApisService {
 				ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
 				Date d = new Date(ca.getTimeInMillis());
 				String date = d.toString().replace("-", "");
-				result = result + this.getFlightsList(apiItemDTO, date);
+				result = result + this.getFlightsList(apiItemDTO.getAirportId(), "NAARKPC", date);
+				result = result + this.getFlightsList("NAARKPC", apiItemDTO.getAirportId(), date);
 			}
 		}
 		
@@ -83,8 +85,8 @@ public class ApisService {
 		return apisDAO.addAirlinesList(ar);
 	}
 	
-	public int getFlightsList(ApiItemDTO dto, String date) throws Exception {
-		ApiBodyDTO apiBodyDTO = this.jsonToObject(dto, date);
+	public int getFlightsList(String depAirportId, String arrAirportId, String date) throws Exception {
+		ApiBodyDTO apiBodyDTO = this.jsonToObject(depAirportId, arrAirportId, date);
 		if(apiBodyDTO == null) {
 			return 0;
 		}
@@ -123,8 +125,8 @@ public class ApisService {
 		return apiBodyDTO;
 	}
 	
-	public ApiBodyDTO jsonToObject(ApiItemDTO dto, String date) throws Exception {
-		String json = this.getFlightList(dto, date);
+	public ApiBodyDTO jsonToObject(String depAirportId, String arrAirportId, String date) throws Exception {
+		String json = this.getFlightList(depAirportId, arrAirportId, date);
 		
 		ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ApiBodyDTO apiBodyDTO = new ApiBodyDTO();
@@ -149,18 +151,16 @@ public class ApisService {
 		return apiBodyDTO;
 	}
 	
-	private String getFlightList(ApiItemDTO dto, String date) throws Exception {
+	private String getFlightList(String depAirportId, String arrAirportId, String date) throws Exception {
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getFlightOpratInfoList"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + SERVICEKEY); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("_type","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*데이터 타입(xml, json)*/
-        urlBuilder.append("&" + URLEncoder.encode("depAirportId","UTF-8") + "=" + URLEncoder.encode(dto.getAirportId(), "UTF-8")); /*출발공항ID*/
-        urlBuilder.append("&" + URLEncoder.encode("arrAirportId","UTF-8") + "=" + URLEncoder.encode("NAARKPC", "UTF-8")); /*도착공항ID*/
+        urlBuilder.append("&" + URLEncoder.encode("depAirportId","UTF-8") + "=" + URLEncoder.encode(depAirportId, "UTF-8")); /*출발공항ID*/
+        urlBuilder.append("&" + URLEncoder.encode("arrAirportId","UTF-8") + "=" + URLEncoder.encode(arrAirportId, "UTF-8")); /*도착공항ID*/
         urlBuilder.append("&" + URLEncoder.encode("depPlandTime","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*출발일(YYYYMMDD)*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("150", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        if(dto.getAirlineId()!=null) {
-        	urlBuilder.append("&" + URLEncoder.encode("airlineId","UTF-8") + "=" + URLEncoder.encode(dto.getAirlineId(), "UTF-8")); /*항공사ID*/
-        }
+        
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
