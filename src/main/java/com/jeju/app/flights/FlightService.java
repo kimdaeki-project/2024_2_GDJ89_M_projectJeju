@@ -76,9 +76,9 @@ public class FlightService {
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("today", now);
-		map.put("depPlandTime", searchDTO.getDepPlandTimeToCome());
-		map.put("depAirportId", request.getParameter("arrAirportId"));
-		map.put("arrAirportId", request.getParameter("depAirportId"));
+		map.put("depPlandTime", request.getParameter("depPlandTime"));
+		map.put("depAirportId", request.getParameter("depAirportId"));
+		map.put("arrAirportId", searchDTO.getDepAirportId());
 		
 		if(request.getParameter("airlineNm") != "" && request.getParameter("airlineNm") != null) {
 			map.put("airlineId", request.getParameter("airlineNm"));

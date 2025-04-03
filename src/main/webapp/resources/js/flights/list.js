@@ -1,13 +1,15 @@
 // init
 
 const selectBox = document.getElementById("selectBox")
-
+const depPlandTimeToCome = document.getElementById("depPlandTimeToCome")
 const depAirportId = document.getElementById("depAirportId")
 const arrAirportId = document.getElementById("arrAirportId")
+const selected = document.getElementById("selected")
 const airlineNm = document.getElementById("airlineNm")
 const accordion = document.getElementById("accordion")
 const reForm = document.getElementById("reForm")
-const btns = document.getElementsByClassName("btn")
+const btns = document.getElementsByClassName("choice")
+const geReserv = document.getElementsByClassName("goReserv")
 
 const li1 = document.getElementById("list-1-list")
 const li2 = document.getElementById("list-2-list")
@@ -45,16 +47,40 @@ function init (){
 
   for(let btn of btns){
     btn.addEventListener("click", (e)=>{
+      
       let flightNum = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.previousElementSibling
       let input = document.createElement("input")
       input.setAttribute("type", "hidden")
       input.setAttribute("name", "flightNum")
       input.setAttribute("value", flightNum.value)
       reForm.appendChild(input)
-      
-      reForm.setAttribute("action", './list2')
-      reForm.setAttribute("method", "post")
-      reForm.submit();
+
+      if(selected.value != "NAARKPC") {
+        input = document.createElement("input")
+        input.setAttribute("type", "hidden")
+        input.setAttribute("name", "depPlandTime")
+        input.setAttribute("value", depPlandTimeToCome.value)
+        reForm.appendChild(input)
+        selected.setAttribute("value", "NAARKPC")
+  
+        reForm.setAttribute("action", './list')
+        reForm.setAttribute("method", "post")
+        reForm.submit();
+      }else {
+        let params = new FormData();
+        params.append("flightNum", flightNum.value)
+
+        fetch("./getFlightCome", {
+          method: "post",
+          body: params
+        })
+        .then(r=>r.text())
+        .then(r=>{
+          location.href = "/reservation/info"
+        })
+      }
+
+
     })
   }
 
@@ -75,9 +101,9 @@ function getAirportList () {
     
     for(let e of ar){
       
-      if(e.airportId=="NAARKPC"){
-        continue;
-      }
+      // if(e.airportId=="NAARKPC"){
+      //   continue;
+      // }
       let opt = document.createElement("option")
       opt.value = e.airportId
       opt.innerHTML = e.airportNm

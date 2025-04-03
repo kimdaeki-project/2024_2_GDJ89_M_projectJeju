@@ -13,6 +13,7 @@ import org.aspectj.lang.reflect.CatchClauseSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,29 +33,35 @@ public class FlightController {
 	private FlightService flightService;
 	
 	@RequestMapping(value = "list", method = RequestMethod.POST)
-	public void getList(HttpServletRequest request, Model model) throws Exception {
+	public void getList(HttpServletRequest request, Model model, SearchDTO searchDTO, HttpSession session) throws Exception {
 		
-		Days days =  new Days();
-		days.setSearchDay(request.getParameter("depPlandTime"));
-		model.addAttribute("day", days);
-		model.addAttribute("depAirportId", request.getParameter("depAirportId"));
-		model.addAttribute("list", flightService.getList(request));
+		searchDTO = (SearchDTO)session.getAttribute("searchInfo");
+		if(request.getParameter("flightNum") != null) {
+			searchDTO.setFlightNumGo(request.getParameter("flightNum"));			
+		}
+		
+		if(searchDTO.getFlightNumGo() == null) {
+			Days days =  new Days();
+			days.setSearchDay(request.getParameter("depPlandTime"));
+			model.addAttribute("day", days);
+			model.addAttribute("depAirportId", request.getParameter("depAirportId"));
+			model.addAttribute("arrAirportId", searchDTO.getArrAirportId());
+			model.addAttribute("list", flightService.getList(request));
+			model.addAttribute("journey", "가는 편");
+		}else if(searchDTO.getFlightNumGo() != null) {
+			Days days =  new Days();
+			days.setSearchDay(request.getParameter("depPlandTime"));
+			model.addAttribute("day", days);
+			model.addAttribute("depAirportId", request.getParameter("depAirportId"));
+			model.addAttribute("arrAirportId", searchDTO.getDepAirportId());
+			model.addAttribute("list", flightService.getListCome(request, searchDTO, session));
+			model.addAttribute("journey", "오는 편");
+		}
+		
+		model.addAttribute("depPlandTimeToCome", searchDTO.getDepPlandTimeToCome());
 
 	}
 	
-	@RequestMapping(value = "list2", method = RequestMethod.POST)
-	public void getListCome(HttpServletRequest request, Model model, SearchDTO searchDTO, HttpSession session) throws Exception {
-		
-		searchDTO = (SearchDTO)session.getAttribute("searchInfo");
-		System.out.println(request.getParameter("flightNum"));
-		
-		Days days =  new Days();
-		days.setSearchDay(searchDTO.getDepPlandTimeToCome());
-		model.addAttribute("day", days);
-		model.addAttribute("depAirportId", searchDTO.getArrAirportId());
-		model.addAttribute("list", flightService.getListCome(request, searchDTO, session));
-
-	}
 	
 //	@RequestMapping(value = "updateList", method = RequestMethod.POST)
 //	@ResponseBody
@@ -72,6 +79,15 @@ public class FlightController {
 	public void search(SearchDTO searchDTO, HttpSession session) throws Exception {
 		
 		session.setAttribute("searchInfo", searchDTO);
+		
+	}
+	
+	@RequestMapping(value = "getFlightCome", method = RequestMethod.POST)
+	public void getFlightCome(SearchDTO searchDTO, HttpSession session, HttpServletRequest request) throws Exception {
+		System.out.println("getFlightCome");
+		searchDTO = (SearchDTO)session.getAttribute("searchInfo");
+		searchDTO.setFlightNumCome(request.getParameter("flightNum"));
+		
 	}
 	
 	
