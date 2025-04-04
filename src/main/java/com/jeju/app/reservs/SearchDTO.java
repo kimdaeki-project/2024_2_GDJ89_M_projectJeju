@@ -13,8 +13,29 @@ public class SearchDTO {
 	private Long adult;
 	private Long child;
 	private Long infant;
+	private Long adultCharge;
+	private Long childCharge;
+	private Long chargeAmount;
+
 	
-	
+	public Long getChargeAmount() {
+		return chargeAmount;
+	}
+	public void setChargeAmount(Long chargeAmount) {
+		this.chargeAmount = chargeAmount;
+	}
+	public Long getAdultCharge() {
+		return adultCharge;
+	}
+	public void setAdultCharge(Long adultCharge) {
+		this.adultCharge = adultCharge;
+	}
+	public Long getChildCharge() {
+		return childCharge;
+	}
+	public void setChildCharge(Long childCharge) {
+		this.childCharge = childCharge;
+	}
 	public String getFlightNumGo() {
 		return flightNumGo;
 	}

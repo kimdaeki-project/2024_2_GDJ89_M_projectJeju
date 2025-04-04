@@ -66,6 +66,7 @@ function init (){
         reForm.setAttribute("action", './list')
         reForm.setAttribute("method", "post")
         reForm.submit();
+        alert("오는 편을 검색합니다")
       }else {
         let params = new FormData();
         params.append("flightNum", flightNum.value)

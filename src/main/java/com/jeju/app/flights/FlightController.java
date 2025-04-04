@@ -72,7 +72,7 @@ public class FlightController {
 	
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public void search() throws Exception {
-		System.out.println("searchGET");
+		
 	}
 	
 	@RequestMapping(value = "search", method = RequestMethod.POST)
@@ -84,7 +84,7 @@ public class FlightController {
 	
 	@RequestMapping(value = "getFlightCome", method = RequestMethod.POST)
 	public void getFlightCome(SearchDTO searchDTO, HttpSession session, HttpServletRequest request) throws Exception {
-		System.out.println("getFlightCome");
+
 		searchDTO = (SearchDTO)session.getAttribute("searchInfo");
 		searchDTO.setFlightNumCome(request.getParameter("flightNum"));
 		

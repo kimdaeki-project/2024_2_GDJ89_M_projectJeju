@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+<script src="https://js.tosspayments.com/v2/standard"></script>
 </head>
 <body>
 	<!-- header -->
@@ -29,45 +30,42 @@
 						<div class="col-md-5 col-lg-4 order-md-last">
 							<h4
 								class="d-flex justify-content-between align-items-center mb-3">
-								<span class="text-primary">Your cart</span> <span
-									class="badge bg-primary rounded-pill">3</span>
+								<span class="text-primary">예상 결제금액</span> <span
+									class="badge bg-primary rounded-pill"></span>
 							</h4>
 							<ul class="list-group mb-3">
 								<li class="list-group-item d-flex justify-content-between lh-sm">
 									<div>
-										<h6 class="my-0">Product name</h6>
-										<small class="text-body-secondary">Brief description</small>
-									</div> <span class="text-body-secondary">$12</span>
+										<h6 class="my-0">성인</h6>
+										<small class="text-body-secondary" id="adult">${searchInfo.adult}</small>
+									</div> <span class="text-body-secondary" id="adultCharge">${searchInfo.adult * flightGo.economyCharge + searchInfo.adult * flightCome.economyCharge}</span>
 								</li>
 								<li class="list-group-item d-flex justify-content-between lh-sm">
 									<div>
-										<h6 class="my-0">Second product</h6>
-										<small class="text-body-secondary">Brief description</small>
-									</div> <span class="text-body-secondary">$8</span>
+										<h6 class="my-0">소아</h6>
+										<small class="text-body-secondary" id="child">${searchInfo.child}</small>
+									</div> <span class="text-body-secondary" id="childCharge">${searchInfo.child * flightGo.economyCharge + searchInfo.child * flightCome.economyCharge}</span>
 								</li>
 								<li class="list-group-item d-flex justify-content-between lh-sm">
 									<div>
-										<h6 class="my-0">Third item</h6>
-										<small class="text-body-secondary">Brief description</small>
-									</div> <span class="text-body-secondary">$5</span>
+										<h6 class="my-0">유아</h6>
+										<small class="text-body-secondary" id="infant">${searchInfo.infant}</small>
+									</div> <span class="text-body-secondary">0</span>
 								</li>
-								<li
-									class="list-group-item d-flex justify-content-between bg-body-tertiary">
-									<div class="text-success">
-										<h6 class="my-0">Promo code</h6>
-										<small>EXAMPLECODE</small>
-									</div> <span class="text-success">−$5</span>
+								<li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+									<div>
+										<h6 class="my-0" id="addb"></h6>
+										<small class="text-body-secondary"></small>
+									</div> <span class="text-body-secondary" id="addbc"></span>
 								</li>
 								<li class="list-group-item d-flex justify-content-between">
-									<span>Total (USD)</span> <strong>$20</strong>
+									<span>합계 (원)</span> <strong id="chargeAmount">${searchInfo.adult * flightGo.economyCharge + searchInfo.adult * flightCome.economyCharge + searchInfo.child * flightGo.economyCharge + searchInfo.child * flightCome.economyCharge}</strong>
 								</li>
 							</ul>
 
 							<form class="card p-2">
 								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="Promo code">
-									<button type="submit" class="btn btn-secondary">Redeem</button>
+									<button type="button" id="getBusiness" class="btn btn-secondary">비즈니스석 업그레이드</button>
 								</div>
 							</form>
 						</div>
@@ -77,32 +75,78 @@
 								<div class="col-6">
 									<h4 class="mb-3">탑승객 정보</h4>
 								</div>
-								<div class="col-6">
-									<button class="btn btn-info" id="addPerson">탑승객 추가</button>
-								</div>
 							</div>
 
 								<form class="needs-validation" novalidate="">
 									<div class="row g-3" id="infos">
-
-										<div class="col-sm-6">
-											<label for="firstName" class="form-label">성</label>
-											<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-											<div class="invalid-feedback"></div>
-										</div>
-	
-										<div class="col-sm-6">
-											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-											<div class="invalid-feedback"></div>
-										</div>
-	
-										<div class="col-12">
-											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
-											<div class="invalid-feedback">생년월일을 입력하세요</div>
-										</div>
-										
+									
+									<c:forEach begin="1" end="${searchInfo.adult }" step="1" var="i">
+										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+											<h5>성인${i }</h5>
+											<div class="col-sm-6">
+												<label for="firstName" class="form-label">성</label>
+												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-sm-6">
+												<label for="lastName" class="form-label">이름</label>
+												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-12">
+												<label for="email" class="form-label">생년월일</label>
+												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>										
+									</c:forEach>
+									<c:forEach begin="1" end="${searchInfo.child }" step="1" var="i">
+										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+											<h5>소아${i }</h5>
+											<div class="col-sm-6">
+												<label for="firstName" class="form-label">성</label>
+												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-sm-6">
+												<label for="lastName" class="form-label">이름</label>
+												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-12">
+												<label for="email" class="form-label">생년월일</label>
+												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>										
+									</c:forEach>
+									<c:forEach begin="1" end="${searchInfo.infant }" step="1" var="i">
+										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+											<h5>유아${i }</h5>
+											<div class="col-sm-6">
+												<label for="firstName" class="form-label">성</label>
+												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-sm-6">
+												<label for="lastName" class="form-label">이름</label>
+												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<div class="invalid-feedback"></div>
+											</div>
+		
+											<div class="col-12">
+												<label for="email" class="form-label">생년월일</label>
+												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>										
+									</c:forEach>
+									
 										<hr class="my-4">
 										
 										<div class="form-check">
@@ -152,8 +196,7 @@
 
 								<hr class="my-4">
 
-								<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
-									to checkout</button>
+								<button class="w-100 btn btn-primary btn-lg" id="payments" type="button">결제창으로 이동</button>
 							</form>
 						</div>
 					</div>
