@@ -30,8 +30,8 @@
 						<div class="col-md-5 col-lg-4 order-md-last">
 							<h4
 								class="d-flex justify-content-between align-items-center mb-3">
-								<span class="text-primary">예상 결제금액</span> <span
-									class="badge bg-primary rounded-pill"></span>
+								<span class="text-primary">예상 결제금액</span>
+								<span class="badge bg-primary rounded-pill"></span>
 							</h4>
 							<ul class="list-group mb-3">
 								<li class="list-group-item d-flex justify-content-between lh-sm">
@@ -80,68 +80,67 @@
 								<form class="needs-validation" novalidate="">
 									<div class="row g-3" id="infos">
 									
-									<c:forEach begin="1" end="${searchInfo.adult }" step="1" var="i">
-										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
-											<h5>성인${i }</h5>
-											<div class="col-sm-6">
-												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control adultName ip" id="name" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-12">
-												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control adultBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
-												<div class="invalid-feedback"></div>
-											</div>
-										</div>										
-									</c:forEach>
-									<c:forEach begin="1" end="${searchInfo.child }" step="1" var="i">
-										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
-											<h5>소아${i }</h5>
-											<div class="col-sm-6">
-												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control childName ip" id="name" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-12">
-												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control childBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
-												<div class="invalid-feedback"></div>
-											</div>
-										</div>										
-									</c:forEach>
-									<c:forEach begin="1" end="${searchInfo.infant }" step="1" var="i">
-										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
-											<h5>유아${i }</h5>
-											<div class="col-sm-6">
-												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control infantName ip" id="name" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-12">
-												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control infantBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
-												<div class="invalid-feedback"></div>
-											</div>
-										</div>										
-									</c:forEach>
-									
-										<hr class="my-4">
-										
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-											id="same-address"> <label class="form-check-label"
-											for="same-address">반려동물 동반서비스 신청</label>
+								<c:forEach begin="1" end="${searchInfo.adult }" step="1" var="i">
+									<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+										<h5>성인${i }</h5>
+										<div class="col-sm-6">
+											<label for="lastName" class="form-label">이름</label>
+											<input type="text" class="form-control adultName ip" id="name" placeholder="" value="" required="">
+											<div class="invalid-feedback"></div>
 										</div>
-										
-										<hr class="my-4">
-										
-										<h4 class="mb-3">예약자 정보</h4>
-										
+	
 										<div class="col-12">
+											<label for="email" class="form-label">생년월일</label>
+											<input type="email" class="form-control adultBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback"></div>
+										</div>
+									</div>										
+								</c:forEach>
+								<c:forEach begin="1" end="${searchInfo.child }" step="1" var="i">
+									<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+										<h5>소아${i }</h5>
+										<div class="col-sm-6">
+											<label for="lastName" class="form-label">이름</label>
+											<input type="text" class="form-control childName ip" id="name" placeholder="" value="" required="">
+											<div class="invalid-feedback"></div>
+										</div>
+	
+										<div class="col-12">
+											<label for="email" class="form-label">생년월일</label>
+											<input type="email" class="form-control childBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback"></div>
+										</div>
+									</div>										
+								</c:forEach>
+								<c:forEach begin="1" end="${searchInfo.infant }" step="1" var="i">
+									<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
+										<h5>유아${i }</h5>
+										<div class="col-sm-6">
+											<label for="lastName" class="form-label">이름</label>
+											<input type="text" class="form-control infantName ip" id="name" placeholder="" value="" required="">
+											<div class="invalid-feedback"></div>
+										</div>
+	
+										<div class="col-12">
+											<label for="email" class="form-label">생년월일</label>
+											<input type="email" class="form-control infantBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback"></div>
+										</div>
+									</div>										
+								</c:forEach>
+									
+								<hr class="my-4">
+								
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input"	id="same-address">
+									<label class="form-check-label"	for="same-address">반려동물 동반서비스 신청</label>
+								</div>
+								
+								<hr class="my-4">
+								
+								<h4 class="mb-3">예약자 정보</h4>
+										
+								<div class="col-12">
 									<label for="username" class="form-label">회원아이디</label>
 									<div class="input-group has-validation">
 										<input type="text" class="form-control" id="username" placeholder="Username" required="">
@@ -167,15 +166,15 @@
 										<div class="invalid-feedback">통신사를 선택해주세요</div>
 									</div>
 									
-										<div class="col-md-7">
-											<label for="phone" class="form-label">휴대전화번호</label>
-											<input type="text" class="form-control" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
-											<div class="invalid-feedback">전화번호를 입력하세요</div>
+									<div class="col-md-7">
+										<label for="phone" class="form-label">휴대전화번호</label>
+										<input type="text" class="form-control" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
+										<div class="invalid-feedback">전화번호를 입력하세요</div>
 									</div>
 
-										<div class="col-md-4 mt-2 offset-md-4 align-self-end">
-											<button class="btn btn-primary" id="userCheck" type="button">회원정보 확인</button>
-										</div>
+									<div class="col-md-4 mt-2 offset-md-4 align-self-end">
+										<button class="btn btn-primary" id="userCheck" type="button">회원정보 확인</button>
+									</div>
 								</div>
 
 								<hr class="my-4">
