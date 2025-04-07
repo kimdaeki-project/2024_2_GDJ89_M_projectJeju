@@ -84,20 +84,14 @@
 										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
 											<h5>성인${i }</h5>
 											<div class="col-sm-6">
-												<label for="firstName" class="form-label">성</label>
-												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-sm-6">
 												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<input type="text" class="form-control adultName ip" id="name" placeholder="" value="" required="">
 												<div class="invalid-feedback"></div>
 											</div>
 		
 											<div class="col-12">
 												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<input type="email" class="form-control adultBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
 												<div class="invalid-feedback"></div>
 											</div>
 										</div>										
@@ -106,20 +100,14 @@
 										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
 											<h5>소아${i }</h5>
 											<div class="col-sm-6">
-												<label for="firstName" class="form-label">성</label>
-												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-sm-6">
 												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<input type="text" class="form-control childName ip" id="name" placeholder="" value="" required="">
 												<div class="invalid-feedback"></div>
 											</div>
 		
 											<div class="col-12">
 												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<input type="email" class="form-control childBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
 												<div class="invalid-feedback"></div>
 											</div>
 										</div>										
@@ -128,20 +116,14 @@
 										<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
 											<h5>유아${i }</h5>
 											<div class="col-sm-6">
-												<label for="firstName" class="form-label">성</label>
-												<input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-												<div class="invalid-feedback"></div>
-											</div>
-		
-											<div class="col-sm-6">
 												<label for="lastName" class="form-label">이름</label>
-												<input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+												<input type="text" class="form-control infantName ip" id="name" placeholder="" value="" required="">
 												<div class="invalid-feedback"></div>
 											</div>
 		
 											<div class="col-12">
 												<label for="email" class="form-label">생년월일</label>
-												<input type="email" class="form-control" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+												<input type="email" class="form-control infantBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
 												<div class="invalid-feedback"></div>
 											</div>
 										</div>										
@@ -169,34 +151,75 @@
 								
 								<div class="col-12">
 									<label for="email" class="form-label">Email <span
-										class="text-body-secondary">(Optional)</span></label> <input
-										type="email" class="form-control" id="email"
-										placeholder="(예, you@example.com)">
+										class="text-body-secondary">(Optional)</span></label>
+										<input type="email" class="form-control" id="email" placeholder="(예, you@example.com)">
 										<div class="invalid-feedback">이메일을 입력하세요</div>
 									</div>
 									
-									<div class="col-md-3">
-										<label for="tel" class="form-label"></label> <select
-										class="form-select" id="tel" required="">
+									<div class="col-md-5">
+										<label for="tel" class="form-label"></label>
+										<select class="form-select" id="tel" required="">
 										<option value="">통신사</option>
 										<option>SKT</option>
 										<option>KT</option>
 										<option>LGU</option>
-									</select>
-									<div class="invalid-feedback">통신사를 선택해주세요</div>
+										</select>
+										<div class="invalid-feedback">통신사를 선택해주세요</div>
 									</div>
 									
-										<div class="col-md-9">
-											<label for="phone" class="form-label">휴대전화번호</label> <input
-											type="text" class="form-control" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"
-											required="">
+										<div class="col-md-7">
+											<label for="phone" class="form-label">휴대전화번호</label>
+											<input type="text" class="form-control" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
 											<div class="invalid-feedback">전화번호를 입력하세요</div>
 									</div>
+
+										<div class="col-md-4 mt-2 offset-md-4 align-self-end">
+											<button class="btn btn-primary" id="userCheck" type="button">회원정보 확인</button>
+										</div>
 								</div>
 
 								<hr class="my-4">
 
-								<button class="w-100 btn btn-primary btn-lg" id="payments" type="button">결제창으로 이동</button>
+								<button class="w-100 btn btn-primary btn-lg" id="payments" type="button" data-bs-toggle="modal" data-bs-target="#modalView">결제창으로 이동</button>
+									<!-- Modal -->
+								<div class="modal fade" id="modalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">결제방식 선택</h1>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="row my-4">
+													<div class="col-12">
+														<div class="row">
+															<div class="col-6">
+																<button type="button" class="btn btn-primary" style="width: 80%;" id="cardPay">카드결제</button>
+															</div>
+															<div class="col-6">
+																<button type="button" class="btn btn-primary" style="width: 80%;" id="phonePay">휴대폰 결제</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row my-4">
+													<div class="col-12">
+														<div class="row">
+															<div class="col-6" style="justify-content: center;">
+																<button type="button" class="btn btn-primary" style="width: 80%;" id="fakeAccount">가상계좌</button>
+															</div>
+															<div class="col-6">
+																<button type="button" class="btn btn-primary" style="width: 80%;" id="realAccount">계좌이체</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+											</div>
+										</div>
+									</div>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -205,8 +228,9 @@
 		</div>
 	</div>
 
-	<script src="/resources/js/reservation/info.js"></script>
 
+
+	<script src="/resources/js/reservation/info.js"></script>
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 

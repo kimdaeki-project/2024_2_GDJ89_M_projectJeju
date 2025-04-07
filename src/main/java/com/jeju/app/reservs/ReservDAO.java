@@ -22,5 +22,9 @@ public class ReservDAO {
 	public FlightDTO getPrestigeCharge(FlightDTO flightDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getPrestigeCharge", flightDTO);
 	}
+	
+	public void userCheck() throws Exception {
+		
+	}
 
 }

@@ -12,5 +12,9 @@
 	<select id="getPrestigeCharge" parameterType="FlightDTO" resultType="FlightDTO">
 		SELECT ECONOMYCHARGE, PRESTIGECHARGE FROM FLIGHTSUPDATE WHERE FLIGHTNUM = #{flightNum}
 	</select>
+	
+	<select id="userCheck">
+		SELECT * FROM USERS WHERE USERID = #{userId} AND EMAIL = #{email} AND PHONE = #{phone}
+	</select>
 
 </mapper>
