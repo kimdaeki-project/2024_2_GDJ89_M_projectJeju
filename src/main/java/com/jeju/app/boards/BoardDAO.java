@@ -58,6 +58,18 @@ public class BoardDAO {
 		return sqlSession.delete(NAMESPACE+"delete", boardDTO);
 	}
 	
+	public BoardFileDTO getFileDetail(BoardFileDTO boardFileDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getFileDetail", boardFileDTO);
+	}
+	
+	public int fileDelete(BoardFileDTO boardFileDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDelete", boardFileDTO);
+	}
+	
+	public int fileDeleteAll(BoardDTO boardDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDeleteAll", boardDTO);
+	}
+	
 	//좋아요 기능
 	//1. 좋아요를 눌렀는지, 몇 개 눌렀는지 확인
 	public HeartDTO findHeart(HeartDTO heartDTO) throws Exception{

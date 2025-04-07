@@ -93,7 +93,6 @@
 		<result column="BOARDDATE" property="boardDate"/>
 		<result column="BOARDHITS" property="boardHits"/>
 		<result column="LOCATION" property="location"/>
-		<result column="RATING" property="rating"/>
 		<result column="FAVORITE" property="favorite"/>
 		<result column="CATEGORY" property="category"/>
 		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
@@ -163,8 +162,8 @@
   			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
 		INSERT INTO BOARD 
-				(USERID, BOARDNUM, BOARDTITLE, BOARDCONTENTS, BOARDDATE, BOARDHITS, LOCATION, RATING, FAVORITE, CATEGORY)
-		VALUES ('test', BOARD_SEQ.CURRVAL, #{boardTitle}, #{boardContents}, SYSDATE, 0, #{location}, 0, 0, #{category})
+				(USERID, BOARDNUM, BOARDTITLE, BOARDCONTENTS, BOARDDATE, BOARDHITS, LOCATION, FAVORITE, CATEGORY)
+		VALUES ('test', BOARD_SEQ.CURRVAL, #{boardTitle}, #{boardContents}, SYSDATE, 0, #{location}, 0, #{category})
 	</insert>
 	
  	<insert id="addFile" parameterType="BoardFileDTO">
@@ -178,13 +177,25 @@
 	
 	<update id="update" parameterType="BoardDTO">
 		UPDATE BOARD SET 
-			BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}, RATING=#{rating}, LOCATION=#{location}, CATEGORY=#{category}
+			BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}, LOCATION=#{location}, CATEGORY=#{category}
 		WHERE BOARDNUM=#{boardNum}
 	</update>
 	
 	<delete id="delete" parameterType="BoardDTO">
 		DELETE BOARD WHERE BOARDNUM=#{boardNum}
 	</delete>
+	
+	<delete id="fileDelete" parameterType="BoardFileDTO">
+		DELETE IMAGES WHERE FILENUM=#{fileNum}
+	</delete>
+	
+	<delete id="fileDeleteAll" parameterType="BoardDTO">
+		DELETE IMAGES WHERE BOARDNUM=#{boardNum}
+	</delete>
+	
+	<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+		SELECT * FROM IMAGES WHERE FILENUM=#{fileNum}
+	</select>
 	
 	<!-- 좋아요 기능 -->
 	<select id="findHeart" parameterType="HeartDTO" resultType="HeartDTO">

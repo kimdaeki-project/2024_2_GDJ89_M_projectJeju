@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
 
 @Controller
@@ -44,7 +45,7 @@ public class PlaceController {
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String getDetail(BoardDTO boardDTO, Model model, HttpSession session) throws Exception{
+	public String getDetail(BoardDTO boardDTO, Model model, HttpSession session, CommentDTO commentDTO, Pager pager) throws Exception{
 		Object obj = session.getAttribute("board");
 		boolean check = false;
 			if (obj != null) {

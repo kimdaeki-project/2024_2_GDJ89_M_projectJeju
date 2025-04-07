@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,5 +105,46 @@ public class BoardController {
 		int result = boardService.update(boardDTO, session, attaches);
 		
 		return "redirect:./detail?boardNum="+boardDTO.getBoardNum();
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(BoardDTO boardDTO, HttpSession session, Model model) throws Exception{
+		boardDTO = boardService.getDetail(boardDTO, false);
+		String path = "";
+		if(boardDTO.getCategory()==1) {
+			path = "place/list";
+		} else if (boardDTO.getCategory()==2) {
+			path = "diner/list";
+		}else {
+			path = "hotel/list";
+		}
+		int result = boardService.delete(boardDTO, session);
+		String s = "삭제를 실패했습니다.";
+		if (result>0) {
+			s = "삭제를 성공했습니다.";	
+		}
+		model.addAttribute("result", s);
+		model.addAttribute("path", path);
+		
+		return "commons/result";
+	}
+	
+	@RequestMapping(value = "fileDelete", method = RequestMethod.POST)
+	public String fileDelete(BoardFileDTO boardFileDTO, Model model, HttpSession session) throws Exception{
+		int result = boardService.fileDelete(boardFileDTO, session);
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+	}
+	
+	@RequestMapping(value = "detailFiles", method = RequestMethod.POST)
+	public String detailFiles(MultipartFile uploadFile, HttpSession session, Model model, BoardFileDTO boardFileDTO) throws Exception{
+		String fileName = boardService.detailFiles(session, uploadFile);
+		fileName = "/resources/images/boards/"+fileName;
+		boardFileDTO = boardService.fileSave(uploadFile, session);
+		System.out.println(boardFileDTO.getBoardNum());
+		model.addAttribute("result", fileName);
+		
+		return "commons/ajaxResult";
 	}
 }
