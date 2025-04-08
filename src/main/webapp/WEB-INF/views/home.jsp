@@ -118,7 +118,7 @@
                 <img src="/resources/images/hotel.png" class="d-block w-100" alt="Jeju Image 1">
             </div>
             <div class="carousel-item">
-                <img src="/resources/images/jeju.png" class="d-block w-100" alt="Jeju Image 2">
+                <img src="/resources/images/air.png" class="d-block w-100" alt="Jeju Image 2">
             </div>
             <div class="carousel-item">
                 <img src="/resources/images/dol.png" class="d-block w-100" alt="Jeju Image 3">

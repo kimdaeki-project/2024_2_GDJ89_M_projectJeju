@@ -116,7 +116,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown ms-auto">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            게시판
+                            게시판 
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/boards/list">문의게시판</a></li>

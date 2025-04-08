@@ -82,7 +82,6 @@
         <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
     </footer>
 
-    <!-- Import Bootstrap JS, already included in boot_js.jsp -->
     <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import> 
 
     <!-- Custom JS file -->
