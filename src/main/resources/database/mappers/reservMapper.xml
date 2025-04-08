@@ -18,12 +18,16 @@
 	</select>
 	
 	<select id="flightsCheck" parameterType="FlightDTO" resultType="FlightDTO">
-		SELECT * FROM FLIGHTSUPDATE WHERE FLIGHTNUM = #{flightNum}
+		SELECT * FROM FLIGHT WHERE FLIGHTNUM = #{flightNum}
 	</select>
 	
 	<insert id="flightsUpdate" parameterType="FlightDTO">
-		INSERT INTO FLIGHTS VALUES (#{flightNum}, #{vihicleId}, #{airlineNm}, #{depPlandTime}, #{arrPlandTime}, #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
+		INSERT INTO FLIGHT VALUES (#{flightNum}, #{vihicleId}, #{airlineNm}, #{depPlandTime}, #{arrPlandTime}, #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
 	</insert>
+	
+	<select id="getFlight" parameterType="FlightDTO" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE WHERE FLIGHTNUM = #{flightNum}
+	</select>
 	
 	<insert id="reservate" parameterType="ReservDTO">
 		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId})
@@ -33,7 +37,7 @@
 		INSERT ALL
 			<foreach collection="list" item="BoardingInfo">
 				INTO BOARDINGINFO
-				VALUES (#{name}, #{birth}, #{reservNum}, #{div), #{fNumGo}, #{fNumCome}, #{chargeDiv})
+				VALUES (#{BoardingInfo.name}, #{BoardingInfo.birth}, #{BoardingInfo.reservNum}, #{BoardingInfo.div}, #{BoardingInfo.fNumGo}, #{BoardingInfo.fNumCome}, #{BoardingInfo.chargeDiv})
 			</foreach>
 		SELECT * FROM DUAL
 	</insert>

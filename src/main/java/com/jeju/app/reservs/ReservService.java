@@ -45,7 +45,7 @@ public class ReservService {
 		return searchDTO;
 	}
 	
-	public List<BoardingInfo> getBoarderInfo(BoardingInfo boardingInfo, HttpServletRequest request, HttpSession session) throws Exception {
+	public void getBoarderInfo(BoardingInfo boardingInfo, HttpServletRequest request, HttpSession session) throws Exception {
 		SearchDTO searchDTO = (SearchDTO)session.getAttribute("searchInfo");
 		List<BoardingInfo> ar = new ArrayList<BoardingInfo>();
 		
@@ -85,28 +85,30 @@ public class ReservService {
 		
 		session.setAttribute("boarderList", ar);
 		
-		return ar;
 	}
 	
-	public void flightsUpdate(HttpSession session, List<BoardingInfo> ar) throws Exception {
-		ar = (List<BoardingInfo>)session.getAttribute("boarderList");
-		
+	public int flightsUpdate(HttpSession session, List<BoardingInfo> ar) throws Exception {
+		int result = 0;
 		FlightDTO flightDTO = new FlightDTO();
 		flightDTO.setFlightNum(ar.get(0).getfNumGo());
 		if(reservDAO.flightsCheck(flightDTO) == null) {
-			reservDAO.flightsUpdate(flightDTO);
+			flightDTO = reservDAO.getFlight(flightDTO);
+			result = reservDAO.flightsUpdate(flightDTO);
 		}
 		
 		flightDTO = new FlightDTO();
 		flightDTO.setFlightNum(ar.get(0).getfNumCome());
 		if(reservDAO.flightsCheck(flightDTO) == null) {
-			reservDAO.flightsUpdate(flightDTO);
+			flightDTO = reservDAO.getFlight(flightDTO);
+			result = result + reservDAO.flightsUpdate(flightDTO);
 		}
+		
+		return result;
 	}
 	
 	public int reservate(ReservDTO reservDTO, HttpSession session, HttpServletRequest request) throws Exception {
 		reservDTO.setReservNum(request.getParameter("reservNum"));
-		reservDTO.setUsetId("user"); // session에서 꺼내와야함
+		reservDTO.setUserId("test"); // session에서 꺼내와야함
 		
 		return reservDAO.reservate(reservDTO);
 	}

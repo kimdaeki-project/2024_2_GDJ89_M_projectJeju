@@ -30,7 +30,7 @@
         padding: 10px 0;
         text-align: center;
         margin-top: auto; /* 푸터를 화면 하단에 고정 */
-        position: fixed; /* 푸터를 고정 위치에 배치 */
+        /* position: fixed; */ /* 푸터를 고정 위치에 배치 */
         bottom: 0; /* 화면 하단에 위치 */
         left: 0;
         width: 100%; /* 화면 전체 너비 */

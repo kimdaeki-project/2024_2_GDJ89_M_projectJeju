@@ -1,5 +1,7 @@
 package com.jeju.app.flights;
 
+import java.sql.Date;
+
 public class FlightDTO {
 	
 	private String flightNum;
@@ -8,11 +10,23 @@ public class FlightDTO {
 	private String vihicleId;
 	private String depAirportNm;
 	private String arrAirportNm;
-	private String depPlandTime;
-	private String arrPlandTime;
+	private Date depPlandTime;
+	private Date arrPlandTime;
 	private Long economyCharge;
 	private Long prestigeCharge;
 	
+	public Date getDepPlandTime() {
+		return depPlandTime;
+	}
+	public void setDepPlandTime(Date depPlandTime) {
+		this.depPlandTime = depPlandTime;
+	}
+	public Date getArrPlandTime() {
+		return arrPlandTime;
+	}
+	public void setArrPlandTime(Date arrPlandTime) {
+		this.arrPlandTime = arrPlandTime;
+	}
 	public String getAirlineId() {
 		return airlineId;
 	}
@@ -48,18 +62,6 @@ public class FlightDTO {
 	}
 	public void setArrAirportNm(String arrAirportNm) {
 		this.arrAirportNm = arrAirportNm;
-	}
-	public String getDepPlandTime() {
-		return depPlandTime;
-	}
-	public void setDepPlandTime(String depPlandTime) {
-		this.depPlandTime = depPlandTime;
-	}
-	public String getArrPlandTime() {
-		return arrPlandTime;
-	}
-	public void setArrPlandTime(String arrPlandTime) {
-		this.arrPlandTime = arrPlandTime;
 	}
 	public Long getEconomyCharge() {
 		return economyCharge;

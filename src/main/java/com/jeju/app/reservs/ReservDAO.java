@@ -27,6 +27,10 @@ public class ReservDAO {
 		
 	}
 	
+	public FlightDTO getFlight(FlightDTO flightDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getFlight", flightDTO);
+	}
+	
 	public FlightDTO flightsCheck(FlightDTO flightDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"flightsCheck", flightDTO);
 	}

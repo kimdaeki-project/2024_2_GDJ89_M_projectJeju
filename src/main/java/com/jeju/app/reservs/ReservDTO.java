@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ReservDTO {
 	
 	private String reservNum;
-	private String usetId;
+	private String userId;
 	
 	public String getReservNum() {
 		return reservNum;
@@ -13,11 +13,11 @@ public class ReservDTO {
 	public void setReservNum(String reservNum) {
 		this.reservNum = reservNum;
 	}
-	public String getUsetId() {
-		return usetId;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUsetId(String usetId) {
-		this.usetId = usetId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 }
