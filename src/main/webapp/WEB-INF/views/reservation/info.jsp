@@ -79,19 +79,22 @@
 
 								<form class="needs-validation" novalidate="">
 									<div class="row g-3" id="infos">
+										<input type="hidden" id="aCount" value="${searchInfo.adult}">
+										<input type="hidden" id="cCount" value="${searchInfo.child}">
+										<input type="hidden" id="iCount" value="${searchInfo.infant}">
 									
 								<c:forEach begin="1" end="${searchInfo.adult }" step="1" var="i">
 									<div style="border: solid; border-color: rgb(122, 122, 122); border-radius: 5%;">
 										<h5>성인${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control adultName ip" id="name" placeholder="" value="" required="">
+											<input type="text" class="form-control adultName ip" id="a${i}Name" placeholder="" value="" required="">
 											<div class="invalid-feedback"></div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control adultBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<input type="email" class="form-control adultBirth ip" id="a${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
 											<div class="invalid-feedback"></div>
 										</div>
 									</div>										
@@ -101,13 +104,13 @@
 										<h5>소아${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control childName ip" id="name" placeholder="" value="" required="">
+											<input type="text" class="form-control childName ip" id="c${i}Name" placeholder="" value="" required="">
 											<div class="invalid-feedback"></div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control childBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<input type="email" class="form-control childBirth ip" id="c${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
 											<div class="invalid-feedback"></div>
 										</div>
 									</div>										
@@ -117,13 +120,13 @@
 										<h5>유아${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control infantName ip" id="name" placeholder="" value="" required="">
+											<input type="text" class="form-control infantName ip" id="i${i}Name" placeholder="" value="" required="">
 											<div class="invalid-feedback"></div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control infantBirth ip" id="birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<input type="email" class="form-control infantBirth ip" id="i${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
 											<div class="invalid-feedback"></div>
 										</div>
 									</div>										
@@ -179,7 +182,9 @@
 
 								<hr class="my-4">
 
-								<button class="w-100 btn btn-primary btn-lg" id="payments" type="button" data-bs-toggle="modal" data-bs-target="#modalView">결제창으로 이동</button>
+								<div id="box">
+									<button class="w-100 btn btn-primary btn-lg" id="payments" type="button" data-bs-toggle="modal" data-bs-target="#modalView">결제창으로 이동</button>
+								</div>
 									<!-- Modal -->
 								<div class="modal fade" id="modalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered">

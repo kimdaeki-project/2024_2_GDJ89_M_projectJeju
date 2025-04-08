@@ -50,16 +50,27 @@ public class ReservController {
 	
 	@RequestMapping(value = "userCheck", method = RequestMethod.POST)
 	public String userCheck(HttpServletRequest request, Model model) throws Exception {
-		System.out.println(request.getParameter("phone"));
-		System.out.println(request.getParameter("email"));
-		System.out.println(request.getParameter("userId"));
-		model.addAttribute("result", 1);
+
+		// 유저 정보 확인
+		
+		model.addAttribute("result", "name");
 		return "commons/ajaxResult";
 	}
 	
+	@RequestMapping(value = "boarderInfo", method = RequestMethod.POST)
+	public void boarderInfo(HttpServletRequest request, BoardingInfo boardingInfo, HttpSession session) throws Exception {
+		reservService.getBoarderInfo(boardingInfo, request, session);
+	}
+	
 	@RequestMapping(value = "success", method = RequestMethod.GET)
-	public void success() throws Exception {
-		System.out.println("success");
+	public void success(HttpSession session, HttpServletRequest request, List<BoardingInfo> ar, ReservDTO reservDTO) throws Exception {
+		ar = (List<BoardingInfo>)session.getAttribute("boarderList");
+		if(ar.get(0).getReservNum().equalsIgnoreCase(request.getParameter("reservNum"))) {
+			reservService.flightsUpdate(session, ar);
+			reservService.reservate(reservDTO, session, request);
+			int result = reservService.addBoarderList(ar);
+			System.out.println(result);
+		}
 	}
 	
 	@RequestMapping(value = "fail", method = RequestMethod.GET)

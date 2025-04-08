@@ -16,5 +16,26 @@
 	<select id="userCheck">
 		SELECT * FROM USERS WHERE USERID = #{userId} AND EMAIL = #{email} AND PHONE = #{phone}
 	</select>
+	
+	<select id="flightsCheck" parameterType="FlightDTO" resultType="FlightDTO">
+		SELECT * FROM FLIGHTSUPDATE WHERE FLIGHTNUM = #{flightNum}
+	</select>
+	
+	<insert id="flightsUpdate" parameterType="FlightDTO">
+		INSERT INTO FLIGHTS VALUES (#{flightNum}, #{vihicleId}, #{airlineNm}, #{depPlandTime}, #{arrPlandTime}, #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
+	</insert>
+	
+	<insert id="reservate" parameterType="ReservDTO">
+		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId})
+	</insert>
+	
+	<insert id="addBoarderList" parameterType="List">
+		INSERT ALL
+			<foreach collection="list" item="BoardingInfo">
+				INTO BOARDINGINFO
+				VALUES (#{name}, #{birth}, #{reservNum}, #{div), #{fNumGo}, #{fNumCome}, #{chargeDiv})
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
 
 </mapper>

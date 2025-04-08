@@ -18,7 +18,15 @@
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			
-			
+			<div class="container text-center">
+				<div class="row align-items-center">
+					<div class="col align-self-center">
+						<h1>결제 실패</h1>
+						<button type="button" class="btn btn-secondary" onclick=history.back()>돌아가기</button>
+					</div>
+					</div>
+				</div>
+			</div>
 			
 			
 		</div>

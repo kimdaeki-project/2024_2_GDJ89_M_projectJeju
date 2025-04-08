@@ -26,5 +26,21 @@ public class ReservDAO {
 	public void userCheck() throws Exception {
 		
 	}
+	
+	public FlightDTO flightsCheck(FlightDTO flightDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"flightsCheck", flightDTO);
+	}
+	
+	public int flightsUpdate(FlightDTO flightDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"flightsUpdate", flightDTO);
+	}
+	
+	public int reservate(ReservDTO reservDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"reservate", reservDTO);
+	}
+	
+	public int addBoarderList(List<BoardingInfo> boarders) throws Exception {
+		return sqlSession.insert(NAMESPACE+"addBoarderList", boarders);
+	}
 
 }
