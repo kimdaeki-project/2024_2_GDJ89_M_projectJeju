@@ -5,5 +5,7 @@
 
 <!-- mybatis 설정 -->
 <configuration>
-	
+	<typeAliases>
+			<typeAlias type="com.jeju.app.users.UserDTO" alias="UserDTO"/>
+	</typeAliases>
 </configuration>
