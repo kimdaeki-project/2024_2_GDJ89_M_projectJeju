@@ -1,8 +1,11 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirPark JEJU</title>
@@ -27,7 +30,7 @@
         padding: 10px 0;
         text-align: center;
         margin-top: auto; /* 푸터를 화면 하단에 고정 */
-        position: fixed; /* 푸터를 고정 위치에 배치 */
+        /* position: fixed; */ /* 푸터를 고정 위치에 배치 */
         bottom: 0; /* 화면 하단에 위치 */
         left: 0;
         width: 100%; /* 화면 전체 너비 */
@@ -86,6 +89,7 @@
 
     <!-- Custom JS file -->
     <script src="/resources/js/users/join.js"></script>
+
 
 </body>
 </html>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.boards.BoardDAO">
+	<select id="getPlaceList" resultType="BoardDTO" parameterType="Pager">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 1 AND
+					<include refid="search"></include>
+					<choose>
+						<when test="searchKind=='sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind=='sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<select id="getDinerList" resultType="BoardDTO" parameterType="Pager">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 2 AND
+					<include refid="search"></include>
+					<choose>
+						<when test="searchKind=='sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind=='sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<select id="getHotelList" resultType="BoardDTO" parameterType="Pager">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 3 AND
+					<include refid="search"></include>
+					<choose>
+						<when test="searchKind=='sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind=='sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		SELECT *
+		FROM BOARD N
+			 LEFT OUTER JOIN 
+			 IMAGES NF
+			 USING(BOARDNUM)
+		WHERE BOARDNUM = #{boardNum}
+	</select>
+	
+	<resultMap type="BoardDTO" id="getDetailResult">
+		<id column="BOARDNUM" property="boardNum"/>
+		<result column="USERID" property="userID"/>
+		<result column="BOARDTITLE" property="boardTitle"/>
+		<result column="BOARDCONTENTS" property="boardContents"/>
+		<result column="BOARDDATE" property="boardDate"/>
+		<result column="BOARDHITS" property="boardHits"/>
+		<result column="LOCATION" property="location"/>
+		<result column="RATING" property="rating"/>
+		<result column="FAVORITE" property="favorite"/>
+		<result column="CATEGORY" property="category"/>
+		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="OLDNAME" property="oldName"/>
+		</collection>
+	</resultMap>
+	
+	<sql id="search">
+				<choose>
+					<when test="kind=='k2'">
+						BOARDCONTENTS LIKE '%'||#{search}||'%'
+					</when>
+					<when test="kind=='k3'">
+						BOARDLOCATION LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						BOARDTITLE LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+	</sql>
+	
+	<sql id="location">
+				<choose>
+					<when test="locationKind=='lo2'">
+						WHERE LOCATION = '제주시'
+					</when>
+					<when test="locationKind=='lo3'">
+						WHERE LOCATION = '애월'
+					</when>
+					<when test="locationKind=='lo4'">
+						WHERE LOCATION = '서귀포'
+					</when>
+					<when test="locationKind=='lo5'">
+						WHERE LOCATION = '남원'
+					</when>
+					<when test="locationKind=='lo6'">
+						WHERE LOCATION = '조천'
+					</when>
+					<when test="locationKind=='lo7'">
+						WHERE LOCATION = '중문'
+					</when>
+					<when test="locationKind=='lo8'">
+						WHERE LOCATION = '한림'
+					</when>
+					<otherwise>
+					
+					</otherwise>
+				</choose>
+	</sql>
+	
+	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+		SELECT COUNT(BOARDNUM) FROM
+		(
+			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND
+			<include refid="search"></include>
+		)<include refid="location"></include>
+	</select>
+	
+	<select id="getMaxHits" resultType="BoardDTO">
+		SELECT * FROM board WHERE boardHits = (SELECT max(boardhits) FROM board) OR BOARDHITS = (SELECT (MAX(BOARDHITS)-1) FROM BOARD)
+	</select>
+	
+	<insert id="add" parameterType="BoardDTO">
+		<selectKey order="BEFORE" keyProperty="boardNum" resultType="Long">
+  			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+		INSERT INTO BOARD 
+				(USERID, BOARDNUM, BOARDTITLE, BOARDCONTENTS, BOARDDATE, BOARDHITS, LOCATION, RATING, FAVORITE, CATEGORY)
+		VALUES ('test', BOARD_SEQ.CURRVAL, #{boardTitle}, #{boardContents}, SYSDATE, 0, #{location}, 0, 0, #{category})
+	</insert>
+	
+ 	<insert id="addFile" parameterType="BoardFileDTO">
+		INSERT INTO IMAGES
+		VALUES (file_seq.nextval, #{boardNum}, #{fileName}, #{oldName})
+	</insert>
+	
+	<update id="updateHits" parameterType="BoardDTO">
+		UPDATE BOARD SET BOARDHITS=BOARDHITS+1 WHERE BOARDNUM=#{boardNum}
+	</update>
+	
+	<update id="update" parameterType="BoardDTO">
+		UPDATE BOARD SET 
+			BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}, RATING=#{rating}, LOCATION=#{location}, CATEGORY=#{category}
+		WHERE BOARDNUM=#{boardNum}
+	</update>
+
+</mapper>

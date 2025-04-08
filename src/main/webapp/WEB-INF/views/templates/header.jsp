@@ -123,7 +123,7 @@
                             <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link active" href="#">PARKING</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/flights/search">PARKING</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">QNA</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">NOTICE</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/users/login">로그인</a></li>
@@ -140,3 +140,4 @@
 </body>
 
 </html>
+
