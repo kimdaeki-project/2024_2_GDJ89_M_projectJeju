@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.HomeDAO">
+		
+	<select id="getMaxHit" resultType="BoardDTO">
+		SELECT * FROM	
+			(
+				SELECT ROWNUM R , M.* FROM
+					(
+						SELECT * FROM BOARD WHERE FAVORITE = (SELECT (MAX(FAVORITE)) FROM BOARD)
+					) M
+			)
+		WHERE R = 1
+	</select>
+	
+	<select id="getMaxHit2" resultType="BoardDTO">
+		SELECT * FROM	
+			(
+				SELECT ROWNUM R , M.* FROM
+					(
+						SELECT * FROM BOARD WHERE BOARDHITS = (SELECT (MAX(BOARDHITS)) FROM BOARD)
+					) M
+			)
+		WHERE R = 1
+	</select>
+	
+	<select id="getNotice" resultType="PB_DTO">
+		SELECT * FROM NOTICE WHERE BOARDDATE = (SELECT MAX(BOARDDATE) FROM NOTICE)
+	</select>
+
+</mapper>
