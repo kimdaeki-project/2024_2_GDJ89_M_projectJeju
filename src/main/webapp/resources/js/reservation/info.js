@@ -75,16 +75,32 @@ box.addEventListener("click", ()=>{
   }
 })
 
-let ips = document.getElementsByClassName("ip")
-for(ip of ips) {
-  ip.classList.add("is-invalid")
-  ip.addEventListener("input", (e)=>{
-    if(e.target.value.length > 0) {
-      e.target.classList.remove("is-invalid")
+// 탑승정보 유효성 검사
+let ipns = document.getElementsByClassName("ipn")
+let ipbs = document.getElementsByClassName("ipb")
+let regName = /^[가-힣]{2,6}$/;
+let regBirth = /[0-9]{8}$/;
+for(ipn of ipns) {
+  ipn.addEventListener("blur", (e)=>{
+    if(regName.test(e.target.value)) {
       e.target.classList.add("is-valid")
-    }else {
-      e.target.classList.remove("is-valid")
+      e.target.classList.remove("is-invalid")
+    }else{
+      e.target.value = ""
       e.target.classList.add("is-invalid")
+      e.target.classList.remove("is-valid")
+    }
+  })
+}
+for(ipb of ipbs) {
+  ipb.addEventListener("blur", (e)=>{
+    if(regBirth.test(e.target.value)) {
+      e.target.classList.add("is-valid")
+      e.target.classList.remove("is-invalid")
+    }else{
+      e.target.value = ""
+      e.target.classList.add("is-invalid")
+      e.target.classList.remove("is-valid")
     }
   })
 }
@@ -93,12 +109,11 @@ let username = document.getElementById("username")
 let email = document.getElementById("email")
 let tel = document.getElementById("tel")
 let phone = document.getElementById("phone")
-username.classList.add("is-invalid")
-email.classList.add("is-invalid")
-tel.classList.add("is-invalid")
-phone.classList.add("is-invalid")
 
-username.addEventListener("input", ()=>{
+let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+let regPhone = /^01\d{8,9}/;
+
+username.addEventListener("blur", ()=>{
   if(username.value.length > 0) {
     username.classList.remove("is-invalid")
     username.classList.add("is-valid")
@@ -108,8 +123,8 @@ username.addEventListener("input", ()=>{
   }
 })
 
-email.addEventListener("input", ()=>{
-  if(email.value.length > 0) {
+email.addEventListener("blur", ()=>{
+  if(regEmail.test(email.value)) {
     email.classList.remove("is-invalid")
     email.classList.add("is-valid")
   }else {
@@ -128,8 +143,8 @@ tel.addEventListener("change", ()=>{
   }
 })
 
-phone.addEventListener("input", ()=>{
-  if(phone.value.length > 9) {
+phone.addEventListener("blur", ()=>{
+  if(regPhone.test(phone.value)) {
     phone.classList.remove("is-invalid")
     phone.classList.add("is-valid")
   }else {
@@ -139,110 +154,119 @@ phone.addEventListener("input", ()=>{
 })
 
 
-
 // 회원정보 확인
 userCheck.addEventListener("click", ()=>{
 
-  let params = new FormData()
-  params.append("userId", username.value)
-  params.append("email", email.value)
-  params.append("phone", phone.value)
-  fetch("./userCheck", {
-    method:"post",
-    body: params
-  })
-  .then(r=>r.text())
-  .then(r=>{
-    if(r.trim().length > 0) {
-      payments.disabled = false;
-      // 카드 결제
-      cardPay.addEventListener("click", ()=>{
-        payment.requestPayment({
-          method: "CARD",
-          amount: {
-            currency: "KRW",
-            value: chargeAmount
-          },
-          orderId: rdm,
-          orderName: "예약자 포함 "+(person)+"인",
-          successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
-          failUrl: window.location.origin + "/reservation/fail",
-          customerEmail: email.value,
-          customerName: r,
-          card: {
-            useEscrow: false,
-            flowMode: "DEFAULT",
-            useCardPoint: false,
-            useAppCardOnly: false,
-          },
-        })  
+  let cs = document.getElementsByClassName("check")
+  for(c of cs) {
+    if(c.value == "" || c.classList.contains("is-invalid")){
+      c.classList.add("is-invalid")
+    }else {
+      let params = new FormData()
+      params.append("userId", username.value)
+      params.append("email", email.value)
+      params.append("phone", phone.value)
+      fetch("./userCheck", {
+        method:"post",
+        body: params
       })
-      
-      // 가상계좌
-      fakeAccount.addEventListener("click", ()=>{
-        payment.requestPayment({
-          method: "VIRTUAL_ACCOUNT",
-          amount: {
-            currency: "KRW",
-            value: chargeAmount,
-          },
-          orderId: rdm,
-          orderName: "예약자 포함 "+(person)+"인",
-          successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
-          failUrl: window.location.origin + "/reservation/fail",
-          customerEmail: email.value,
-          customerName: r,
-          virtualAccount: {
-            cashReceipt: {
-              type: "소득공제",
-            },
-            useEscrow: false,
-            validHours: 24,
-          },
-        });
-      })
-      
-      // 계좌이체
-      realAccount.addEventListener("click", ()=>{
-        payment.requestPayment({
-          method: "TRANSFER",
-          amount: {
-            currency: "KRW",
-            value: chargeAmount,
-          },
-          orderId: rdm,
-          orderName: "예약자 포함 "+(person)+"인",
-          successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
-          failUrl: window.location.origin + "/reservation/fail",
-          customerEmail: email.value,
-          customerName: r,
-          transfer: {
-            cashReceipt: {
-              type: "소득공제",
-            },
-            useEscrow: false,
-          },
-        });
-      })
-      
-      // 휴대폰 결제
-      phonePay.addEventListener("click", ()=>{
-        payment.requestPayment({
-          method: "MOBILE_PHONE",
-          amount: {
-            currency: "KRW",
-            value: chargeAmount,
-          },
-          orderId: rdm,
-          orderName: "예약자 포함 "+(person)+"인",
-          successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
-          failUrl: window.location.origin + "/reservation/fail",
-          customerEmail: email.value,
-          customerName: r,
-        });
+      .then(r=>r.text())
+      .then(r=>{
+        if(r.trim().length > 0) {
+          payments.disabled = false;
+          // 카드 결제
+          cardPay.addEventListener("click", ()=>{
+            payment.requestPayment({
+              method: "CARD",
+              amount: {
+                currency: "KRW",
+                value: chargeAmount
+              },
+              orderId: rdm,
+              orderName: "예약자 포함 "+(person)+"인",
+              successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
+              failUrl: window.location.origin + "/reservation/fail",
+              customerEmail: email.value,
+              customerName: r,
+              card: {
+                useEscrow: false,
+                flowMode: "DEFAULT",
+                useCardPoint: false,
+                useAppCardOnly: false,
+              },
+            })  
+          })
+          
+          // 가상계좌
+          fakeAccount.addEventListener("click", ()=>{
+            payment.requestPayment({
+              method: "VIRTUAL_ACCOUNT",
+              amount: {
+                currency: "KRW",
+                value: chargeAmount,
+              },
+              orderId: rdm,
+              orderName: "예약자 포함 "+(person)+"인",
+              successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
+              failUrl: window.location.origin + "/reservation/fail",
+              customerEmail: email.value,
+              customerName: r,
+              virtualAccount: {
+                cashReceipt: {
+                  type: "소득공제",
+                },
+                useEscrow: false,
+                validHours: 24,
+              },
+            });
+          })
+          
+          // 계좌이체
+          realAccount.addEventListener("click", ()=>{
+            payment.requestPayment({
+              method: "TRANSFER",
+              amount: {
+                currency: "KRW",
+                value: chargeAmount,
+              },
+              orderId: rdm,
+              orderName: "예약자 포함 "+(person)+"인",
+              successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
+              failUrl: window.location.origin + "/reservation/fail",
+              customerEmail: email.value,
+              customerName: r,
+              transfer: {
+                cashReceipt: {
+                  type: "소득공제",
+                },
+                useEscrow: false,
+              },
+            });
+          })
+          
+          // 휴대폰 결제
+          phonePay.addEventListener("click", ()=>{
+            payment.requestPayment({
+              method: "MOBILE_PHONE",
+              amount: {
+                currency: "KRW",
+                value: chargeAmount,
+              },
+              orderId: rdm,
+              orderName: "예약자 포함 "+(person)+"인",
+              successUrl: window.location.origin + "/reservation/success?reservNum="+rdm,
+              failUrl: window.location.origin + "/reservation/fail",
+              customerEmail: email.value,
+              customerName: r,
+            });
+          })
+        }
       })
     }
-  })
+  }
+
+  
+
 })
 
 
