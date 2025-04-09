@@ -64,14 +64,25 @@ public class UserController {
 
     // 마이페이지(GET)
     @RequestMapping(value = "/mypage", method = RequestMethod.GET)
-    public String myPage(HttpSession session) {
+    public String myPage(HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 정보를 확인
         if (session.getAttribute("user") == null) {
             // 로그인하지 않았다면 로그인 페이지로 리다이렉트
             return "redirect:/users/login"; // 로그인 페이지 URL
         }
 
-        // 로그인한 사용자일 경우 마이페이지로 이동
+        // 로그인한 사용자일 경우, 사용자 정보를 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        try {
+            // getDetail 메소드를 호출하여 사용자 상세 정보 조회
+            UserDTO userDetail = userService.getDetail(userDTO);
+            model.addAttribute("userDetail", userDetail); // 사용자 상세 정보를 모델에 추가
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("message", "사용자 정보를 불러오는 데 실패했습니다.");
+            return "commons/error";
+        }
+
         return "mypage"; // mypage.jsp로 리턴
     }
 
@@ -98,7 +109,7 @@ public class UserController {
         }
     }
 
- // 회원탈퇴 페이지(GET)
+    // 회원탈퇴 페이지(GET)
     @RequestMapping(value = "userDelete", method = RequestMethod.GET)
     public String userDelete1(HttpSession session) {
         // 세션에 로그인한 사용자가 없다면 로그인 페이지로 리다이렉트
@@ -137,7 +148,7 @@ public class UserController {
             return "redirect:/users/mypage"; // 오류 발생 시 마이페이지로 리다이렉트
         }
     }
-
+}
 
 
     // 사용자 목록 조회
@@ -153,4 +164,4 @@ public class UserController {
 //        model.addAttribute("list", userService.getList()); // 사용자 목록 추가
 //        return "users/getList"; // 사용자 목록 페이지
 //    }
-}
+

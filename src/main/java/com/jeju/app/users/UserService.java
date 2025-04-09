@@ -21,7 +21,10 @@ public class UserService {
 		int result = userDAO.join(userDTO);
 		return result;	
 	}
-	
+	  public UserDTO getDetail(UserDTO userDTO) throws Exception {
+	        // 실제 DB 조회
+	        return userDAO.getDetail(userDTO);
+	  }
 	
 	public UserDTO login(UserDTO userDTO) throws Exception {
 	    UserDTO result = userDAO.getDetail(userDTO);
@@ -45,9 +48,9 @@ public class UserService {
 		return result;
 		}
 	
-	public List<UserDTO>getList(UserDTO userDTO) throws Exception {
-		return userDAO.getList(userDTO);
-	}
+//	public List<UserDTO>getList(UserDTO userDTO) throws Exception {
+//		return userDAO.getList(userDTO);
+//	}
 	public String pwUpdate(UserDTO userDTO,String currentPassword, String newPassword, String confirmPassword) throws Exception{
 		
 		  if (!newPassword.equals(confirmPassword)) {
