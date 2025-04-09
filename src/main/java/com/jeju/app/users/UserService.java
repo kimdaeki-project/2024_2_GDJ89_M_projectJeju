@@ -28,8 +28,6 @@ public class UserService {
 	
 	public UserDTO login(UserDTO userDTO) throws Exception {
 	    UserDTO result = userDAO.getDetail(userDTO);
-	    System.out.println(result.getUserID());
-	    System.out.println(result.getPassword());
 
 	    if (result.getPassword().equals(userDTO.getPassword())) {
 	        return result;

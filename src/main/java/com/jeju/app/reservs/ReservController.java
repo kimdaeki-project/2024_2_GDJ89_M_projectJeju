@@ -65,7 +65,7 @@ public class ReservController {
 	}
 	
 	@RequestMapping(value = "success", method = RequestMethod.GET)
-	public void success(HttpSession session, HttpServletRequest request, ReservDTO reservDTO) throws Exception {
+	public void success(HttpSession session, HttpServletRequest request, Model model, ReservDTO reservDTO) throws Exception {
 		List<BoardingInfo> ar = (List<BoardingInfo>)session.getAttribute("boarderList");
 		if(ar.get(0).getReservNum().equalsIgnoreCase(request.getParameter("orderId"))) {
 			reservService.reservate(reservDTO, session, request);

@@ -27,6 +27,15 @@
 	
 	<context:component-scan base-package="com.jeju.app" />
 	
-	
+	<!-- Interceptors -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/reservation/info"/>
+
+			<!-- bean의 이름 -->
+			<beans:ref bean="loginCheckInterceptor"/>
+		</interceptor>
+
+	</interceptors>
 	
 </beans:beans>
