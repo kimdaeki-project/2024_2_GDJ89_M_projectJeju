@@ -6,7 +6,14 @@ public class ReservDTO {
 	
 	private String reservNum;
 	private String userId;
+	private String payment;
 	
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
 	public String getReservNum() {
 		return reservNum;
 	}
