@@ -13,6 +13,8 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	
+	
 	<select id="getAirportList" resultType="ApiItemDTO">
 		SELECT * FROM AIRPORT
 	</select>
