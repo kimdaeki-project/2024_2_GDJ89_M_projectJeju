@@ -23,14 +23,9 @@ public class UserController {
 
     // 로그인 처리 (POST)
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(UserDTO userDTO, HttpSession session, Model model) {
-        try {
-            userDTO = userService.login(userDTO);
-        } catch (Exception e) {
-            model.addAttribute("result", e.getMessage());
-            return "users/login";
-        }
-
+    public String login(UserDTO userDTO, HttpSession session, Model model) throws Exception {
+    	
+        userDTO = userService.login(userDTO);
         
         if (userDTO != null) {
             session.setAttribute("user", userDTO);

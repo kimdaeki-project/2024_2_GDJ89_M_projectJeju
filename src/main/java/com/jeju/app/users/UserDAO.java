@@ -29,7 +29,6 @@ public class UserDAO {
 		return sqlSession.delete(NAMESPACE+"userDelete", userDTO);
 	}
 	public List<UserDTO> getList (UserDTO userDTO) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"getList", userDTO);
-				
+		return sqlSession.selectList(NAMESPACE+"getList", userDTO);	
 	}
 }

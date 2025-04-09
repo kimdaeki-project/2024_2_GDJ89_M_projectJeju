@@ -7,8 +7,7 @@
 
     <!-- 사용자 로그인 -->
     <select id="login" parameterType="UserDTO" resultType="UserDTO">
-        SELECT userId, password, name, phone, email
-        FROM users
+        SELECT * FROM USERS
         WHERE userId = #{userID} AND password = #{password}
     </select>
 
@@ -27,8 +26,7 @@
 
     <!-- 사용자 상세 정보 조회 -->
     <select id="getDetail" parameterType="UserDTO" resultType="UserDTO">
-        SELECT userId, name, phone, email
-        FROM users
+        SELECT * FROM users
         WHERE userID = #{userID}
     </select>
     

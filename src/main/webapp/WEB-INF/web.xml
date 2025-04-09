@@ -32,4 +32,7 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>com.jeju.app.MyContextListener</listener-class>
+  </listener>
 </web-app>
