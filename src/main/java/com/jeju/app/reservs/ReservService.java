@@ -109,9 +109,10 @@ public class ReservService {
 	
 	public int reservate(ReservDTO reservDTO, HttpSession session, HttpServletRequest request) throws Exception {
 		reservDTO.setReservNum(request.getParameter("orderId"));
+		reservDTO.setPayment(request.getParameter("payment"));
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
-		reservDTO.setUserId(userDTO.getUserID()); // session에서 꺼내와야함
-		
+ 		reservDTO.setUserId(userDTO.getUserID());
+ 		
 		return reservDAO.reservate(reservDTO);
 	}
 	

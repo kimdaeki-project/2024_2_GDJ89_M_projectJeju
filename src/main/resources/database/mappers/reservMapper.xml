@@ -30,7 +30,7 @@
 	</select>
 	
 	<insert id="reservate" parameterType="ReservDTO">
-		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId})
+		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId}, #{payment})
 	</insert>
 	
 	<insert id="addBoarderList" parameterType="List">
