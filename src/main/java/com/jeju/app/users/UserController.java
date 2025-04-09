@@ -59,7 +59,7 @@ public class UserController {
     }
 
     // 마이페이지(GET)
-    @RequestMapping(value = "/mypage", method = RequestMethod.GET)
+    @RequestMapping(value = "mypage", method = RequestMethod.GET)
     public String myPage(HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 정보를 확인
         if (session.getAttribute("user") == null) {
@@ -79,7 +79,7 @@ public class UserController {
             return "commons/error";
         }
 
-        return "mypage"; // mypage.jsp로 리턴
+        return "users/mypage"; // mypage.jsp로 리턴
     }
 
     // 비밀번호 수정 페이지(GET)

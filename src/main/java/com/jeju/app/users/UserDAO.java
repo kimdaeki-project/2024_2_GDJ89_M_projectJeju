@@ -31,4 +31,8 @@ public class UserDAO {
 	public List<UserDTO> getList (UserDTO userDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getList", userDTO);	
 	}
+	public int checkUserIdExist(String userID) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

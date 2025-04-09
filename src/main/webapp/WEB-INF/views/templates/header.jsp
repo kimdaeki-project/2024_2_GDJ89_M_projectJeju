@@ -128,7 +128,7 @@
                             <!-- 로그인 상태일 때 -->
                             <li class="nav-item"><a class="nav-link active" href="/users/logout">로그아웃</a></li>
                             <li class="nav-item"><a class="nav-link active" href="/users/mypage">마이페이지</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="/users/reservation">예약확인</a></li>
+                          
                         </c:when>
                         <c:otherwise>
                             <!-- 로그인하지 않은 상태일 때 -->
