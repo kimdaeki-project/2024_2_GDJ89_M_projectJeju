@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jeju.app.flights.FlightDTO;
+import com.jeju.app.users.UserDTO;
 
 @Repository
 public class ReservDAO {
@@ -23,8 +24,8 @@ public class ReservDAO {
 		return sqlSession.selectOne(NAMESPACE+"getPrestigeCharge", flightDTO);
 	}
 	
-	public void userCheck() throws Exception {
-		
+	public UserDTO userCheck(UserDTO userDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"userCheck", userDTO);
 	}
 	
 	public FlightDTO getFlight(FlightDTO flightDTO) throws Exception {

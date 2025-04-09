@@ -89,7 +89,7 @@
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
 											<input type="text" class="form-control adultName ipn check" id="a${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
+											<div class="invalid-feedback">한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
@@ -105,7 +105,7 @@
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
 											<input type="text" class="form-control childName ipn check" id="c${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
+											<div class="invalid-feedback">한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
@@ -121,7 +121,7 @@
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
 											<input type="text" class="form-control infantName ipn check" id="i${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
+											<div class="invalid-feedback">한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
@@ -172,7 +172,7 @@
 									<div class="col-md-7">
 										<label for="phone" class="form-label">휴대전화번호</label>
 										<input type="text" class="form-control check" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
-										<div class="invalid-feedback">('-'없이 입력 (예, 01012345678))</div>
+										<div class="invalid-feedback">'-'없이 입력 (예, 01012345678)</div>
 									</div>
 
 									<div class="col-md-4 mt-2 offset-md-4 align-self-end">

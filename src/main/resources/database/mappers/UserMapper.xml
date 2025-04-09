@@ -9,7 +9,7 @@
     <select id="login" parameterType="UserDTO" resultType="UserDTO">
         SELECT userId, password, name, phone, email
         FROM users
-        WHERE userId = #{userId} AND password = #{password}
+        WHERE userId = #{userID} AND password = #{password}
     </select>
 
     <!-- 사용자 회원가입 -->

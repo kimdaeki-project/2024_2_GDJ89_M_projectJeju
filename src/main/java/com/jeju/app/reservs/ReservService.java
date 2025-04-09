@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jeju.app.flights.FlightDTO;
+import com.jeju.app.users.UserDTO;
 
 @Service
 public class ReservService {
@@ -115,6 +116,10 @@ public class ReservService {
 	
 	public int addBoarderList(List<BoardingInfo> ar) throws Exception {
 		return reservDAO.addBoarderList(ar);
+	}
+	
+	public UserDTO userCheck(UserDTO userDTO) throws Exception {
+		return reservDAO.userCheck(userDTO);
 	}
 
 }

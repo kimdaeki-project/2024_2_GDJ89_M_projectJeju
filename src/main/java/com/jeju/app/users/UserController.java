@@ -31,6 +31,7 @@ public class UserController {
             return "users/login";
         }
 
+        
         if (userDTO != null) {
             session.setAttribute("user", userDTO);
             return "redirect:/"; // 로그인 후 메인 페이지로 리다이렉트

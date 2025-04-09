@@ -30,6 +30,7 @@ public class UserService {
 	    UserDTO result = userDAO.getDetail(userDTO);
 
 	    if (result == null) {
+	    	System.out.println("user = null");
 	        return null;
 	    }
 
