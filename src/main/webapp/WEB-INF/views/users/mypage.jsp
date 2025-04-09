@@ -7,90 +7,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import> <!-- Import Bootstrap CSS -->
-    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import> <!-- Import header -->
+    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
     <style>
-        /* General resets and body styling */
-        body, html {
-            height: 100%;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        /* Center the content vertically and horizontally */
-        .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 0;
+            color: #333;
         }
 
         .container {
-            max-width: 500px; /* 폼의 가로 크기를 조금 더 줄임 */
-            width: 100%;
-            padding: 12px; /* 여백을 좀 더 줄임 */
-            background-color: #ffffff;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid #ffcc00;
-            box-sizing: border-box;
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 10px; /* 제목 아래 여백을 더 줄임 */
+            font-size: 32px;
             color: #333;
-            font-weight: bold;
-            font-size: 18px; /* 제목 폰트 크기 줄임 */
+            margin-bottom: 40px;
+            font-weight: 700;
         }
 
-        .card {
-            margin-top: 12px; /* 카드 간격을 줄임 */
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .card-title {
-            font-size: 14px; /* 카드 제목 폰트 크기 줄임 */
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px; /* 여백 줄임 */
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
         }
 
         .form-label {
-            font-weight: bold;
-            color: #343a40;
-            font-size: 12px; /* 라벨 폰트 크기 줄임 */
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 8px;
         }
 
         .form-control {
-            border-radius: 4px;
-            font-size: 14px; /* 폰트 크기 줄임 */
-            padding: 8px; /* 여백 줄임 */
-            margin-bottom: 10px; /* 필드 간격 줄임 */
             width: 100%;
-            box-sizing: border-box;
-            background-color: #f8f9fa;
-            border: 1px solid #ced4da;
-            transition: all 0.3s ease;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: #ffcc00;
-            box-shadow: 0 0 6px rgba(255, 204, 0, 0.25);
-            background-color: #ffffff;
+            border-color: #007bff;
+            background-color: #fff;
+            outline: none;
         }
 
         .btn {
-            width: 100%;
-            padding: 10px; /* 버튼 높이 줄임 */
-            font-size: 14px; /* 폰트 크기 줄임 */
-            border-radius: 6px;
+            width: 50%; /* 버튼 가로 사이즈를 50%로 설정 */
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            display: block;  /* 중앙 정렬을 위해 block 설정 */
+            margin: 0 auto;  /* 중앙 정렬 */
         }
 
         .btn-primary {
@@ -123,86 +130,188 @@
             background-color: #c82333;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px; /* 작은 화면에서는 패딩을 더 줄임 */
-                max-width: 90%;
-            }
+        .note {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-            h2 {
-                font-size: 16px;
-            }
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-info div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .user-info div:not(:last-child) {
+            border-right: 1px solid #ddd;
+        }
+
+        .edit-btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #ffc107;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 30%; /* 버튼 가로 사이즈를 50%로 설정 */
+            display: block;  /* 중앙 정렬을 위해 block 설정 */
+            margin: 0 auto;  /* 중앙 정렬 */
+        }
+
+        .edit-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .toggle-section-btn {
+            margin-top: 15px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            width: 30%; /* 버튼 가로 사이즈를 50%로 설정 */
+            display: block;  /* 중앙 정렬을 위해 block 설정 */
+            margin: 0 auto;  /* 중앙 정렬 */
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-section-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .post-list, .reservation-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-item, .reservation-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post-item:hover, .reservation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-item p, .reservation-item p {
+            color: #555;
+            margin: 0;
         }
     </style>
+
+    <script>
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
+        }
+
+        function toggleEditSection() {
+            var editSection = document.getElementById("edit-section");
+            var viewSection = document.getElementById("view-section");
+            // 정보 수정 섹션의 상태만 토글합니다.
+            editSection.style.display = (editSection.style.display === "none" || editSection.style.display === "") ? "block" : "none";
+            viewSection.style.display = (viewSection.style.display === "none" || viewSection.style.display === "") ? "block" : "none";
+        }
+    </script>
 </head>
 
 <body>
 
-    <div class="main-container">
-        <div class="container">
-            <h2>마이페이지</h2>
+    <div class="container">
+        <h2>마이페이지</h2>
 
-            <!-- 현재 사용자 정보 표시 -->
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">내 정보</h5>
-                    <form action="/users/update" method="POST">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">이메일</label>
-                            <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">전화번호</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.user.phone}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">비밀번호</label>
-                            <input type="password" class="form-control" id="password" name="password" value="${sessionScope.user.password}" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">정보 변경</button>
-                    </form>
+        <!-- 개인정보 표시 섹션 -->
+        <div class="section" id="view-section">
+            <h3 class="section-title">내 정보</h3>
+            <div class="user-info">
+                <div>
+                    <p><strong>이메일</strong></p>
+                    <p>${sessionScope.user.email}</p>
+                </div>
+                <div>
+                    <p><strong>전화번호</strong></p>
+                    <p>${sessionScope.user.phone}</p>
                 </div>
             </div>
+            <button class="edit-btn" onclick="toggleEditSection()">정보 수정하기</button>
+        </div>
 
-            <!-- 비밀번호 변경 섹션 -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">비밀번호 변경</h5>
-                    <form action="/users/pwUpdate" method="POST">
-                        <div class="mb-3">
-                            <label for="currentPassword" class="form-label">현재 비밀번호</label>
-                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newPassword" class="form-label">새 비밀번호</label>
-                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">비밀번호 확인</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-success">비밀번호 변경</button>
-                    </form>
+        <!-- 개인정보 수정 섹션 (수정 버튼 클릭 시 표시됨) -->
+        <div class="section" id="edit-section" style="display:none;">
+            <h3 class="section-title">정보 수정</h3>
+            <form action="/users/update" method="POST">
+                <div class="form-group">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">전화번호</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.user.phone}" required>
+                </div>
 
-            <!-- 회원 탈퇴 섹션 -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title text-danger">회원 탈퇴</h5>
-                    <form action="/users/userDelete" method="POST">
-                        <p>회원 탈퇴를 원하시면 아래 버튼을 눌러주세요.</p>
-                        <button type="submit" class="btn btn-danger">회원 탈퇴</button>
-                    </form>
+                <!-- 비밀번호 변경 섹션 (수정 섹션 안에 포함) -->
+                <h3 class="section-title">비밀번호 변경</h3>
+                <div class="form-group">
+                    <label for="currentPassword" class="form-label">현재 비밀번호</label>
+                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="newPassword" class="form-label">새 비밀번호</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">비밀번호 확인</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">정보 변경</button>
+            </form>
+            <button class="btn btn-secondary" onclick="toggleEditSection()">수정 취소</button>
+        </div>
+
+        <!-- 내가 쓴 글 섹션 -->
+        <div class="section">
+            <h3 class="section-title">내가 쓴 글</h3>
+            <button class="toggle-section-btn" onclick="toggleSection('post-list')">내가 쓴 글 보기</button>
+            <ul id="post-list" class="post-list" style="display:none;">
+                <li class="post-item">글 제목 1</li>
+                <li class="post-item">글 제목 2</li>
+                <li class="post-item">글 제목 3</li>
+            </ul>
+        </div>
+
+        <!-- 예약 내역 확인 섹션 -->
+        <div class="section">
+            <h3 class="section-title">예약 내역</h3>
+            <button class="toggle-section-btn" onclick="toggleSection('reservation-list')">예약 내역 보기</button>
+            <ul id="reservation-list" class="reservation-list" style="display:none;">
+                <li class="reservation-item">예약 내역 1</li>
+                <li class="reservation-item">예약 내역 2</li>
+                <li class="reservation-item">예약 내역 3</li>
+            </ul>
         </div>
     </div>
 
-    <!-- Import necessary JS files -->
     <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-    <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import> <!-- Import Bootstrap JS -->
 
 </body>
 
