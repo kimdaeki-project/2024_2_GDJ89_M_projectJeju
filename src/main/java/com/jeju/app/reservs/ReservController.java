@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeju.app.flights.FlightDTO;
+import com.jeju.app.users.UserDTO;
 
 @Controller
 @RequestMapping(value = "reservation/")
@@ -49,11 +50,12 @@ public class ReservController {
 	}
 	
 	@RequestMapping(value = "userCheck", method = RequestMethod.POST)
-	public String userCheck(HttpServletRequest request, Model model) throws Exception {
+	public String userCheck(Model model, UserDTO userDTO) throws Exception {
 
 		// 유저 정보 확인
+		userDTO = reservService.userCheck(userDTO);
 		
-		model.addAttribute("result", "name");
+		model.addAttribute("result", userDTO.getName());
 		return "commons/ajaxResult";
 	}
 	
@@ -65,11 +67,9 @@ public class ReservController {
 	@RequestMapping(value = "success", method = RequestMethod.GET)
 	public void success(HttpSession session, HttpServletRequest request, ReservDTO reservDTO) throws Exception {
 		List<BoardingInfo> ar = (List<BoardingInfo>)session.getAttribute("boarderList");
-		if(ar.get(0).getReservNum().equalsIgnoreCase(request.getParameter("reservNum"))) {
-			System.out.println(reservService.flightsUpdate(session, ar));
+		if(ar.get(0).getReservNum().equalsIgnoreCase(request.getParameter("orderId"))) {
 			reservService.reservate(reservDTO, session, request);
-			int result = reservService.addBoarderList(ar);
-			System.out.println(result);
+			reservService.addBoarderList(ar);
 		}
 	}
 	

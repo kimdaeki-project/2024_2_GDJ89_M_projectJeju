@@ -28,12 +28,10 @@ public class UserService {
 	
 	public UserDTO login(UserDTO userDTO) throws Exception {
 	    UserDTO result = userDAO.getDetail(userDTO);
+	    System.out.println(result.getUserID());
+	    System.out.println(result.getPassword());
 
-	    if (result == null) {
-	        return null;
-	    }
-
-	    if (Objects.equals(result.getPassword(), userDTO.getPassword())) {
+	    if (result.getPassword().equals(userDTO.getPassword())) {
 	        return result;
 	    }
 
