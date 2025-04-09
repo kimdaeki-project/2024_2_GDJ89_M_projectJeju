@@ -13,8 +13,8 @@
 		SELECT ECONOMYCHARGE, PRESTIGECHARGE FROM FLIGHTSUPDATE WHERE FLIGHTNUM = #{flightNum}
 	</select>
 	
-	<select id="userCheck">
-		SELECT * FROM USERS WHERE USERID = #{userId} AND EMAIL = #{email} AND PHONE = #{phone}
+	<select id="userCheck" parameterType="UserDTO" resultType="UserDTO">
+		SELECT * FROM USERS WHERE USERID = #{userID} AND EMAIL = #{email} AND PHONE = #{phone}
 	</select>
 	
 	<select id="flightsCheck" parameterType="FlightDTO" resultType="FlightDTO">

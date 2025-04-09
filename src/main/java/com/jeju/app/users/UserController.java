@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/users/*")
@@ -24,24 +23,18 @@ public class UserController {
 
     // 로그인 처리 (POST)
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(UserDTO userDTO, HttpSession session, Model model) {
-        try {
-            userDTO = userService.login(userDTO);
-        } catch (Exception e) {
-            model.addAttribute("result", e.getMessage());
-            return "users/login";
-        }
-
-        // userDTO가 null일 경우, 로그인 실패 처리
+    public String login(UserDTO userDTO, HttpSession session, Model model) throws Exception {
+    	
+        userDTO = userService.login(userDTO);
+        
         if (userDTO != null) {
             session.setAttribute("user", userDTO);
             return "redirect:/"; // 로그인 후 메인 페이지로 리다이렉트
-        } else {
-            // 로그인 실패 시 메시지와 함께 로그인 페이지로 돌아감
-            model.addAttribute("result", "아이디 또는 비밀번호가 잘못되었습니다.");
-            model.addAttribute("path", "./login");
-            return "commons/result"; // 실패 메시지 화면
         }
+
+        model.addAttribute("result", "다시 로그인을 시도해 주세요");
+        model.addAttribute("path", "./login");
+        return "commons/result";
     }
 
     // 회원가입 페이지 (GET)
@@ -55,13 +48,6 @@ public class UserController {
         int result = userService.join(userDTO, session.getServletContext());
         return "redirect:/"; // 회원가입 후 메인 페이지로 리다이렉트
     }
-    
-    @RequestMapping(value = "checkUserID", method = RequestMethod.GET)
-    @ResponseBody
-    public boolean checkUserID(@RequestParam String userID) {
-        // 아이디 중복 여부만 반환
-        return userService.isUserIdAvailable(userID); // 아이디가 사용 가능한지 여부를 반환
-    }
 
     // 로그아웃 처리
     @RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -73,27 +59,27 @@ public class UserController {
     }
 
     // 마이페이지(GET)
-    @RequestMapping(value = "mypage", method = RequestMethod.GET)
+    @RequestMapping(value = "/mypage", method = RequestMethod.GET)
     public String myPage(HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 정보를 확인
-//        if (session.getAttribute("user") == null) {
-//            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
-//            return "redirect:/users/login"; // 로그인 페이지 URL
-//        }
-//
-//        // 로그인한 사용자일 경우, 사용자 정보를 가져오기
-//        UserDTO userDTO = (UserDTO) session.getAttribute("user");
-//        try {
-//            // getDetail 메소드를 호출하여 사용자 상세 정보 조회
-//            UserDTO userDetail = userService.getDetail(userDTO);
-//            model.addAttribute("userDetail", userDetail); // 사용자 상세 정보를 모델에 추가
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            model.addAttribute("message", "사용자 정보를 불러오는 데 실패했습니다.");
-//            return "commons/error";
-//        }
+        if (session.getAttribute("user") == null) {
+            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
+            return "redirect:/users/login"; // 로그인 페이지 URL
+        }
 
-        return "users/mypage"; // mypage.jsp로 리턴
+        // 로그인한 사용자일 경우, 사용자 정보를 가져오기
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        try {
+            // getDetail 메소드를 호출하여 사용자 상세 정보 조회
+            UserDTO userDetail = userService.getDetail(userDTO);
+            model.addAttribute("userDetail", userDetail); // 사용자 상세 정보를 모델에 추가
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("message", "사용자 정보를 불러오는 데 실패했습니다.");
+            return "commons/error";
+        }
+
+        return "mypage"; // mypage.jsp로 리턴
     }
 
     // 비밀번호 수정 페이지(GET)

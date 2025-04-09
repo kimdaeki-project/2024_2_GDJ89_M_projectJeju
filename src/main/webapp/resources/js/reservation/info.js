@@ -158,12 +158,17 @@ phone.addEventListener("blur", ()=>{
 userCheck.addEventListener("click", ()=>{
 
   let cs = document.getElementsByClassName("check")
+  let check = true;
   for(c of cs) {
     if(c.value == "" || c.classList.contains("is-invalid")){
       c.classList.add("is-invalid")
-    }else {
-      let params = new FormData()
-      params.append("userId", username.value)
+      check = false;
+    }
+  }
+
+  if(check) {
+    let params = new FormData()
+      params.append("userID", username.value)
       params.append("email", email.value)
       params.append("phone", phone.value)
       fetch("./userCheck", {
@@ -262,10 +267,7 @@ userCheck.addEventListener("click", ()=>{
           })
         }
       })
-    }
   }
-
-  
 
 })
 
