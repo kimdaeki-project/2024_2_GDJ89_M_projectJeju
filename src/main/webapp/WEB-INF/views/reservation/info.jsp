@@ -88,14 +88,14 @@
 										<h5>성인${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control adultName ip" id="a${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback"></div>
+											<input type="text" class="form-control adultName ipn check" id="a${i}Name" placeholder="" value="" required="">
+											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control adultBirth ip" id="a${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
-											<div class="invalid-feedback"></div>
+											<input type="email" class="form-control adultBirth ipb check" id="a${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback">YYYYMMDD 예, 20000101</div>
 										</div>
 									</div>										
 								</c:forEach>
@@ -104,14 +104,14 @@
 										<h5>소아${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control childName ip" id="c${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback"></div>
+											<input type="text" class="form-control childName ipn check" id="c${i}Name" placeholder="" value="" required="">
+											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control childBirth ip" id="c${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
-											<div class="invalid-feedback"></div>
+											<input type="email" class="form-control childBirth ipb check" id="c${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback">YYYYMMDD 예, 20000101</div>
 										</div>
 									</div>										
 								</c:forEach>
@@ -120,14 +120,14 @@
 										<h5>유아${i }</h5>
 										<div class="col-sm-6">
 											<label for="lastName" class="form-label">이름</label>
-											<input type="text" class="form-control infantName ip" id="i${i}Name" placeholder="" value="" required="">
-											<div class="invalid-feedback"></div>
+											<input type="text" class="form-control infantName ipn check" id="i${i}Name" placeholder="" value="" required="">
+											<div class="invalid-feedback">이름은 한글 2~6자 이내로 입력해야 합니다</div>
 										</div>
 	
 										<div class="col-12">
 											<label for="email" class="form-label">생년월일</label>
-											<input type="email" class="form-control infantBirth ip" id="i${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
-											<div class="invalid-feedback"></div>
+											<input type="email" class="form-control infantBirth ipb check" id="i${i}Birth" placeholder="(YYYYMMDD 예, 20000101)">
+											<div class="invalid-feedback">YYYYMMDD 예, 20000101</div>
 										</div>
 									</div>										
 								</c:forEach>
@@ -146,7 +146,7 @@
 								<div class="col-12">
 									<label for="username" class="form-label">회원아이디</label>
 									<div class="input-group has-validation">
-										<input type="text" class="form-control" id="username" placeholder="Username" required="">
+										<input type="text" class="form-control check" id="username" placeholder="Username" required="">
 										<div class="invalid-feedback">아이디를 입력하세요</div>
 									</div>
 								</div>
@@ -154,13 +154,13 @@
 								<div class="col-12">
 									<label for="email" class="form-label">Email <span
 										class="text-body-secondary">(Optional)</span></label>
-										<input type="email" class="form-control" id="email" placeholder="(예, you@example.com)">
-										<div class="invalid-feedback">이메일을 입력하세요</div>
+										<input type="email" class="form-control check" id="email" placeholder="(예, you@example.com)">
+										<div class="invalid-feedback">이메일 양식에 맞게 입력하세요 (예, you@example.com)</div>
 									</div>
 									
 									<div class="col-md-5">
 										<label for="tel" class="form-label"></label>
-										<select class="form-select" id="tel" required="">
+										<select class="form-select check" id="tel" required="">
 										<option value="">통신사</option>
 										<option>SKT</option>
 										<option>KT</option>
@@ -171,8 +171,8 @@
 									
 									<div class="col-md-7">
 										<label for="phone" class="form-label">휴대전화번호</label>
-										<input type="text" class="form-control" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
-										<div class="invalid-feedback">전화번호를 입력하세요</div>
+										<input type="text" class="form-control check" id="phone" placeholder="'-'없이 입력 (예, 01012345678)"	required="">
+										<div class="invalid-feedback">('-'없이 입력 (예, 01012345678))</div>
 									</div>
 
 									<div class="col-md-4 mt-2 offset-md-4 align-self-end">
