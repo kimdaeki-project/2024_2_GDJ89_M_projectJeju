@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.publicBoards.qna.QnaDAO">
+	<select id="getList" resultType="QnaDTO">
+		SELECT * FROM QNA ORDER BY BOARDREF DESC, BOARDSTEP ASC
+	</select>
+	
+	<select id="getDetail" parameterType="QnaDTO" resultType="QnaDTO">
+		SELECT * FROM QNA WHERE BOARDNUM=#{boardNum}
+	</select>
+	
+	<insert id="add" parameterType="QnaDTO">
+		<selectKey order="BEFORE" keyProperty="boardNum" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO QNA VALUES
+			(#{userID}, #{boardNum}, #{boardTitle}, #{boardContents}, sysdate, 0, 0, 0)
+	</insert>
+	
+	<insert id="reply" parameterType="QnaDTO">
+		INSERT INTO QNA VALUES
+			(#{userID}, BOARD_SEQ.NEXTVAL, #{boardTitle}, #{boardContents}, sysdate, 0, 0, 0)
+	</insert>
+	
+	<update id="updateStep" parameterType="QnaDTO">
+		UPDATE QNA SET BOARDSTEP=BOARDSTEP+1
+		WHERE BOARDREF=#{boardRef} AND BOARDSTEP>#{boardStep}
+	</update>
+	
+	<update id="update" parameterType="QnaDTO">
+		UPDATE QNA SET BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}
+			WHERE BOARDNUM=#{boardNum}
+	</update>
+	
+	<delete id="delete" parameterType="QnaDTO">
+		DELETE QNA WHERE BOARDNUM=#{boardNum}
+	</delete>
+
+</mapper>

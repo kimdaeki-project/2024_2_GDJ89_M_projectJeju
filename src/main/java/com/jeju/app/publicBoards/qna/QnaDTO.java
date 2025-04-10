@@ -5,7 +5,7 @@ import com.jeju.app.publicBoards.PB_DTO;
 public class QnaDTO extends PB_DTO {
 	
 	private Long boardDepth;
-	private Long boardRep;
+	private Long boardRef;
 	private Long boardStep;
 	
 	
@@ -15,11 +15,11 @@ public class QnaDTO extends PB_DTO {
 	public void setBoardDepth(Long boardDepth) {
 		this.boardDepth = boardDepth;
 	}
-	public Long getBoardRep() {
-		return boardRep;
+	public Long getBoardRef() {
+		return boardRef;
 	}
-	public void setBoardRep(Long boardRep) {
-		this.boardRep = boardRep;
+	public void setBoardRef(Long boardRef) {
+		this.boardRef = boardRef;
 	}
 	public Long getBoardStep() {
 		return boardStep;
