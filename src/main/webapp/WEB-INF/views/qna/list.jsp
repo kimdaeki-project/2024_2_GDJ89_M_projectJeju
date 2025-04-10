@@ -17,7 +17,7 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 
-			<h1>공지사항</h1>
+			<h1>질문게시판</h1>
 			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">
 			</form>
@@ -32,10 +32,10 @@
 					</tr>
 				<tbody>
 				<c:forEach items="${list}" var="i">
-					<tr onclick="location.href='/notice/detail?boardNum=${i.boardNum}'">
+					<tr onclick="location.href='/qna/detail?boardNum=${i.boardNum}'">
 						<td>${i.boardNum}</td>
 						<td>${i.boardTitle}</td>
-						<td>관리자</td>
+						<td>${i.userID}</td>
 						<td>${i.boardDate}</td> 
 					</tr>
 				</c:forEach>
@@ -62,7 +62,7 @@
 			  </li>
 			</ul>
 			  </nav>
-				<!-- <a class="btn btn-success" href="add">글쓰기</a> -->
+				<a class="btn btn-success" href="add">글쓰기</a>
 			
 			
 			

@@ -120,7 +120,7 @@
                     </li>
                     <!-- 공통 메뉴 -->
                     <li class="nav-item"><a class="nav-link active" href="/flights/search">AIR</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">QNA</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/qna/list">QNA</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/notice/list">NOTICE</a></li>
 
                     <!-- 로그인된 사용자 메뉴 -->
@@ -138,6 +138,7 @@
                     </c:choose>
                 </ul>
             </div>
+
         </div>
     </nav>
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.boards.comments.CommentDAO">
+	<select id="getCommentsList" resultType="CommentDTO" parameterType="Map">
+		SELECT * FROM
+  		(
+	  		SELECT ROWNUM R, C.* FROM
+	  		(
+	  			SELECT * FROM COMMENTS
+	  			WHERE BOARDNUM=#{comments.boardNum}
+	  			ORDER BY COMMENTNUM DESC
+	  		)C
+  		)
+  		WHERE R BETWEEN #{pager.startNum} AND #{pager.endNum}
+	</select>
+	
+	<select id="getCommentsCount" parameterType="CommentDTO" resultType="Long">
+		SELECT COUNT(COMMENTNUM) FROM COMMENTS WHERE BOARDNUM=#{boardNum}
+	</select>
+	
+	<insert id="addComments" parameterType="CommentDTO">
+		INSERT INTO COMMENTS VALUES
+			(#{userID}, #{boardNum}, #{boardContents}, SYSDATE, COMMENT_SEQ.NEXTVAL)
+	</insert>
+	
+	<delete id="deleteComments" parameterType="CommentDTO">
+		DELETE COMMENTS WHERE COMMENTNUM=#{commentNum}
+	</delete>
+	
+	<update id="updateComments" parameterType="CommentDTO">
+		UPDATE COMMENTS SET BOARDCONTENTS=#{boardContents} WHERE COMMENTNUM=#{commentNum}
+	</update>
+
+</mapper>

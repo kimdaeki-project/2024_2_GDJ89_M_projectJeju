@@ -42,7 +42,7 @@ public class ApisService {
 		for(ApiItemDTO a : ar) {
 			ApiItemDTO apiItemDTO = new ApiItemDTO();
 			apiItemDTO.setAirportId(a.getAirportId());
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 30; i++) {
 				Calendar ca = Calendar.getInstance();
 				ca.set(Calendar.DATE, ca.get(Calendar.DATE)+i);
 				Date d = new Date(ca.getTimeInMillis());

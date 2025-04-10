@@ -20,11 +20,11 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			 <h1>Test Add</h1><i class="fa-sharp fa-solid fa-star-half"></i>
+			 <h1>Test Add</h1>
 			 <form action="" class="align-items-center" method="post" enctype="multipart/form-data">
 				<div class="row col-12" style="margin-top: 20px; margin-left: 0px;">
 					<input type="hidden" value="${dto.boardNum}" name="boardNum">
-					<select id="loc" style="width: 250px;" name="location" class="form-select">
+					<select id="loc" style="width:	 250px;" name="location" class="form-select">
 					    <option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>지역을 선택하세요.</option>
 					    <option value="제주시" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
 						<option value="애월" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
@@ -39,23 +39,30 @@
 						<option value="2">맛집</option>
 						<option value="3">숙소</option>
 					</select>
-					<span id="locationResult" style="color: red; width: 300px; padding-top: 6px;">지역을 선택하세요.</span>
+					<span id="locationResult" style="color: red; width: 170px; padding-top: 6px;">지역을 선택하세요.</span>
 				</div>
 				<div class="col-12">
 					<input type="text" class="form-control" id="exampleInputEmail1" value="${dto.boardTitle}" name="boardTitle" aria-describedby="emailHelp" placeholder="제목" style="margin-bottom: 1%; margin-top: 7px;">
-				</div>
-					
-				<div class="input-group mb-6 custom-write1 custom-write3">
-					<input type="file" class="form-control" id="attach" name="attaches" multiple>
 				</div>
 				<div>
 					<textarea id="summernote" name="boardContents" value="${dto.boardContents}">
 
 					</textarea>
+					
 				</div>
 				<div style="width: 20%; margin-top: 4%;" class="btn-group" role="group" aria-label="Basic example">
-					<button type="submit" class="btn btn-primary">글쓰기</button>
-					<a class="btn btn-danger" href="/boards/list">취소</a>
+					<button type="submit" id="btnAdd" class="btn btn-primary">글쓰기</button>
+					<c:choose>
+						<c:when test="${dto.category eq 1}">
+							<a class="btn btn-danger" href="/boards/place/list">취소</a>
+						</c:when>
+						<c:when test="${dto.category eq 2}">
+							<a class="btn btn-danger" href="/boards/diner/list">취소</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-danger" href="/boards/hotel/list">취소</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			 </form>
 			 
@@ -65,8 +72,52 @@
 			
 			<script>
 			  $('#summernote').summernote({
-				height: 400
-			  });
+				height:400,
+				callbacks:{
+					onImageUpload:function(files){
+						console.log(files[0]);//<input type="file">
+						let f = new FormData();
+						f.append("uploadFile", files[0]);
+						fetch('./detailFiles', {
+							method:'POST',
+							body:f
+						})
+						.then(r=>r.text())
+						.then(r=>{
+							$('#summernote').summernote('editor.insertImage', r.trim()); 
+						})
+
+					},
+					onMediaDelete: async (files)=>{
+						//js : getAttribute("속성명"), .속성명
+						//jquery : attr("속성명"), prop("속성명")
+						console.log(files[0].src)
+						console.log($(files[0]).attr("src"))
+
+						let fileName = files[0].src;
+						let ar = fileName.split("/");
+						console.log( ar[ar.length-1]);
+
+						ar = fileName.substring(fileName.lastIndexOf("/")+1)
+						console.log(ar);
+
+						//js fetch
+						//jquery , $.get(), $.post(), $.ajax()
+						//1. url, method, parameter
+						//detailFilesDelete, POST, filename
+						let f = new FormData();
+						f.append("fileName", ar)
+						let result = await fetch('detailFilesDelete', {
+							method:'POST',
+							body:f
+						});
+
+						console.log(result)
+
+
+					}
+				}
+			})
 			</script>
 		
 			<script>
@@ -75,8 +126,6 @@
 				  console.log(m)
 				})
 			</script>
-			
-			
 			
 		</div>
 
