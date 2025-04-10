@@ -11,6 +11,10 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 1 AND
 					<include refid="search"></include>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
 					<choose>
 						<when test="searchKind=='sk2'">
 							ORDER BY FAVORITE DESC
@@ -22,10 +26,6 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-				) M
-				<include refid="location"></include>
-			)
-		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
 	<select id="getPlaceCardList" resultMap="getImageList" parameterType="Map">
@@ -35,7 +35,6 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 1 AND
 					<include refid="search"></include>
-					
 				) M
 				<include refid="location"></include>
 			) A
@@ -62,21 +61,21 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 2 AND
 					<include refid="search"></include>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
 					<choose>
-						<when test="searchKind=='sk2'">
+						<when test="searchKind eq 'sk2'">
 							ORDER BY FAVORITE DESC
 						</when>
-						<when test="searchKind=='sk3'">
+						<when test="searchKind eq 'sk3'">
 							ORDER BY BOARDHITS DESC
 						</when>
 						<otherwise>
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-				) M
-				<include refid="location"></include>
-			)
-		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
 	<select id="getDinerCardList" resultMap="getImageList" parameterType="Map">
@@ -86,7 +85,6 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 2 AND
 					<include refid="search"></include>
-					
 				) M
 				<include refid="location"></include>
 			) A
@@ -113,6 +111,10 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 3 AND
 					<include refid="search"></include>
+				) M
+				<include refid="location"></include>
+			)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
 					<choose>
 						<when test="searchKind=='sk2'">
 							ORDER BY FAVORITE DESC
@@ -124,10 +126,6 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-				) M
-				<include refid="location"></include>
-			)
-		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
 	<select id="getHotelCardList" resultMap="getImageList" parameterType="Map">
@@ -137,7 +135,6 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 3 AND
 					<include refid="search"></include>
-				
 				) M
 				<include refid="location"></include>
 			) A
@@ -240,10 +237,26 @@
 				</choose>
 	</sql>
 	
-	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+	<select id="getTotalCount1" resultType="Long" parameterType="Pager">
 		SELECT COUNT(BOARDNUM) FROM
 		(
-			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND
+			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND CATEGORY = 1 AND
+			<include refid="search"></include>
+		)<include refid="location"></include>
+	</select>
+	
+	<select id="getTotalCount2" resultType="Long" parameterType="Pager">
+		SELECT COUNT(BOARDNUM) FROM
+		(
+			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND CATEGORY = 2 AND
+			<include refid="search"></include>
+		)<include refid="location"></include>
+	</select>
+	
+	<select id="getTotalCount3" resultType="Long" parameterType="Pager">
+		SELECT COUNT(BOARDNUM) FROM
+		(
+			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND CATEGORY = 3 AND
 			<include refid="search"></include>
 		)<include refid="location"></include>
 	</select>

@@ -29,8 +29,7 @@ public class DinerService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
-		
+		Long totalCount = boardDAO.getTotalcount2(pager);
 		pager.make(totalCount);
 		pager.makeNum();
 		List<BoardDTO> ar = boardDAO.getDinerList(pager);
@@ -44,7 +43,7 @@ public class DinerService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
+		Long totalCount = boardDAO.getTotalcount2(pager);
 		
 		pager.cardMake(totalCount);
 		pager.makeNum();

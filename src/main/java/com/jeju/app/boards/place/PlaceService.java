@@ -29,7 +29,7 @@ public class PlaceService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
+		Long totalCount = boardDAO.getTotalcount1(pager);
 		
 		pager.make(totalCount);
 		pager.makeNum();
@@ -44,7 +44,7 @@ public class PlaceService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
+		Long totalCount = boardDAO.getTotalcount1(pager);
 		
 		pager.cardMake(totalCount);
 		pager.makeNum();

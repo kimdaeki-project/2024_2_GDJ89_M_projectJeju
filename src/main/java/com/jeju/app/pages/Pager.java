@@ -125,7 +125,7 @@ public class Pager {
 		if (this.getPage()%5 != 0) {
 			curBlock++;
 		}
-		
+		System.out.println(curBlock+"curBl");
 		Long start = (curBlock-1)*5+1;
 		Long end = curBlock*5;
 		
@@ -144,8 +144,8 @@ public class Pager {
 			totalCount=1L;
 		}
 		
-		Long totalPage = totalCount/9;
-		if (totalCount%9 != 0) {
+		Long totalPage = totalCount/10;
+		if (totalCount%10 != 0) {
 			totalPage++;
 		}
 		
