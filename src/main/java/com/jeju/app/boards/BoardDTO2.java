@@ -1,12 +1,11 @@
 package com.jeju.app.boards;
 
 import java.sql.Date;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoardDTO {
+public class BoardDTO2 {
 	
 	private String userID;
 	private Long boardNum;
@@ -18,15 +17,11 @@ public class BoardDTO {
 	private Double rating;
 	private Long favorite;
 	private Long category;
-	private List<BoardFileDTO> boardFileDTOs;
+	private String fileName;
 	
 	
-	public List<BoardFileDTO> getBoardFileDTOs() {
-		return boardFileDTOs;
-	}
-	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
-		this.boardFileDTOs = boardFileDTOs;
-	}
+	
+	
 	public String getUserID() {
 		return userID;
 	}
@@ -87,4 +82,13 @@ public class BoardDTO {
 	public void setCategory(Long category) {
 		this.category = category;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	
+
 }

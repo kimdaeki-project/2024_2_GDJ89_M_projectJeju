@@ -65,12 +65,25 @@
 									<div class="row row-cols-3">
 										<c:forEach items="${list}" var="i" begin="0" end="8">
 											<div class="col" style="padding-left: 7%; padding-bottom: 5%;">
-												<div class="card" style="width: 75%;">
-													<img src="/resources/images/woojin/flower.png" class="card-img-top">
+												<div class="card" style="width: 80%;">
+													<c:choose>
+														<c:when test="${i.fileName eq null}">
+															<a href="/boards/detail?boardNum=${i.boardNum}">
+																<img src="/resources/images/woojin/noImages.png" class="card-img-top" style="object-fit: contain; height: 13rem;">													
+															</a>
+														</c:when>
+														<c:otherwise>
+															<a href="/boards/detail?boardNum=${i.boardNum}">
+																<img src="/resources/images/boards/${i.fileName}" class="card-img-top" style="object-fit: contain; height: 13rem;">
+															</a>
+														</c:otherwise>
+														</c:choose>
 													<div class="card-body">
+														<span hidden>${i.fileName}</span>
+														<span hidden>${i.boardNum}</span>
 													<h5 class="card-title">${i.boardTitle}</h5>
 													<p class="card-text">${i.boardDate}</p>
-													<h6 class="card-text">조회수 : ${i.boardHits} 즐겨찾기 : ${i.favorite}</h6>
+													<h6 class="card-text">조회수 : ${i.boardHits}<br> 좋아요 : ${i.favorite}</h6>
 													</div>
 												</div>
 											</div>

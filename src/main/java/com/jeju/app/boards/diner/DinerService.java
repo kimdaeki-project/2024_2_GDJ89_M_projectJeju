@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.jeju.app.boards.BoardDAO;
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.boards.BoardDTO2;
+import com.jeju.app.boards.BoardFileDTO;
 import com.jeju.app.boards.comments.CommentDAO;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
@@ -36,7 +38,7 @@ public class DinerService {
 		return ar;
 	}
 	
-	public List<BoardDTO> getcardList(Pager pager) throws Exception{
+	public List<BoardDTO2> getcardList(Pager pager) throws Exception{
 		
 		System.out.println("service CardList");
 		
@@ -47,7 +49,16 @@ public class DinerService {
 		pager.cardMake(totalCount);
 		pager.makeNum();
 		
-		List<BoardDTO> ar = boardDAO.getDinerList(pager);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("searchKind", pager.getSearchKind());
+		map.put("search", pager.getSearch());
+		map.put("startNum", pager.getStartNum());
+		map.put("endNum", pager.getEndNum());
+		map.put("kind", pager.getKind());
+		map.put("locationKind", pager.getLocationKind());
+		
+		List<BoardDTO2> ar = boardDAO.getDinerCardList(map);
 		
 		return ar;
 	}

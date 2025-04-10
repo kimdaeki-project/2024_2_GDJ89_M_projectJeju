@@ -30,6 +30,18 @@ public class BoardDAO {
 		return sqlSession.selectList(NAMESPACE+"getHotelList", pager);
 	}
 	
+	public List<BoardDTO2> getPlaceCardList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getPlaceCardList", map);
+	}
+	
+	public List<BoardDTO2> getDinerCardList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getDinerCardList", map);
+	}
+	
+	public List<BoardDTO2> getHotelCardList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getHotelCardList", map);
+	}
+	
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
 	}

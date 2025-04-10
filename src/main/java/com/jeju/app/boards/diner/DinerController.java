@@ -1,6 +1,7 @@
 package com.jeju.app.boards.diner;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.boards.BoardDTO2;
+import com.jeju.app.boards.BoardFileDTO;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
 
@@ -37,7 +40,7 @@ public class DinerController {
 		
 		System.out.println("diner cardList");
 		
-		List<BoardDTO> ar = dinerService.getcardList(pager);
+		List<BoardDTO2> ar = dinerService.getcardList(pager);
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);

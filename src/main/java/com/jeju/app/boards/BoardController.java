@@ -27,22 +27,17 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(@ModelAttribute BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches, Model model) throws Exception {
+	public String add(@ModelAttribute BoardDTO boardDTO, HttpSession session, MultipartFile files, Model model) throws Exception {
 		//user부분 C/S/DA/DT가 들어오면 구동
 		//UserDTO userDTO = (UserDTO)session.getAttribute("user");
-		System.out.println("before");
 		boardDTO.setUserID("test");
-		
-		int result = boardService.add(boardDTO, session, attaches);
-		System.out.println("after"+boardDTO.getBoardNum());
+		int result = boardService.add(boardDTO, session, files);
 		
 		return "redirect:./place/list";
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String add() throws Exception{
-		
-		System.out.println("get");
 		return "boards/add";
 	}
 	
@@ -86,7 +81,6 @@ public class BoardController {
 	@RequestMapping(value = "detail", method = RequestMethod.POST)
 	public String heart(HeartDTO heartDTO) throws Exception{
 			boardService.insertHeart(heartDTO);
-		
 		
 		return "redirect:./detail?boardNum="+heartDTO.getBoardNum();
 	}
@@ -138,11 +132,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "detailFiles", method = RequestMethod.POST)
-	public String detailFiles(MultipartFile uploadFile, HttpSession session, Model model, BoardFileDTO boardFileDTO) throws Exception{
-		String fileName = boardService.detailFiles(session, uploadFile);
+	public String detailFiles(MultipartFile uploadFile, HttpSession session, Model model, BoardDTO boardDTO) throws Exception{
+		String fileName = boardService.detailFiles(session, uploadFile, boardDTO);
 		fileName = "/resources/images/boards/"+fileName;
-		boardFileDTO = boardService.fileSave(uploadFile, session);
-		System.out.println(boardFileDTO.getBoardNum());
 		model.addAttribute("result", fileName);
 		
 		return "commons/ajaxResult";

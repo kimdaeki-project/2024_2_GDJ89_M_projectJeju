@@ -25,7 +25,6 @@
               <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
               <li><a class="dropdown-item" href="/boards/diner/list">맛집 후기</a></li>
               <li><a class="dropdown-item" href="/boards/hotel/list">숙소 후기</a></li>
-              <li><a class="dropdown-item" href="/boards/list">testBoard</a></li>
             </ul>
           </li>
           <li class="nav-item">

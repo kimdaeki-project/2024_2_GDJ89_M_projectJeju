@@ -78,6 +78,7 @@
 				<tbody>
 				<c:forEach items="${list}" var="i">
 					<tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
+						<span hidden>$</span>
 						<td>${i.boardNum}</td>
 						<td>${i.boardTitle}</td>
 						<td>${i.userID}</td>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.boards.BoardDTO2;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
 
@@ -27,7 +28,6 @@ public class HotelController {
 		System.out.println("hotel List");
 		
 		List<BoardDTO> ar = hotelService.getList(pager);
-		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
 	}
@@ -37,7 +37,7 @@ public class HotelController {
 		
 		System.out.println("diner cardList");
 		
-		List<BoardDTO> ar = hotelService.getcardList(pager);
+		List<BoardDTO2> ar = hotelService.getcardList(pager);
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);

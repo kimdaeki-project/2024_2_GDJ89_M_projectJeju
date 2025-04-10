@@ -15,6 +15,7 @@
 		<typeAlias type="com.jeju.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
 		<typeAlias type="com.jeju.app.boards.hearts.HeartDTO" alias="HeartDTO"/>
 		<typeAlias type="com.jeju.app.boards.comments.CommentDTO" alias="CommentDTO"/>
+		<typeAlias type="com.jeju.app.boards.BoardDTO2" alias="BoardDTO2"/>
 		
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.util.List" alias="List"/>

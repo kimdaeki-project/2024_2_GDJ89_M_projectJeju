@@ -11,5 +11,11 @@ public interface PB_DAO {
 	
 	public List<PB_DTO> getList(PB_Pager pager) throws Exception;
 	
+	public PB_DTO getDetail(PB_DTO dto) throws Exception;
+	
 	public int add(PB_DTO dto) throws Exception;
+	
+	public int delete(PB_DTO dto) throws Exception;
+	
+	public int update(PB_DTO dto) throws Exception;
 }

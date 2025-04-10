@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,12 @@ public class BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
-	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception {
+	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile files) throws Exception {
 		int result = boardDAO.add(boardDTO);
-		System.out.println("fileAdd");
-		for (MultipartFile attach : attaches) {
-			if (attach.isEmpty()) {
-				System.out.println("fileEmpty");
-				continue;
-			}
-			BoardFileDTO boardFileDTO = this.fileSave(attach, session);
+			BoardFileDTO boardFileDTO = this.fileSave(files, session.getServletContext());
+			System.out.println(boardFileDTO.getFileName()+"이름");
 			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
 			result = boardDAO.addFiles(boardFileDTO);
-		}
 		
 		return result;
 	}
@@ -49,8 +44,8 @@ public class BoardService {
 		return boardDAO.getDetail(boardDTO);
 	}
 	
-	public BoardFileDTO fileSave(MultipartFile attach, HttpSession session) throws Exception {
-		String path = session.getServletContext().getRealPath("/resources/images/boards");
+	public BoardFileDTO fileSave(MultipartFile attach, ServletContext context) throws Exception {
+		String path = context.getRealPath("/resources/images/boards");
 		
 		System.out.println(path);
 		
@@ -70,12 +65,13 @@ public class BoardService {
 		return boardFileDTO;
 	}
 	
-	public String detailFiles(HttpSession session, MultipartFile files) throws Exception{
+	public String detailFiles(HttpSession session, MultipartFile files, BoardDTO boardDTO) throws Exception{
 		String path = session.getServletContext().getRealPath("/resources/images/boards/");
-		System.out.println(path);
 		String fileName = fileManager.fileSave(path, files);
+		BoardFileDTO boardFileDTO = this.fileSave(files, session.getServletContext());
 		return fileName;
 	}
+	
 	public int fileDelete(BoardFileDTO boardFileDTO, HttpSession session) throws Exception{
 		
 		boardFileDTO = boardDAO.getFileDetail(boardFileDTO);
@@ -101,7 +97,7 @@ public class BoardService {
 			if (attach.isEmpty()) {
 				continue;
 			}
-			BoardFileDTO boardFileDTO = this.fileSave(attach, session);
+			BoardFileDTO boardFileDTO = this.fileSave(attach, session.getServletContext());
 			
 			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
 			result = boardDAO.addFiles(boardFileDTO);

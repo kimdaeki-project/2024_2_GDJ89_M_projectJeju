@@ -28,6 +28,33 @@
 		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
+	<select id="getPlaceCardList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 1 AND
+					<include refid="search"></include>
+					
+				) M
+				<include refid="location"></include>
+			) A
+			LEFT OUTER JOIN IMAGES I
+			USING(BOARDNUM)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
+					<choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+	</select>
+	
 	<select id="getDinerList" resultType="BoardDTO" parameterType="Pager">
 		SELECT * FROM
 			(SELECT ROWNUM R, M.* FROM
@@ -52,6 +79,33 @@
 		WHERE R BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
+	<select id="getDinerCardList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 2 AND
+					<include refid="search"></include>
+					
+				) M
+				<include refid="location"></include>
+			) A
+			LEFT OUTER JOIN IMAGES I
+			USING(BOARDNUM)
+		WHERE R BETWEEN #{startNum} AND #{endNum}
+				<choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+	</select>
+	
 	<select id="getHotelList" resultType="BoardDTO" parameterType="Pager">
 		SELECT * FROM
 			(SELECT ROWNUM R, M.* FROM
@@ -74,6 +128,33 @@
 				<include refid="location"></include>
 			)
 		WHERE R BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<select id="getHotelCardList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(
+					SELECT * 
+					FROM BOARD WHERE CATEGORY = 3 AND
+					<include refid="search"></include>
+				
+				) M
+				<include refid="location"></include>
+			) A
+			LEFT OUTER JOIN IMAGES I
+			USING(BOARDNUM)
+		WHERE R BETWEEN #{startNum} AND #{endNum}	
+					<choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
@@ -102,41 +183,55 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="BoardDTO2" id="getImageList">
+		<id column="BOARDNUM" property="boardNum"/>
+		<result column="USERID" property="userID"/>
+		<result column="BOARDTITLE" property="boardTitle"/>
+		<result column="BOARDCONTENTS" property="boardContents"/>
+		<result column="BOARDDATE" property="boardDate"/>
+		<result column="BOARDHITS" property="boardHits"/>
+		<result column="LOCATION" property="location"/>
+		<result column="FAVORITE" property="favorite"/>
+		<result column="CATEGORY" property="category"/>
+		<result property="fileName" column="FILENAME"/>
+		<result property="searchKind" column="SEARCHKIND"/>
+	</resultMap>
+	
 	<sql id="search">
 				<choose>
-					<when test="kind=='k2'">
-						BOARDCONTENTS LIKE '%'||#{search}||'%'
+					<when test="kind eq 'k2'">
+						BOARDCONTENTS LIKE '%'||#{search, jdbcType=VARCHAR}||'%'
 					</when>
-					<when test="kind=='k3'">
-						BOARDLOCATION LIKE '%'||#{search}||'%'
+					<when test="kind eq 'k3'">
+						BOARDLOCATION LIKE '%'||#{search, jdbcType=VARCHAR}||'%'
 					</when>
 					<otherwise>
-						BOARDTITLE LIKE '%'||#{search}||'%'
+						BOARDTITLE LIKE '%'||#{search, jdbcType=VARCHAR}||'%'
 					</otherwise>
 				</choose>
 	</sql>
 	
 	<sql id="location">
 				<choose>
-					<when test="locationKind=='lo2'">
+					<when test="locationKind eq 'lo2'">
 						WHERE LOCATION = '제주시'
 					</when>
-					<when test="locationKind=='lo3'">
+					<when test="locationKind eq 'lo3'">
 						WHERE LOCATION = '애월'
 					</when>
-					<when test="locationKind=='lo4'">
+					<when test="locationKind eq 'lo4'">
 						WHERE LOCATION = '서귀포'
 					</when>
-					<when test="locationKind=='lo5'">
+					<when test="locationKind eq 'lo5'">
 						WHERE LOCATION = '남원'
 					</when>
-					<when test="locationKind=='lo6'">
+					<when test="locationKind eq 'lo6'">
 						WHERE LOCATION = '조천'
 					</when>
-					<when test="locationKind=='lo7'">
+					<when test="locationKind eq 'lo7'">
 						WHERE LOCATION = '중문'
 					</when>
-					<when test="locationKind=='lo8'">
+					<when test="locationKind eq 'lo8'">
 						WHERE LOCATION = '한림'
 					</when>
 					<otherwise>
@@ -194,7 +289,7 @@
 	</delete>
 	
 	<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
-		SELECT * FROM IMAGES WHERE FILENUM=#{fileNum}
+		SELECT * FROM IMAGES WHERE BOARDNUM=#{boardNum}
 	</select>
 	
 	<!-- 좋아요 기능 -->
