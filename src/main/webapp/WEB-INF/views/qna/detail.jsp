@@ -47,7 +47,7 @@
 						<span hidden>${dto.boardNum}</span>
 					</div>
 					<div style="float: right; display: inline-block; width: 180px;">
-						<a class="btn btn-primary" href="/notice/update?boardNum=${dto.boardNum}" id="up" data-board-num="${dto.boardNum}">수정</a>
+						<a class="btn btn-primary" href="/qna/update?boardNum=${dto.boardNum}" id="up" data-board-num="${dto.boardNum}">수정</a>
 						<a id="btnDelete" class="btn btn-danger" href="./delete?boardNum=${dto.boardNum}">삭제</a>
 					</div>
 				</div>
@@ -62,25 +62,6 @@
 			<div>
 				<div style="text-align: center;">
 					<h3>${dto.boardContents}</h3>
-				</div>
-			</div>
-
-			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="mb-3">
-								<textarea data-commentNum="" class="form-control" id="message-text"></textarea>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" id="modal_close" data-bs-dismiss="modal" aria-label="Close">취소</button>
-							<button type="submit" class="btn btn-primary" id="modal_change" data-bs-dismiss="modal" aria-label="Close">수정</button>
-						</div>
-					</div>
 				</div>
 			</div>
 			
