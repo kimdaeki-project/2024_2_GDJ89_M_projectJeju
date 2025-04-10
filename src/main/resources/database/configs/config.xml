@@ -5,7 +5,9 @@
 
 <!-- mybatis 설정 -->
 <configuration>
+  
 	<typeAliases>
+		<typeAlias type="com.jeju.app.users.UserDTO" alias="UserDTO"/>
 		<typeAlias type="com.jeju.app.pages.Pager" alias="Pager"/>
 		<typeAlias type="com.jeju.app.pages.PB_Pager" alias="PB_Pager"/>
 		<typeAlias type="com.jeju.app.boards.BoardDTO" alias="BoardDTO"/>
@@ -13,11 +15,16 @@
 		<typeAlias type="com.jeju.app.publicBoards.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.jeju.app.publicBoards.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.jeju.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
+    <typeAlias type="com.jeju.app.apis.ApiItemDTO" alias="ApiItemDTO"/>
+		<typeAlias type="com.jeju.app.flights.FlightDTO" alias="FlightDTO"/>
+		<typeAlias type="com.jeju.app.reservs.SearchDTO" alias="SearchDTO"/>
+		<typeAlias type="com.jeju.app.reservs.ReservDTO" alias="ReservDTO"/>
+		<typeAlias type="com.jeju.app.reservs.BoardingInfo" alias="BoardingInfo"/>
 		<typeAlias type="com.jeju.app.boards.hearts.HeartDTO" alias="HeartDTO"/>
 		<typeAlias type="com.jeju.app.boards.comments.CommentDTO" alias="CommentDTO"/>
 		<typeAlias type="com.jeju.app.boards.BoardDTO2" alias="BoardDTO2"/>
-		
-		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
 	</typeAliases>
+  
 </configuration>
