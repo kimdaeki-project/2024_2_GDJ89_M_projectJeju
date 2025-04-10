@@ -32,8 +32,6 @@ public class TestJackson extends Sample{
 	
 	@Test
 	public void deleteInsert() throws Exception {
-//		System.out.println("addAirlines : "+apisService.getAirlinesList());
-//		System.out.println("addAirports : "+apisService.getAirportsList());
 		System.out.println(apisService.initFlightsList());
 	}
 	
