@@ -14,6 +14,7 @@ import com.jeju.app.publicBoards.PB_DTO;
 @Repository
 public class NoticeDAO implements PB_DAO {
 	
+
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.jeju.app.publicBoards.notice.NoticeDAO.";
@@ -30,9 +31,26 @@ public class NoticeDAO implements PB_DAO {
 	}
 
 	@Override
+	public PB_DTO getDetail(PB_DTO dto) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"getDetail", dto);
+	}
+
+	@Override
 	public int add(PB_DTO dto) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE+"add", dto);
+	}
+	
+	@Override
+	public int delete(PB_DTO dto) throws Exception {
+		return sqlSession.delete(NAMESPACE+"delete", dto);
+	}
+	
+	@Override
+	public int update(PB_DTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NAMESPACE+"update", dto);
 	}
 
 }

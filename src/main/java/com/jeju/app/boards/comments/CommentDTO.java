@@ -1,55 +1,46 @@
-package com.jeju.app.publicBoards;
+package com.jeju.app.boards.comments;
 
 import java.sql.Date;
 
-public class PB_DTO {
+public class CommentDTO {
 	
 	private String userID;
 	private Long boardNum;
-	private String boardTitle;
 	private String boardContents;
-	private String boardDate;
-
+	private Date boardDate;
+	private Long commentNum;
+	
+	
 	public String getUserID() {
 		return userID;
 	}
-
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-
 	public Long getBoardNum() {
 		return boardNum;
 	}
-
 	public void setBoardNum(Long boardNum) {
 		this.boardNum = boardNum;
 	}
-
 	public String getBoardContents() {
 		return boardContents;
 	}
-
 	public void setBoardContents(String boardContents) {
 		this.boardContents = boardContents;
 	}
-
-	public String getBoardDate() {
+	public Date getBoardDate() {
 		return boardDate;
 	}
-
-	public void setBoardDate(String boardDate) {
+	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;
 	}
-
-	public String getBoardTitle() {
-		return boardTitle;
+	public Long getCommentNum() {
+		return commentNum;
 	}
-
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
+	public void setCommentNum(Long commentNum) {
+		this.commentNum = commentNum;
 	}
 	
 	
-
 }

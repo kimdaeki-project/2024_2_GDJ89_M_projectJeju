@@ -32,10 +32,10 @@
 					</tr>
 				<tbody>
 				<c:forEach items="${list}" var="i">
-					<tr>
+					<tr onclick="location.href='/notice/detail?boardNum=${i.boardNum}'">
 						<td>${i.boardNum}</td>
 						<td>${i.boardTitle}</td>
-						<td>${i.userID}</td>
+						<td>관리자</td>
 						<td>${i.boardDate}</td> 
 					</tr>
 				</c:forEach>
@@ -62,7 +62,7 @@
 			  </li>
 			</ul>
 			  </nav>
-				<a class="btn btn-success" href="add">글쓰기</a>
+				<!-- <a class="btn btn-success" href="add">글쓰기</a> -->
 			
 			
 			

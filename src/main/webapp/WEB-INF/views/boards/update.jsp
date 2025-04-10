@@ -55,7 +55,17 @@
 				</div>
 				<div style="width: 20%; margin-top: 4%;" class="btn-group" role="group" aria-label="Basic example">
 					<button type="submit" class="btn btn-primary">글쓰기</button>
-					<a class="btn btn-danger" href="/boards/list">취소</a>
+					<c:choose>
+						<c:when test="${dto.category eq 1}">
+							<a class="btn btn-danger" href="/boards/place/list">취소</a>
+						</c:when>
+						<c:when test="${dto.category eq 2}">
+							<a class="btn btn-danger" href="/boards/diner/list">취소</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-danger" href="/boards/hotel/list">취소</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			 </form>
 			 

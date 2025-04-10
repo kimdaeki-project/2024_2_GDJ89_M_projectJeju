@@ -18,6 +18,7 @@ public class FileManager {
 		}
 		
 		String f = UUID.randomUUID().toString();
+		System.out.println(profile);
 		f = f+"_"+profile.getOriginalFilename();
 		
 		file = new File(file, f);

@@ -10,17 +10,32 @@
 				(
 					SELECT * 
 					FROM NOTICE
+					ORDER BY BOARDNUM DESC
 				) M
 			)
 		WHERE R BETWEEN #{startNum} AND #{endNum}
+		
 	</select>
 	
 	<select id="getTotalCount" resultType="Long" parameterType="PB_Pager">
 		SELECT COUNT(BOARDNUM) FROM NOTICE 
 	</select>
 	
-	<insert id="add">
-		INSERT INTO NOTICE VALUES('test', PB_board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE)
+	<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
+		SELECT * FROM NOTICE WHERE BOARDNUM=#{boardNum}
+	</select>
+	
+	<insert id="add" parameterType="NoticeDTO">
+		INSERT INTO NOTICE VALUES
+			('test', PB_board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE)
 	</insert>
+	
+	<delete id="delete" parameterType="NoticeDTO">
+		DELETE NOTICE WHERE BOARDNUM=#{boardNum}
+	</delete>
+	
+	<update id="update" parameterType="NoticeDTO">
+		UPDATE NOTICE SET BOARDTITLE=#{boardTitle}, BOARDCONTENTS=#{boardContents}
+	</update>
 
 </mapper>

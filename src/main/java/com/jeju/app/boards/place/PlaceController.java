@@ -1,7 +1,9 @@
 package com.jeju.app.boards.place;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.boards.BoardDTO2;
+import com.jeju.app.boards.BoardFileDTO;
+import com.jeju.app.boards.BoardService;
+import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
 
 @Controller
@@ -20,6 +26,8 @@ public class PlaceController {
 	
 	@Autowired
 	private PlaceService placeService;
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Model model, Pager pager) throws Exception{
@@ -37,14 +45,14 @@ public class PlaceController {
 		
 		System.out.println("place cardList");
 		
-		List<BoardDTO> ar = placeService.getcardList(pager);
+		List<BoardDTO2> ar = placeService.getcardList(pager);
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public String getDetail(BoardDTO boardDTO, Model model, HttpSession session) throws Exception{
+	public String getDetail(BoardDTO boardDTO, Model model, HttpSession session, CommentDTO commentDTO, Pager pager) throws Exception{
 		Object obj = session.getAttribute("board");
 		boolean check = false;
 			if (obj != null) {

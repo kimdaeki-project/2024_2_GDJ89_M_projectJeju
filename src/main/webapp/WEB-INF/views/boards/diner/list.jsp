@@ -60,7 +60,7 @@
 			  </div>
 			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 1">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>
-				<option value="sk2" id="sk2" ${pager.searchKind eq 'sk2' ? 'selected': ''}>즐겨찾기 많은 순</option>
+				<option value="sk2" id="sk2" ${pager.searchKind eq 'sk2' ? 'selected': ''}>좋아요 많은 순</option>
 				<option value="sk3" id="sk3" ${pager.searchKind eq 'sk3' ? 'selected': ''}>조회수 많은 순</option>
 			</select>
 			</form>
@@ -78,6 +78,7 @@
 				<tbody>
 				<c:forEach items="${list}" var="i">
 					<tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
+						<span hidden>$</span>
 						<td>${i.boardNum}</td>
 						<td>${i.boardTitle}</td>
 						<td>${i.userID}</td>
