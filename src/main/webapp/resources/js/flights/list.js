@@ -43,7 +43,7 @@ const dis = [di1, di2, di3, di4, di5, di6, di7]
 function init (){
 
   getAirlineList();
-  getAirportList();
+  // getAirportList();
 
   for(let btn of btns){
     btn.addEventListener("click", (e)=>{
@@ -91,29 +91,23 @@ init();
 
 // getAirportList
 
-function getAirportList () {
-  let url = "http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getArprtList?serviceKey=J0mHq1R1fL8PBzcOJXPlaICPhvWctJpIQoAUJNzx1fUeMzFU9bjNRoAuwfN%2FC1w79pvPN5onz8835x6feTa2yA%3D%3D&_type=json"
-  
-  fetch(url)
-  .then(r=>r.json())
-  .then(r=>{
-    
-    let ar = r.response.body.items.item
-    
-    for(let e of ar){
-      
-      // if(e.airportId=="NAARKPC"){
-      //   continue;
-      // }
-      let opt = document.createElement("option")
-      opt.value = e.airportId
-      opt.innerHTML = e.airportNm
-      depAirportId.appendChild(opt)
-      
-    }
-    
-  })
-}
+// function getAirportList () {
+//   let url = "http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getArprtList?serviceKey=J0mHq1R1fL8PBzcOJXPlaICPhvWctJpIQoAUJNzx1fUeMzFU9bjNRoAuwfN%2FC1w79pvPN5onz8835x6feTa2yA%3D%3D&_type=json"
+//   fetch(url)
+//   .then(r=>r.json())
+//   .then(r=>{
+//     let ar = r.response.body.items.item
+//     for(let e of ar){
+//       // if(e.airportId=="NAARKPC"){
+//       //   continue;
+//       // }
+//       let opt = document.createElement("option")
+//       opt.value = e.airportId
+//       opt.innerHTML = e.airportNm
+//       depAirportId.appendChild(opt)
+//     }
+//   })
+// }
 
 
 // getAirlineList
@@ -140,9 +134,19 @@ function getAirlineList() {
 
 selectBox.addEventListener("click", (e)=>{
   if(e.target.classList.contains("list-group-item")) {
+    let targetDay;
+    if(e.target.innerText == null || e.target.innerText == "") {
+      let now = new Date();
+      now = now.toISOString().substring(0, 10)
+      targetDay = now
+      e.target.setAttribute("type", "hidden")
+    }else{
+      targetDay = e.target.innerText
+    }
+    
     let input = document.createElement("input")
     input.setAttribute("type", "hidden")
-    input.setAttribute("value", e.target.innerText)
+    input.setAttribute("value", targetDay)
     input.setAttribute("name", "depPlandTime")
     selectBox.appendChild(input)
 
@@ -154,19 +158,18 @@ selectBox.addEventListener("click", (e)=>{
   }
 })
 
-depAirportId.addEventListener("change", ()=>{
 
-  let input = document.createElement("input")
-  input.setAttribute("type", "hidden")
-  input.setAttribute("value", li4.innerText)
-  input.setAttribute("name", "depPlandTime")
-  selectBox.appendChild(input)
+// depAirportId.addEventListener("change", ()=>{
+//   let input = document.createElement("input")
+//   input.setAttribute("type", "hidden")
+//   input.setAttribute("value", li4.innerText)
+//   input.setAttribute("name", "depPlandTime")
+//   selectBox.appendChild(input)
+//   reForm.setAttribute("action", './list')
+//   reForm.setAttribute("method", "post")
+//   reForm.submit();
 
-  reForm.setAttribute("action", './list')
-  reForm.setAttribute("method", "post")
-  reForm.submit();
-
-})
+// })
 
 airlineNm.addEventListener("change", ()=>{
   
