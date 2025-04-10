@@ -151,6 +151,10 @@ document.addEventListener("DOMContentLoaded", function() {
             // 유효성 검사에 실패하면 폼 제출을 막음
             if (!isValid) {
                 event.preventDefault(); // 폼 제출 막기
+            } else {
+                // 유효성 검사가 성공적으로 끝난 경우, 알럿창 띄우고 홈으로 리다이렉트
+                alert('회원가입이 완료되었습니다!');
+                window.location.href = '/';  // 홈 페이지로 리다이렉트 (홈 URL로 변경 가능)
             }
         });
     }
