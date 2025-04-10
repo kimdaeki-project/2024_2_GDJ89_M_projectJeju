@@ -313,7 +313,7 @@
 	</insert>
 	
 	<update id="deleteHeart" parameterType="HeartDTO">
-		DELETE HEART WHERE BOARDNUM=#{boardNum} AND USERID=${userID}
+		DELETE HEART WHERE BOARDNUM=#{boardNum} AND USERID=#{userID}
 	</update>
 	
 
