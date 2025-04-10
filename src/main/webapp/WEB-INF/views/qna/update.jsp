@@ -27,13 +27,13 @@
 				</div>
 				<div>
 					<textarea id="summernote" name="boardContents" value="${dto.boardContents}">
-
+						${dto.boardContents}
 					</textarea>
 					
 				</div>
 				<div style="width: 20%; margin-top: 4%;" class="btn-group" role="group" aria-label="Basic example">
 					<button type="submit" id="btnAdd" class="btn btn-primary">글쓰기</button>
-					<a class="btn btn-danger" href="./list">취소</a>
+					<a class="btn btn-danger" href="/notice/list">취소</a>
 				</div>
 			 </form>
 			

@@ -44,10 +44,7 @@
 				<div class="col-12">
 					<input type="text" class="form-control" id="exampleInputEmail1" value="${dto.boardTitle}" name="boardTitle" aria-describedby="emailHelp" placeholder="제목" style="margin-bottom: 1%; margin-top: 7px;">
 				</div>
-					
-				<div class="input-group mb-6 custom-write1 custom-write3">
-					<input type="file" class="form-control" id="attach" name="attaches" multiple>
-				</div>
+				
 				<div>
 					<textarea id="summernote" name="boardContents" value="${dto.boardContents}">
 						${dto.boardContents}
