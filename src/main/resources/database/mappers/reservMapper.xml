@@ -41,5 +41,35 @@
 			</foreach>
 		SELECT * FROM DUAL
 	</insert>
+	
+	<select id="getReservationsList" parameterType="UserDTO" resultType="ReservDTO">
+		SELECT DISTINCT RESERVNUM, FNUMGO, FNUMCOME, CHARGEDIV, PAYMENT 
+		FROM RESERVATIONS R
+		JOIN BOARDINGINFO B
+		USING (RESERVNUM)
+		WHERE USERID = #{userID}
+	</select>
+	
+	<select id="getFlightGo" parameterType="ReservDTO" resultType="FlightDTO">
+		SELECT DISTINCT FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE
+		FROM FLIGHT F
+		JOIN BOARDINGINFO B
+		ON B.FNUMGO = F.FLIGHTNUM
+		WHERE B.RESERVNUM = #{reservNum}
+	</select>
+	
+	<select id="getBoardingInfo" parameterType="ReservDTO" resultType="BoardingInfo">
+		SELECT NAME, BIRTH, DIV
+		FROM BOARDINGINFO
+		WHERE RESERVNUM = #{reservNum}
+	</select>
+	
+	<select id="getFlightCome" parameterType="ReservDTO" resultType="FlightDTO">
+		SELECT DISTINCT FLIGHTNUM, VIHICLEID, AIRLINENM, DEPPLANDTIME, ARRPLANDTIME, DEPAIRPORTNM, ARRAIRPORTNM, ECONOMYCHARGE, PRESTIGECHARGE
+		FROM FLIGHT F
+		JOIN BOARDINGINFO B
+		ON B.FNUMCOME  = F.FLIGHTNUM
+		WHERE B.RESERVNUM = #{reservNum}
+	</select>
 
 </mapper>

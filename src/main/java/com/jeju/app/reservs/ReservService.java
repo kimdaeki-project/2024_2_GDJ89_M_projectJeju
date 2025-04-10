@@ -1,7 +1,9 @@
 package com.jeju.app.reservs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -122,6 +124,22 @@ public class ReservService {
 	
 	public UserDTO userCheck(UserDTO userDTO) throws Exception {
 		return reservDAO.userCheck(userDTO);
+	}
+	
+	public List<ReservDTO> getReservationsList(UserDTO userDTO) throws Exception {
+		List<ReservDTO> ar = reservDAO.getReservationsList(userDTO);
+		for(ReservDTO dto : ar) {
+			List<BoardingInfo> bdrs = new ArrayList<BoardingInfo>();
+			FlightDTO flightDTO = reservDAO.getFlightGo(dto);
+			dto.setfGo(flightDTO);
+			flightDTO = reservDAO.getFlightCome(dto);
+			dto.setfCome(flightDTO);
+			bdrs = reservDAO.getBoardingInfo(dto);
+			dto.setBoarders(bdrs);
+		}
+		
+		
+		return ar;
 	}
 
 }

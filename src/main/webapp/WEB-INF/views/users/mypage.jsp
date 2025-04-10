@@ -280,7 +280,7 @@
             <h3>마이페이지</h3>
             <ul>
                 <li><a href="javascript:void(0);" onclick="showSection('view-section')">내 정보</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')">예약 내역</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')" id="getReservations">예약 내역</a></li>
                 <li><a href="javascript:void(0);" onclick="showSection('post-list')">내가 쓴 글</a></li>
                 <li><a href="javascript:void(0);" onclick="showSection('liked-post-list')">좋아요한 글</a></li>
             </ul>

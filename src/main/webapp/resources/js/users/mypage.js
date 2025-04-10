@@ -100,3 +100,17 @@ function toggleVisibility(id) {
     const section = document.getElementById(id);
     section.classList.toggle("hidden");
 }
+
+
+// 예약내역 불러오기
+const getReservs = document.getElementById("getReservations")
+getReservs.addEventListener("click", ()=>{
+    fetch("/reservation/getReservsList", {
+        method: "get",
+        headers: {'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'}
+    })
+    .then(r=>r.json())
+    .then(r=>{
+        console.log(r)
+    })
+})

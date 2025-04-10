@@ -1,6 +1,7 @@
 package com.jeju.app.reservs;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,9 +24,12 @@ public class ReservController {
 	@Autowired
 	private ReservService reservService;
 	
-	@RequestMapping(value = "payments", method = RequestMethod.GET)
-	public void payments() throws Exception {
-		System.out.println("payments");
+	@RequestMapping(value = "getReservsList", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ReservDTO> getReservationsList(HttpSession session, Model model)throws Exception {
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		List<ReservDTO> ar = reservService.getReservationsList(userDTO);
+		return ar;
 	}
 	
 	@RequestMapping(value = "info", method = RequestMethod.GET)
@@ -72,6 +76,7 @@ public class ReservController {
 		List<BoardingInfo> ar = (List<BoardingInfo>)session.getAttribute("boarderList");
 		if(ar.get(0).getReservNum().equalsIgnoreCase(request.getParameter("orderId"))) {
 			reservService.reservate(reservDTO, session, request);
+			reservService.flightsUpdate(session, ar);
 			reservService.addBoarderList(ar);
 		}
 	}
