@@ -112,5 +112,9 @@ getReservs.addEventListener("click", ()=>{
     .then(r=>r.json())
     .then(r=>{
         console.log(r)
+        for(let a of r) {
+            let time = new Date(a.fGo.depPlandTime);
+            console.log(time.toISOString)
+        }
     })
 })

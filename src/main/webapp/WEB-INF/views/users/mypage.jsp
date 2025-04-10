@@ -365,7 +365,24 @@
             <div class="section hidden" id="reservation-list">
                 <h3 class="section-title">예약 내역</h3>
                 <ul>
-                    <li>예약 내역 1</li>
+                    <li>
+                        <div class="row">
+                            <div class="col">
+                                1
+                            </div>
+                            <div class="col">
+                                <div class="row">2</div>
+                                <div class="row">3</div>
+                            </div>
+                            <div class="col">
+                                <div class="row">4</div>
+                                <div class="row">5</div>
+                            </div>
+                            <div class="col">
+                                6
+                            </div>
+                        </div>
+                    </li>
                     <li>예약 내역 2</li>
                     <li>예약 내역 3</li>
                 </ul>

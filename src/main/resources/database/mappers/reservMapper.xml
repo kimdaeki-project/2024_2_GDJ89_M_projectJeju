@@ -22,7 +22,7 @@
 	</select>
 	
 	<insert id="flightsUpdate" parameterType="FlightDTO">
-		INSERT INTO FLIGHT VALUES (#{flightNum}, #{vihicleId}, #{airlineNm}, #{depPlandTime}, #{arrPlandTime}, #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
+		INSERT INTO FLIGHT VALUES (#{flightNum}, #{vihicleId}, #{airlineNm}, TO_DATE(#{depPlandTime}, 'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{arrPlandTime}, 'YYYY-MM-DD HH24:MI:SS'), #{depAirportNm}, #{arrAirportNm}, #{economyCharge}, #{prestigeCharge})
 	</insert>
 	
 	<select id="getFlight" parameterType="FlightDTO" resultType="FlightDTO">

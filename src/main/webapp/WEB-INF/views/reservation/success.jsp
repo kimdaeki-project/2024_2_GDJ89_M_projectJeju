@@ -22,7 +22,7 @@
 				<div class="row align-items-center">
 					<div class="col align-self-center">
 						<h1>결제 완료</h1>
-						<button type="button" class="btn btn-secondary">예약내역 확인</button>
+						<button type="button" class="btn btn-secondary"><a href="/users/mypage" style="text-decoration: none ;">예약내역 확인</a></button>
 					</div>
 					</div>
 				</div>
