@@ -32,7 +32,6 @@ public class TestJackson extends Sample{
 	
 	@Test
 	public void deleteInsert() throws Exception {
-
 		System.out.println(apisService.initFlightsList());
 	}
 	

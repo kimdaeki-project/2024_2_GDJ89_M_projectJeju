@@ -29,7 +29,7 @@ public class HotelService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
+		Long totalCount = boardDAO.getTotalcount3(pager);
 		pager.make(totalCount);
 		pager.makeNum();
 		List<BoardDTO> ar = boardDAO.getHotelList(pager);
@@ -43,8 +43,7 @@ public class HotelService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
-		System.out.println(pager.getSearchKind());
+		Long totalCount = boardDAO.getTotalcount3(pager);
 		pager.cardMake(totalCount);
 		pager.makeNum();
 		

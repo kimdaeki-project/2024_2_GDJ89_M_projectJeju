@@ -50,8 +50,14 @@ public class BoardDAO {
 		return sqlSession.insert(NAMESPACE+"add", boardDTO);
 	}
 	
-	public Long getTotalcount(Pager pager) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
+	public Long getTotalcount1(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount1", pager);
+	}
+	public Long getTotalcount2(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount2", pager);
+	}
+	public Long getTotalcount3(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount3", pager);
 	}
 	
 	public int addFiles(BoardFileDTO boardFileDTO) throws Exception{
