@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeju.app.pages.PB_Pager;
 import com.jeju.app.publicBoards.PB_DTO;
+import com.jeju.app.users.UserDTO;
 
 @Controller
 @RequestMapping(value = "/notice/*")
@@ -38,7 +39,8 @@ public class NoticeController {
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(PB_DTO dto, HttpSession session, Model model) throws Exception {
-		dto.setUserID("test");
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		dto.setUserID(userDTO.getUserID());
 		int result = noticeService.add(dto, session);
 		System.out.println("conAdd"+result);
 		return "redirect:./list";

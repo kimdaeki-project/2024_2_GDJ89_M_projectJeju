@@ -27,7 +27,7 @@
 	
 	<insert id="add" parameterType="NoticeDTO">
 		INSERT INTO NOTICE VALUES
-			('test', PB_board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE)
+			(#{userID}, PB_board_seq.nextval, #{boardTitle}, #{boardContents}, SYSDATE)
 	</insert>
 	
 	<delete id="delete" parameterType="NoticeDTO">

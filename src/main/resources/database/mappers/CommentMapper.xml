@@ -23,7 +23,7 @@
 	
 	<insert id="addComments" parameterType="CommentDTO">
 		INSERT INTO COMMENTS VALUES
-			('test', #{boardNum}, #{boardContents}, SYSDATE, COMMENT_SEQ.NEXTVAL)
+			(#{userID}, #{boardNum}, #{boardContents}, SYSDATE, COMMENT_SEQ.NEXTVAL)
 	</insert>
 	
 	<delete id="deleteComments" parameterType="CommentDTO">

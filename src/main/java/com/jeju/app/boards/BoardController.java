@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jeju.app.boards.hearts.HeartDTO;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.users.UserDTO;
 
 @Controller
 @RequestMapping(value = "/boards/*")
@@ -29,8 +30,8 @@ public class BoardController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String add(@ModelAttribute BoardDTO boardDTO, HttpSession session, MultipartFile files, Model model) throws Exception {
 		//user부분 C/S/DA/DT가 들어오면 구동
-		//UserDTO userDTO = (UserDTO)session.getAttribute("user");
-		boardDTO.setUserID("test");
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		boardDTO.setUserID(userDTO.getUserID());
 		int result = boardService.add(boardDTO, session, files);
 		
 		return "redirect:./place/list";
