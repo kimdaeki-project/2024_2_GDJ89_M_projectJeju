@@ -40,6 +40,10 @@ getAirportList();
 
 flightSearch.addEventListener("click", ()=>{
     
+  if(adult.value+child.value+infant.value == 0) {
+    alert("여정은 최소 한명의 탑승객이 있어야 합니다")
+  }else{
+    
     let params = new FormData();
     params.append("arrAirportId", arrAirportId.value)
     params.append("depAirportId", depAirportId.value)
@@ -48,7 +52,7 @@ flightSearch.addEventListener("click", ()=>{
     params.append("adult", adult.value)
     params.append("child", child.value)
     params.append("infant", infant.value)
-
+  
     fetch("./search", {
       method: "POST",
       body: params
@@ -59,26 +63,54 @@ flightSearch.addEventListener("click", ()=>{
       searchForm.setAttribute("method", "post")
       searchForm.submit();
     })
-
+  }
 
 })
 
+const adult = document.getElementById("adult")
+const infant = document.getElementById("infant")
 person.addEventListener("click", (e)=>{
 
   if(e.target.classList.contains("bi-dash-lg")) {
-    e.target.parentNode.nextElementSibling.value = e.target.parentNode.nextElementSibling.value - 1;
-    if(e.target.parentNode.nextElementSibling.value < 0) {
-      e.target.parentNode.nextElementSibling.value = 0
+    if(e.target.parentNode.nextElementSibling.value <= infant.value && e.target.parentNode.nextElementSibling.id == "adult") {
+      alert("유아는 반드시 동반하는 성인이 있어야 합니다")
+    }else {
+      e.target.parentNode.nextElementSibling.value = e.target.parentNode.nextElementSibling.value - 1;
+      if(e.target.parentNode.nextElementSibling.value < 0) {
+        e.target.parentNode.nextElementSibling.value = 0
+      }
     }
   }
 
   if(e.target.classList.contains("bi-plus-lg")) {
-    e.target.parentNode.previousElementSibling.value = Number(e.target.parentNode.previousElementSibling.value) + 1;
-
-    if(e.target.parentNode.previousElementSibling.value > 9) {
-      e.target.parentNode.previousElementSibling.value = 9
+    if(e.target.parentNode.previousElementSibling.value == adult.value && e.target.parentNode.previousElementSibling.id == "infant") {
+      alert("유아는 반드시 동반하는 성인이 있어야 합니다")
+    }else {
+      e.target.parentNode.previousElementSibling.value = Number(e.target.parentNode.previousElementSibling.value) + 1;
+      if(e.target.parentNode.previousElementSibling.value > 9) {
+        e.target.parentNode.previousElementSibling.value = 9
+      }
     }
   }
-
 })
 
+
+depPlandTime.addEventListener("change", ()=>{
+  let now = new Date();
+  now = now.toISOString().substring(0, 10)
+  if(depPlandTime.value < now ) {
+    alert("가는 날짜는 오늘 이후로 검색이 가능합니다")
+    depPlandTime.value = now
+  }
+  if(depPlandTime.value > depPlandTimeToCome.value && depPlandTimeToCome.value != "") {
+    alert("오는 날짜는 가는 날짜 이후로 검색이 가능합니다")
+    depPlandTimeToCome.value = depPlandTime.value
+  }
+})
+
+depPlandTimeToCome.addEventListener("change", ()=>{
+  if(depPlandTime.value > depPlandTimeToCome.value) {
+    alert("오는 날짜는 가는 날짜 이후로 검색이 가능합니다")
+    depPlandTimeToCome.value = depPlandTime.value
+  }
+})

@@ -24,7 +24,7 @@
 			<form id="reForm">
 				<div class="row">
 					<div class="col">
-						<div class="input-group mb-3 mt-5" style="width: 80%; <c:if test="${not empty searchInfo.flightNumGo }">display: none;</c:if>" >
+						<div class="input-group mb-3 mt-5" style="width: 80%; display: none;" >
 							<label class="input-group-text" for="airportId">출발지</label>
 							<select	class="form-select" id="depAirportId" name="depAirportId">
 								<option id="selected" selected value="${depAirportId}">출발 공항 선택</option>
@@ -71,26 +71,7 @@
 				
 				<div class="">
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade" id="list-1" role="tabpanel">
-							<div id="list1">
-								<div class="container mt-8">
-									<div class="d-flex align-items-center">
-										<strong role="status">Loading...</strong>
-										<div class="spinner-border ms-auto" aria-hidden="true"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="list-2" role="tabpanel">
-							<div id="list2">
-								
-							</div>
-						</div>
-						<div class="tab-pane fade" id="list-3" role="tabpanel">
-							<div id="list3">
-								
-							</div>
-						</div>
+						
 						<div class="tab-pane fade show active" id="list-4" role="tabpanel">
 							<div id="list4">
 								<div class="accordion accordion-flush mt-5 container text-center" id="accordionFlushExample">
@@ -156,26 +137,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="list-5" role="tabpanel">
-							<div id="list5">
-								
-							</div>			
-						</div>
-						<div class="tab-pane fade" id="list-6" role="tabpanel">
-							<div id="list6">
-								
-							</div>
-						</div>
-						<div class="tab-pane fade" id="list-7" role="tabpanel">
-							<div id="list7">
-								<div class="container mt-8">
-									<div class="d-flex align-items-center">
-										<strong role="status">Loading...</strong>
-										<div class="spinner-border ms-auto" aria-hidden="true"></div>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 
