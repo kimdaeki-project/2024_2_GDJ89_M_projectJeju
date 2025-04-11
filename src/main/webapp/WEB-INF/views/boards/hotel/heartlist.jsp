@@ -16,7 +16,8 @@
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
 			<h1>숙소 후기 게시판</h1>
-			<form action="cardlist" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
+			<span hidden>${user.userID}</span>
+			<form action="heartlist" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">
 				<div class="col-12">
 					<select id="loc" name="locationKind" class="form-select" onchange="locat()">
@@ -66,22 +67,22 @@
 									<div class="row row-cols-3">
 										<c:forEach items="${list}" var="i" begin="0" end="8">
 											<div class="col" style="padding-left: 7%; padding-bottom: 5%;">
-												<div class="card" style="width: 80%;">
+												<div class="card" style="width: 75%;">
 													<c:choose>
-														<c:when test="${i.fileName eq null}">
-															<a href="/boards/detail?boardNum=${i.boardNum}">
-																<img src="/resources/images/woojin/noImages.png" class="card-img-top" style="object-fit: contain; height: 13rem;">													
-															</a>
-														</c:when>
-														<c:otherwise>
-															<a href="/boards/detail?boardNum=${i.boardNum}">
-																<img src="/resources/images/boards/${i.fileName}" class="card-img-top" style="object-fit: contain; height: 13rem;">
-															</a>
-														</c:otherwise>
-														</c:choose>
+													<c:when test="${i.fileName eq null}">
+														<a href="/boards/detail?boardNum=${i.boardNum}">
+															<img src="/resources/images/woojin/noImages.png" class="card-img-top" style="object-fit: contain; height: 13rem;">													
+														</a>
+													</c:when>
+													<c:otherwise>
+														<a href="/boards/detail?boardNum=${i.boardNum}">
+															<img src="/resources/images/boards/${i.fileName}" class="card-img-top" style="object-fit: contain; height: 13rem;">
+														</a>
+													</c:otherwise>
+													</c:choose>
 													<div class="card-body">
-														<span hidden>${i.fileName}</span>
 														<span hidden>${i.boardNum}</span>
+														<span hidden>${i.userID}</span>
 													<h5 class="card-title">${i.boardTitle}</h5>
 													<p class="card-text">${i.boardDate}</p>
 													<h6 class="card-text">조회수 : ${i.boardHits}<br> 좋아요 : ${i.favorite}</h6>
@@ -95,7 +96,7 @@
 						</tr>
 				</tbody>
 			</table>
-			<nav aria-label="Page navigation example" style="width: 300px; margin: 0px auto;">
+			<nav aria-label="Page navigation example" style="width: 150px; margin: 0px auto;">
 				<ul class="pagination">
 				  <li class="page-item">
 					<button class="page-link pages" data-page-num="${pager.start-1}" aria-label="Previous">

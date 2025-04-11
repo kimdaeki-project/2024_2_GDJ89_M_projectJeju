@@ -1,5 +1,7 @@
 package com.jeju.app.users;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.pages.MyPager;
 
 @Controller
 @RequestMapping(value = "/users/*")
@@ -60,7 +65,7 @@ public class UserController {
 
     // 마이페이지(GET)
     @RequestMapping(value = "mypage", method = RequestMethod.GET)
-    public String myPage(HttpSession session, Model model) {
+    public String myPage(HttpSession session, Model model, MyPager pager) {
         // 세션에서 로그인한 사용자 정보를 확인
         if (session.getAttribute("user") == null) {
             // 로그인하지 않았다면 로그인 페이지로 리다이렉트
@@ -72,7 +77,10 @@ public class UserController {
         try {
             // getDetail 메소드를 호출하여 사용자 상세 정보 조회
             UserDTO userDetail = userService.getDetail(userDTO);
+            List<BoardDTO> ar = userService.getMyList(pager, session, userDTO);
             model.addAttribute("userDetail", userDetail); // 사용자 상세 정보를 모델에 추가
+            model.addAttribute("pager", pager);
+            model.addAttribute("list", ar);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "사용자 정보를 불러오는 데 실패했습니다.");

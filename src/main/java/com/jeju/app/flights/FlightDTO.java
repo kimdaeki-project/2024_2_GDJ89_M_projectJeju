@@ -10,23 +10,35 @@ public class FlightDTO {
 	private String vihicleId;
 	private String depAirportNm;
 	private String arrAirportNm;
-	private Date depPlandTime;
-	private Date arrPlandTime;
+	private String depPlandTime;
+	private String arrPlandTime;
 	private Long economyCharge;
 	private Long prestigeCharge;
 	
-	public Date getDepPlandTime() {
+	public String getDepPlandTime() {
 		return depPlandTime;
 	}
-	public void setDepPlandTime(Date depPlandTime) {
+	public void setDepPlandTime(String depPlandTime) {
 		this.depPlandTime = depPlandTime;
 	}
-	public Date getArrPlandTime() {
+	public String getArrPlandTime() {
 		return arrPlandTime;
 	}
-	public void setArrPlandTime(Date arrPlandTime) {
+	public void setArrPlandTime(String arrPlandTime) {
 		this.arrPlandTime = arrPlandTime;
 	}
+	//	public Date getDepPlandTime() {
+//		return depPlandTime;
+//	}
+//	public void setDepPlandTime(Date depPlandTime) {
+//		this.depPlandTime = depPlandTime;
+//	}
+//	public Date getArrPlandTime() {
+//		return arrPlandTime;
+//	}
+//	public void setArrPlandTime(Date arrPlandTime) {
+//		this.arrPlandTime = arrPlandTime;
+//	}
 	public String getAirlineId() {
 		return airlineId;
 	}

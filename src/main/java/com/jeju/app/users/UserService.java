@@ -1,6 +1,9 @@
 package com.jeju.app.users;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.ServletContext;
@@ -8,14 +11,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.jeju.app.boards.BoardDAO;
+import com.jeju.app.boards.BoardDTO;
+import com.jeju.app.pages.MyPager;
+import com.jeju.app.pages.Pager;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private BoardDAO boardDAO;
 	
 	public int join (UserDTO userDTO, ServletContext context) throws Exception {
 		int result = userDAO.join(userDTO);
@@ -106,6 +118,25 @@ public class UserService {
 	
 	
 	
+	}
+
+	
+	public List<BoardDTO> getMyList(MyPager pager, HttpSession session, @RequestParam("userID") UserDTO userDTO) throws Exception{
+		
+		pager.setPerPage(5L);
+		pager.makeNum();
+		
+		userDTO = (UserDTO)session.getAttribute("user");
+		BoardDTO dto = new BoardDTO();
+		dto.setUserID(userDTO.getUserID());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userID", userDTO.getUserID());
+		map.put("startNum", pager.getStartNum());
+		map.put("endNum", pager.getEndNum());
+		List<BoardDTO> ar = boardDAO.getMyList(map);
+		
+		return ar;
 	}
 
 }

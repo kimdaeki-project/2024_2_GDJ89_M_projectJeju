@@ -18,6 +18,9 @@ import com.jeju.app.apis.ApisService;
 import com.jeju.app.flights.FlightDTO;
 import com.jeju.app.flights.FlightService;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.reservs.ReservDTO;
+import com.jeju.app.reservs.ReservService;
+import com.jeju.app.users.UserDTO;
 
 import projectJeju.Sample;
 
@@ -28,13 +31,23 @@ public class TestJackson extends Sample{
 	private ApisService apisService;
 	@Autowired
 	private FlightService flightService;
-	
+	@Autowired
+	private ReservService reservService;
 	
 	@Test
-	public void deleteInsert() throws Exception {
-
-		System.out.println(apisService.initFlightsList());
+	public void getReservatonsList() throws Exception {
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserID("test");
+		List<ReservDTO> ar = reservService.getReservationsList(userDTO);
+		System.out.println(ar.size());
+		System.out.println(ar.get(4).getBoarders().get(0).getName());
+		System.out.println(ar.get(0).getfGo().getDepPlandTime());
 	}
+	
+//	@Test
+//	public void deleteInsert() throws Exception {
+//		System.out.println(apisService.initFlightsList());
+//	}
 	
 //	@Test
 //	public void getListTest() throws Exception {

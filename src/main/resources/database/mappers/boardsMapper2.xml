@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jeju.app.boards.BoardDAO2">
+	<select id="getPlaceHeartList" resultMap="BoardDTO2" parameterType="Map">
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+			WHERE b.userid = 'test1234'
+		) m WHERE category = 1 and r between #{startNum} and ${endNum} 
+		 ORDER BY boarddate desc
+	</select>
+	
+	<select id="getDinerHeartList" resultMap="BoardDTO2" parameterType="Map">
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+			WHERE b.userid = 'test1234'
+		) m WHERE category = 2 and r between #{startNum} and ${endNum} 
+		ORDER BY boarddate desc
+	</select>
+	
+	<select id="getHotelHeartList" resultMap="BoardDTO2" parameterType="Map">
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+			WHERE b.userid = 'test1234'
+		) m WHERE category = 3 ORDER BY boarddate desc
+	</select>
+	
+	<resultMap type="BoardDTO2" id="getHeartList">
+		<id column="BOARDNUM" property="boardNum"/>
+		<result column="USERID" property="userID"/>
+		<result column="BOARDTITLE" property="boardTitle"/>
+		<result column="BOARDCONTENTS" property="boardContents"/>
+		<result column="BOARDDATE" property="boardDate"/>
+		<result column="BOARDHITS" property="boardHits"/>
+		<result column="LOCATION" property="location"/>
+		<result column="FAVORITE" property="favorite"/>
+		<result column="CATEGORY" property="category"/>
+		<result property="fileName" column="FILENAME"/>
+		<result property="searchKind" column="SEARCHKIND"/>
+	</resultMap>
+
+</mapper>

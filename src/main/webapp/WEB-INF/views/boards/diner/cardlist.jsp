@@ -49,6 +49,7 @@
 			  <div class="btn-group">
 				<a href="/boards/diner/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
 				<a href="/boards/diner/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
+				<a href="/boards/diner/heartlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-heart-fill"></i></a>
 			  </div>
 			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 2">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>
