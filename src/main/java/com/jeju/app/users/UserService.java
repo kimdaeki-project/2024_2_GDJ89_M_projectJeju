@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UserService {
 
+	
 	@Autowired
 	private UserDAO userDAO;
 	
@@ -44,9 +45,6 @@ public class UserService {
 		return result;
 		}
 	
-//	public List<UserDTO>getList(UserDTO userDTO) throws Exception {
-//		return userDAO.getList(userDTO);
-//	}
 	public String pwUpdate(UserDTO userDTO,String currentPassword, String newPassword, String confirmPassword) throws Exception{
 		
 		  if (!newPassword.equals(confirmPassword)) {
@@ -97,15 +95,17 @@ public class UserService {
 
 	    return "/users/mypage";
 	}
-
-
 	
 	public int userDelete(UserDTO userDTO) throws Exception{
 		
 		return userDAO.userDelete(userDTO);
-	
-	
-	
+
 	}
+    //id 중복 검사 
+    public boolean checkIdExists(UserDTO userDTO) {
+        return userDAO.countByUserId(userDTO) > 0;
+    }
+    
+    
 
 }

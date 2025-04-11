@@ -56,6 +56,11 @@
         WHERE userID = #{userID}
     </delete>
     
+    <select id="countByUserId" parameterType="UserDTO" resultType="Long">
+    SELECT COUNT(*) FROM USERS WHERE USERID = #{userID}
+</select>
+
+    
 
 
 </mapper>

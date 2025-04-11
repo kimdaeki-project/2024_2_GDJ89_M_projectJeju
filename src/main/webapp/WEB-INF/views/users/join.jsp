@@ -142,12 +142,12 @@
 <body>
     <!-- Main content -->
    <div class="container">
-    <h2>회원가입</h2> <!-- 제목 스타일을 마이페이지와 동일하게 변경 -->
+    <h2>회원가입</h2> 
     <form id="join_form" action="./join" method="post">
         <!-- Name Field -->
   <div class="form-group">
     <label for="name">이름:</label>
-    <input type="text" id="name" name="name" class="form-control" required placeholder="이름을 입력하세요">
+    <input type="text" id="name" name="name" class="form-control" >
     <div class="error-message" id="name-error"></div> <!-- 오류 메시지 -->
 </div>
 
@@ -156,7 +156,7 @@
 		
         <div class="form-group">
             <label for="userID">아이디:</label>
-            <input type="text" id="userID" name="userID" class="form-control" required placeholder="아이디를 입력하세요">
+            <input type="text" id="userID" name="userID" class="form-control">
             <div class="error-message" id="userID-error"></div>
             <div class="success-message" id="userID-success"></div>
         </div>
@@ -166,28 +166,28 @@
         <!-- Password Field -->
         <div class="form-group">
             <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" class="form-control" required placeholder="비밀번호를 입력하세요">
+            <input type="password" id="password" name="password" class="form-control" >
             <div class="error-message" id="password-error"></div> <!-- 오류 메시지 -->
         </div>
 
         <!-- Confirm Password Field -->
         <div class="form-group">
             <label for="confirm_password">비밀번호 확인:</label>
-            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required placeholder="비밀번호를 다시 입력하세요">
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" >
             <div class="error-message" id="confirm_password-error"></div> <!-- 오류 메시지 -->
         </div>
 
         <!-- Email Field -->
         <div class="form-group">
             <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" class="form-control" required placeholder="이메일을 입력하세요">
+            <input type="email" id="email" name="email" class="form-control" >
             <div class="error-message" id="email-error"></div> <!-- 오류 메시지 -->
         </div>
 
         <!-- Phone Field -->
         <div class="form-group">
             <label for="phone">전화번호:</label>
-            <input type="tel" id="phone" name="phone" class="form-control" required placeholder="전화번호를 입력하세요">
+            <input type="tel" id="phone" name="phone" class="form-control">
             <div class="error-message" id="phone-error"></div> <!-- 오류 메시지 -->
         </div>
 
