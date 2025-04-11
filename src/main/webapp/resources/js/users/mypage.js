@@ -113,8 +113,143 @@ getReservs.addEventListener("click", ()=>{
     .then(r=>{
         console.log(r)
         for(let a of r) {
-            let time = new Date(a.fGo.depPlandTime);
-            console.log(time.toISOString)
+            const reserv = document.getElementById("reserv")
+            while(reserv.firstChild){
+                reserv.removeChild(reserv.firstChild)
+            }
+            try {
+                createList(reserv, a);
+            } catch (error) {
+                
+            }
         }
     })
 })
+
+function createList(ul, dto) {
+    let li = document.createElement("li")
+    let box = document.createElement("div")
+    box.classList.add("row")
+
+    // // 예약번호 and 탑승객 정보
+    // let divider = document.createElement("div")
+    // divider.classList.add("col")
+    // let divrow = document.createElement("div")
+    // divrow.classList.add("row")
+    // divrow.innerText = dto.reservNum
+    // divider.appendChild(divrow)
+    // divrow = document.createElement("div")
+    // divrow.classList.add("row")
+    // let btn = document.createElement("button")
+    // btn.classList.add("btn", "btn-secondary")
+    // btn.innerText = '탑승객 정보'
+    // divrow.appendChild(btn)
+    // divider.appendChild(divrow)
+    // box.appendChild(divider)
+
+    // 출발편 시간 공항 좌석구분
+    divider = document.createElement("div")
+    divider.classList.add("col")
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerHTML = '<strong>가는 편</strong>'
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerText = dto.fGo.depPlandTime + "~"
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerText = dto.fGo.arrPlandTime
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    let divcol = document.createElement("div")
+    divcol.classList.add("col")
+    divcol.innerText = dto.fGo.depAirportNm + "-" + dto.fGo.arrAirportNm
+    divrow.appendChild(divcol)
+    divcol = document.createElement("div")
+    divcol.classList.add("col")
+    if(dto.chargeDiv == "prestige" && dto.fGo.prestigeCharge != 0) {
+        divcol.innerText = '비즈니스석'
+    }else {
+        divcol.innerText = '일반석'
+    }
+    divrow.appendChild(divcol)
+    divider.appendChild(divrow)
+    box.appendChild(divider)
+
+    // 도착편 시간 공항 좌석구분
+    divider = document.createElement("div")
+    divider.classList.add("col")
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerHTML = '<strong>오는 편</strong>'
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerText = dto.fCome.depPlandTime + "~"
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerText = dto.fCome.arrPlandTime
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divcol = document.createElement("div")
+    divcol.classList.add("col")
+    divcol.innerText = dto.fCome.depAirportNm + "-" + dto.fCome.arrAirportNm
+    divrow.appendChild(divcol)
+    divcol = document.createElement("div")
+    divcol.classList.add("col")
+    if(dto.chargeDiv == "prestige" && dto.fCome.prestigeCharge != 0) {
+        divcol.innerText = '비즈니스석'
+    }else {
+        divcol.innerText = '일반석'
+    }
+    divrow.appendChild(divcol)
+    divider.appendChild(divrow)
+    box.appendChild(divider)
+
+    // 결제방식
+    divider = document.createElement("div")
+    divider.classList.add("col")
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerHTML = '<strong>결제방식</strong>'
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    switch(dto.payment){
+        case 'card' : dto.payment = '카드'
+        break;
+        case 'mobile_phone' : dto.payment = '휴대폰 결제'
+        break;
+        case 'virtual_account' : dto.payment = '가상계좌'
+        break;
+        case 'transfer' : dto.payment = '계좌이체'
+        break;
+    }
+    divrow.innerHTML = `<p>${dto.payment}</p>`
+    divider.appendChild(divrow)
+    box.appendChild(divider)
+
+    // 결제금액
+    divider = document.createElement("div")
+    divider.classList.add("col")
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerHTML = '<strong>결제금액</strong>'
+    divider.appendChild(divrow)
+    divrow = document.createElement("div")
+    divrow.classList.add("row")
+    divrow.innerHTML = `<p>${dto.amount}</p>`
+    divider.appendChild(divrow)
+    box.appendChild(divider)
+
+
+
+    li.appendChild(box)
+    ul.appendChild(li)
+}
+

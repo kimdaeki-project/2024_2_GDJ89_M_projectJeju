@@ -16,8 +16,15 @@ public class ReservDTO {
 	private FlightDTO fGo;
 	private FlightDTO fCome;
 	private List<BoardingInfo> boarders;
+	private Long amount;
 	
 
+	public Long getAmount() {
+		return amount;
+	}
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
 	public List<BoardingInfo> getBoarders() {
 		return boarders;
 	}

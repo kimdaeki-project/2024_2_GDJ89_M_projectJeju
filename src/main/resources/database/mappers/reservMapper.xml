@@ -30,7 +30,7 @@
 	</select>
 	
 	<insert id="reservate" parameterType="ReservDTO">
-		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId}, #{payment})
+		INSERT INTO RESERVATIONS VALUES (#{reservNum}, #{userId}, #{payment}, #{amount})
 	</insert>
 	
 	<insert id="addBoarderList" parameterType="List">
@@ -43,7 +43,7 @@
 	</insert>
 	
 	<select id="getReservationsList" parameterType="UserDTO" resultType="ReservDTO">
-		SELECT DISTINCT RESERVNUM, FNUMGO, FNUMCOME, CHARGEDIV, PAYMENT 
+		SELECT DISTINCT RESERVNUM, FNUMGO, FNUMCOME, CHARGEDIV, PAYMENT, AMOUNT
 		FROM RESERVATIONS R
 		JOIN BOARDINGINFO B
 		USING (RESERVNUM)

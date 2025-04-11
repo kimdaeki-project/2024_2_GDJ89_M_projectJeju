@@ -112,6 +112,7 @@ public class ReservService {
 	public int reservate(ReservDTO reservDTO, HttpSession session, HttpServletRequest request) throws Exception {
 		reservDTO.setReservNum(request.getParameter("orderId"));
 		reservDTO.setPayment(request.getParameter("payment"));
+		reservDTO.setAmount(Long.parseLong(request.getParameter("amount")));
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
  		reservDTO.setUserId(userDTO.getUserID());
  		
