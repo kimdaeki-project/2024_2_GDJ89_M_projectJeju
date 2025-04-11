@@ -15,8 +15,8 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			<h1>숙소 후기 게시판</h1>
-			<form action="cardlist" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
+			<h1>명소 후기 게시판</h1>
+			<form action="heartlist" id="list_form" class="row row-cols-lg-auto g-3 align-items-center">
 				<input type="hidden" name="page" id="pageNum">
 				<div class="col-12">
 					<select id="loc" name="locationKind" class="form-select" onchange="locat()">
@@ -47,9 +47,9 @@
 				<button type="submit" class="btn btn-primary">검색</button>
 			  </div>
 			  <div class="btn-group">
-				<a href="/boards/hotel/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
-				<a href="/boards/hotel/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
-				<a href="/boards/hotel/heartlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-heart-fill"></i></a>
+				<a href="/boards/diner/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
+				<a href="/boards/diner/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
+				<a href="/boards/diner/heartlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-heart-fill"></i></a>
 			  </div>
 			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 2">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>
@@ -66,21 +66,20 @@
 									<div class="row row-cols-3">
 										<c:forEach items="${list}" var="i" begin="0" end="8">
 											<div class="col" style="padding-left: 7%; padding-bottom: 5%;">
-												<div class="card" style="width: 80%;">
+												<div class="card" style="width: 75%;">
 													<c:choose>
-														<c:when test="${i.fileName eq null}">
-															<a href="/boards/detail?boardNum=${i.boardNum}">
-																<img src="/resources/images/woojin/noImages.png" class="card-img-top" style="object-fit: contain; height: 13rem;">													
-															</a>
-														</c:when>
-														<c:otherwise>
-															<a href="/boards/detail?boardNum=${i.boardNum}">
-																<img src="/resources/images/boards/${i.fileName}" class="card-img-top" style="object-fit: contain; height: 13rem;">
-															</a>
-														</c:otherwise>
-														</c:choose>
+													<c:when test="${i.fileName eq null}">
+														<a href="/boards/detail?boardNum=${i.boardNum}">
+															<img src="/resources/images/woojin/noImages.png" class="card-img-top" style="object-fit: contain; height: 13rem;">													
+														</a>
+													</c:when>
+													<c:otherwise>
+														<a href="/boards/detail?boardNum=${i.boardNum}">
+															<img src="/resources/images/boards/${i.fileName}" class="card-img-top" style="object-fit: contain; height: 13rem;">
+														</a>
+													</c:otherwise>
+													</c:choose>
 													<div class="card-body">
-														<span hidden>${i.fileName}</span>
 														<span hidden>${i.boardNum}</span>
 													<h5 class="card-title">${i.boardTitle}</h5>
 													<p class="card-text">${i.boardDate}</p>
@@ -95,7 +94,7 @@
 						</tr>
 				</tbody>
 			</table>
-			<nav aria-label="Page navigation example" style="width: 300px; margin: 0px auto;">
+			<nav aria-label="Page navigation example" style="width: 150px; margin: 0px auto;">
 				<ul class="pagination">
 				  <li class="page-item">
 					<button class="page-link pages" data-page-num="${pager.start-1}" aria-label="Previous">

@@ -1,3 +1,4 @@
+
 // 이메일 수정 처리
 function updateEmail() {
     var newEmail = document.getElementById('email').value;
