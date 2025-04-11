@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jeju.app.boards.hearts.HeartDTO;
+import com.jeju.app.pages.MyPager;
 import com.jeju.app.pages.Pager;
 
 @Repository
@@ -42,6 +43,22 @@ public class BoardDAO {
 		return sqlSession.selectList(NAMESPACE+"getHotelCardList", map);
 	}
 	
+	public List<BoardDTO2> getPlaceHeartList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getPlaceHeartList", map);
+	}
+	
+	public List<BoardDTO2> getDinerHeartList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getDinerHeartList", map);
+	}
+	
+	public List<BoardDTO2> getHotelHeartList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getHotelHeartList", map);
+	}
+	
+	public List<BoardDTO> getMyList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getMyList", map);
+	}
+	
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
 	}
@@ -50,8 +67,23 @@ public class BoardDAO {
 		return sqlSession.insert(NAMESPACE+"add", boardDTO);
 	}
 	
-	public Long getTotalcount(Pager pager) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pager);
+	public Long getTotalcount1(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount1", pager);
+	}
+	public Long getTotalHeartCount1(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount1", pager);
+	}
+	public Long getTotalcount2(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount2", pager);
+	}
+	public Long getTotalHeartCount2(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount2", pager);
+	}
+	public Long getTotalcount3(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount3", pager);
+	}
+	public Long getTotalHeartCount3(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount3", pager);
 	}
 	
 	public int addFiles(BoardFileDTO boardFileDTO) throws Exception{

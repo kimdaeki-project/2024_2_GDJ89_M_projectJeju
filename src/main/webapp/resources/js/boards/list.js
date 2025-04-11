@@ -5,11 +5,14 @@ const sklist = document.getElementById("sklist");
 const tbody = document.getElementById("tbody");
 const cardlist = document.getElementById("cardlist");
 const loc = document.getElementById("loc");
+const swi = document.getElementById("swi");
+const switch_form = document.getElementById("switch_form");
 
 for (let p of pages) {
     p.addEventListener("click", function(){
         console.log(p.getAttribute("data-page-num"));
         pageNum.value=p.getAttribute("data-page-num");
+        console.log(pageNum.value)
         list_form.submit();
     })
 }
@@ -38,3 +41,10 @@ cardlist.addEventListener('click', ()=>{
         console.log("${list.boardTitle}")
     })
 })
+
+function switchHeart() {
+    var select = document.getElementById("swi");
+
+    var selectValue = select.setAttribute("checked", ehecked);
+    switch_form.submit();
+}

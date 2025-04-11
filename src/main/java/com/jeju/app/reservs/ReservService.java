@@ -1,7 +1,9 @@
 package com.jeju.app.reservs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -110,6 +112,7 @@ public class ReservService {
 	public int reservate(ReservDTO reservDTO, HttpSession session, HttpServletRequest request) throws Exception {
 		reservDTO.setReservNum(request.getParameter("orderId"));
 		reservDTO.setPayment(request.getParameter("payment"));
+		reservDTO.setAmount(Long.parseLong(request.getParameter("amount")));
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
  		reservDTO.setUserId(userDTO.getUserID());
  		
@@ -122,6 +125,22 @@ public class ReservService {
 	
 	public UserDTO userCheck(UserDTO userDTO) throws Exception {
 		return reservDAO.userCheck(userDTO);
+	}
+	
+	public List<ReservDTO> getReservationsList(UserDTO userDTO) throws Exception {
+		List<ReservDTO> ar = reservDAO.getReservationsList(userDTO);
+		for(ReservDTO dto : ar) {
+			List<BoardingInfo> bdrs = new ArrayList<BoardingInfo>();
+			FlightDTO flightDTO = reservDAO.getFlightGo(dto);
+			dto.setfGo(flightDTO);
+			flightDTO = reservDAO.getFlightCome(dto);
+			dto.setfCome(flightDTO);
+			bdrs = reservDAO.getBoardingInfo(dto);
+			dto.setBoarders(bdrs);
+		}
+		
+		
+		return ar;
 	}
 
 }

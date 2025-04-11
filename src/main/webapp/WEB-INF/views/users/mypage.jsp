@@ -65,9 +65,10 @@
             flex-grow: 1;
             padding: 40px 30px;
             background-color: #ffffff;
+
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            max-width: 880px;
+            max-width: 1000px;
             width: 100%;
         }
         h2 {
@@ -163,6 +164,31 @@
         .hidden {
             display: none;
         }
+          .message {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            display: none; /* 초기에는 숨겨둠 */
+        }
+
+        .error-message {
+            color: red;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            color: green;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .reservList {
+            text-align: center;
+            list-style: none;
+        }
     </style>
 
     <script>
@@ -174,6 +200,8 @@
             var section = document.getElementById(sectionId);
             section.classList.remove('hidden');
         }
+
+
     </script>
 </head>
 
@@ -185,9 +213,8 @@
                 <li><a href="javascript:void(0);" onclick="showSection('view-section')">내 정보</a></li>
                 <li><a href="javascript:void(0);" onclick="showSection('edit-section')">정보 수정</a></li>
                 <li><a href="${pageContext.request.contextPath}/users/pwUpdate">비밀번호 변경</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')">예약 내역</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')" id="getReservations">예약 내역</a></li>
                 <li><a href="javascript:void(0);" onclick="showSection('post-list')">내가 쓴 글</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('like-post-list')">좋아요한 글</a></li>
             </ul>
         </div>
 
@@ -241,10 +268,13 @@
             <!-- 예약 내역 섹션 -->
             <div class="section hidden" id="reservation-list">
                 <h3 class="section-title">예약 내역</h3>
-                <ul>
-                    <li>예약 내역 1</li>
-                    <li>예약 내역 2</li>
-                    <li>예약 내역 3</li>
+                <ul class="reservList" id="reserv">
+                    <li>
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span>예약내역을 불러오는 중입니다</span>
+                    </li>
                 </ul>
             </div>
 
@@ -258,19 +288,10 @@
                 </ul>
             </div>
 
-            <!-- 좋아요한 글 섹션 -->
-            <div class="section hidden" id="like-post-list">
-                <h3 class="section-title">좋아요한 글</h3>
-                <ul>
-                    <li>좋아요한 글 1</li>
-                    <li>좋아요한 글 2</li>
-                    <li>좋아요한 글 3</li>
-                </ul>
-            </div>
-        </div>
+        
     </div>
 
-    <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+    <script src="/resources/js/users/mypage.js"></script>
 </body>
 
 </html>

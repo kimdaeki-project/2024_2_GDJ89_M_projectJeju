@@ -21,7 +21,7 @@
 				</ol>
 			  </nav>
 			<h1>숙소 후기 게시판</h1>
-
+			<span hidden>${user.userID}</span>
 			<form action="list" id="list_form" class="row row-cols-lg-auto g-3 align-items-center" style="margin-top: 3px;">
 				<input type="hidden" name="page" id="pageNum">
 				<div class="col-12">
@@ -57,7 +57,10 @@
 			  <div class="btn-group">
 				<a href="/boards/hotel/list" class="btn btn-outline-primary" aria-current="page"><i class="bi bi-card-list"></i></a>
 				<a href="/boards/hotel/cardlist" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-border-all"></i></a>
+				<a href="/boards/hotel/heartlist?userID=${user.userID}" id="cardlist" class="btn btn-outline-primary"><i class="bi bi-heart-fill"></i></a>
+				<span hidden>${user.userID}</span>
 			  </div>
+			  	
 			<select name="searchKind" id="sklist" onchange="change()" class="form-select" id="inlineFormSelectPref 1">
 				<option value="sk1" id="sk1" ${pager.searchKind eq 'sk1' ? 'selected': ''}>작성 날짜 순</option>
 				<option value="sk2" id="sk2" ${pager.searchKind eq 'sk2' ? 'selected': ''}>좋아요 많은 순</option>

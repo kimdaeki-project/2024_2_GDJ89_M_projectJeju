@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jeju.app.boards.BoardDAO;
 import com.jeju.app.boards.BoardDTO;
@@ -14,6 +17,7 @@ import com.jeju.app.boards.BoardFileDTO;
 import com.jeju.app.boards.comments.CommentDAO;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.users.UserDTO;
 
 @Service
 public class DinerService {
@@ -29,8 +33,7 @@ public class DinerService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
-		
+		Long totalCount = boardDAO.getTotalcount2(pager);
 		pager.make(totalCount);
 		pager.makeNum();
 		List<BoardDTO> ar = boardDAO.getDinerList(pager);
@@ -44,7 +47,7 @@ public class DinerService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalcount(pager);
+		Long totalCount = boardDAO.getTotalcount2(pager);
 		
 		pager.cardMake(totalCount);
 		pager.makeNum();
@@ -59,6 +62,35 @@ public class DinerService {
 		map.put("locationKind", pager.getLocationKind());
 		
 		List<BoardDTO2> ar = boardDAO.getDinerCardList(map);
+		
+		return ar;
+	}
+	
+	public List<BoardDTO2> getHeartList(Pager pager, HttpSession session, @RequestParam ("userID") UserDTO userDTO) throws Exception{
+		
+		System.out.println("service CardList");
+		
+		pager.setKind("k1");
+		
+		Long totalCount = boardDAO.getTotalHeartCount2(pager);
+		
+		pager.cardMake(totalCount);
+		pager.makeNum();
+		
+		userDTO = (UserDTO)session.getAttribute("user");
+		BoardDTO2 dto = new BoardDTO2();
+		dto.setUserID(userDTO.getUserID());
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userID", userDTO.getUserID());
+		map.put("searchKind", pager.getSearchKind());
+		map.put("search", pager.getSearch());
+		map.put("startNum", pager.getStartNum());
+		map.put("endNum", pager.getEndNum());
+		map.put("kind", pager.getKind());
+		map.put("locationKind", pager.getLocationKind());
+		
+		List<BoardDTO2> ar = boardDAO.getDinerHeartList(map);
 		
 		return ar;
 	}

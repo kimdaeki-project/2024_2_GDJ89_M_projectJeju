@@ -74,13 +74,24 @@ public class BoardController {
 		model.addAttribute("dto", boardDTO);
 		
 		//좋아요 기능
-		heartDTO = boardService.findHeart(heartDTO);
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		if (userDTO==null) {
+			heartDTO.setUserID("null");
+		}else {
+			heartDTO.setUserID(userDTO.getUserID());
+			heartDTO = boardService.findHeart(heartDTO);
+			
+		}
 		model.addAttribute("heart", heartDTO);
+		
 		return "boards/detail";
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.POST)
-	public String heart(HeartDTO heartDTO) throws Exception{
+	public String heart(HeartDTO heartDTO, HttpSession session) throws Exception{
+			UserDTO userDTO = (UserDTO)session.getAttribute("user");
+			
+			heartDTO.setUserID(userDTO.getUserID());
 			boardService.insertHeart(heartDTO);
 		
 		return "redirect:./detail?boardNum="+heartDTO.getBoardNum();
