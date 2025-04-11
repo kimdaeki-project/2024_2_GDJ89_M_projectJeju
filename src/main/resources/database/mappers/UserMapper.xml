@@ -17,12 +17,23 @@
         VALUES (#{userID}, #{password}, #{name}, #{phone}, #{email})
     </insert>
 
-    <!-- 비밀번호 수정 -->
-    <update id="pwUpdate" parameterType="UserDTO">
-        UPDATE users
-        SET password = #{newPassword}
-        WHERE userID = #{userID} AND password = #{currentPassword}
-    </update>
+<update id="emailUpdate" parameterType="UserDTO">
+    UPDATE users
+    SET email = #{email}
+    WHERE userID = #{userID}
+</update>
+
+<update id="phoneUpdate" parameterType="UserDTO">
+    UPDATE users
+    SET phone = #{phone}
+    WHERE userID = #{userID}
+</update>
+
+<update id="pwUpdate" parameterType="UserDTO">
+    UPDATE users
+    SET password = #{password}
+    WHERE userID = #{userID}
+</update>
 
     <!-- 사용자 상세 정보 조회 -->
     <select id="getDetail" parameterType="UserDTO" resultType="UserDTO">
@@ -44,6 +55,7 @@
         DELETE FROM users
         WHERE userID = #{userID}
     </delete>
+    
 
 
 </mapper>

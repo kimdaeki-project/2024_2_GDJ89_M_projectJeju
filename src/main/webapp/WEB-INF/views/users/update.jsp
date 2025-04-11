@@ -97,7 +97,7 @@
         <h2>프로필 수정</h2>
 
         <!-- Display user information as input fields -->
-        <form action="./updateProfile" method="post">
+        <form action="./update" method="post">
             <!-- 현재 비밀번호 -->
             <div class="form-group">
                 <label for="currentPassword">현재 비밀번호:</label>

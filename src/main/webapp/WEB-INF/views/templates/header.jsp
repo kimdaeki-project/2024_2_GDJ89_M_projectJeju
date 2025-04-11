@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,11 +109,12 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- 게시판 메뉴 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             게시판
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="/boards/list">문의게시판</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/boards/diner/list">맛집</a></li>
+                            <li><a class="dropdown-item" href="/boards/hotel/list">숙소</a></li>
                             <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
                         </ul>
                     </li>
@@ -129,6 +129,7 @@
                             <!-- 로그인 상태일 때 -->
                             <li class="nav-item"><a class="nav-link active" href="/users/logout">로그아웃</a></li>
                             <li class="nav-item"><a class="nav-link active" href="/users/mypage">마이페이지</a></li>
+                          
                         </c:when>
                         <c:otherwise>
                             <!-- 로그인하지 않은 상태일 때 -->

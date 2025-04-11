@@ -1,310 +1,206 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지</title>
-    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
-    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
+    <title>회원가입 페이지</title>
+    
+    <!-- Import Bootstrap CSS -->
+    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>  
+    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import> <!-- Import header -->
 
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    /* General resets and body styling */
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: 'Poppins', sans-serif; /* Changed to Poppins font */
+        background-color: #f4f4f4;
+    }
 
-        /* 전체 레이아웃 */
-        .container {
-            display: flex;
-            padding: 40px;
-        }
+    /* Center the form in the middle of the page */
+    .container {
+        max-width: 400px; /* 조금 더 좁게 */
+        padding: 12px; /* 패딩을 약간 줄임 */
+        background-color: #ffffff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* 그림자 크기 조정 */
+        border-radius: 6px; /* 테두리 둥글게 줄임 */
+        margin-top: 80px; /* 위쪽 마진 줄임 */
+        border-left: 4px solid #ffcc00; /* 테두리 두께를 줄임 */
+    }
 
-        /* 왼쪽 사이드바 */
-        .sidebar {
-            width: 250px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+    /* Styling the form header */
+    h2 {
+        text-align: center;
+        margin-bottom: 16px; /* 마진 줄임 */
+        color: #333;
+        font-weight: bold;
+        font-size: 24px; /* 마이페이지와 동일한 크기 */
+    }
 
-        .sidebar h3 {
-            font-size: 24px;
-            color: #007bff;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    /* Form field groups */
+    .form-group {
+        margin-bottom: 20px; /* 마진 줄임 */
+    }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    /* Input field styles */
+    .form-control {
+        width: 100%;
+        padding: 12px; /* 패딩 줄임 */
+        border: 1px solid #ced4da;
+        border-radius: 4px; /* 테두리 둥글게 줄임 */
+        font-size: 14px; /* 폰트 크기 줄임 */
+        background-color: #f8f9fa;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
 
-        .sidebar ul li {
-            margin-bottom: 15px;
-            text-align: center;
-        }
+    .form-control:focus {
+        border-color: #ffcc00; /* Focus 색상 변경 */
+        box-shadow: 0 0 6px rgba(255, 204, 0, 0.25); /* 그림자 크기 줄임 */
+        background-color: #ffffff;
+    }
 
-        .sidebar ul li a {
-            font-size: 18px;
-            color: #333;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
+    /* Styling the Submit Button */
+    .btn {
+        width: 100%;
+        padding: 12px; /* 패딩 줄임 */
+        background-color: #ffcc00; /* 버튼 색상 */
+        color: white;
+        border: none;
+        border-radius: 4px; /* 테두리 둥글게 줄임 */
+        font-size: 16px; /* 버튼 폰트 크기 줄임 */
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        .sidebar ul li a:hover {
-            background-color: #007bff;
-            color: white;
-        }
+    .btn:hover {
+        background-color: #e6b800; /* Hover 색상 변경 */
+    }
 
-        /* 오른쪽 메인 콘텐츠 */
-        .content {
-            flex-grow: 1;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-        }
+    /* Style for the Home Button */
+    .home-btn {
+        display: block;
+        text-align: center;
+        margin-top: 20px; /* 마진 줄임 */
+        padding: 10px; /* 패딩 줄임 */
+        background-color: #ffcc00; /* 버튼 색상 */
+        color: white;
+        text-decoration: none;
+        border-radius: 4px; /* 테두리 둥글게 줄임 */
+        width: 160px; /* 너비 줄임 */
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 14px; /* 폰트 크기 줄임 */
+    }
 
-        h2 {
-            font-size: 32px;
-            color: #333;
-            text-align: center;
-            margin-bottom: 40px;
-        }
+    .home-btn:hover {
+        background-color: #e6b800; /* Hover 색상 변경 */
+    }
 
-        .section {
-            background-color: #ffffff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+    /* Label styling */
+    label {
+        font-weight: bold;
+        color: #343a40;
+        font-size: 14px; /* 레이블 폰트 크기 줄임 */
+    }
+/* 오류 메시지 스타일 */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
-        .section-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: #007bff;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+/* 성공 메시지 스타일 */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
-        .user-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
+/* 입력 필드와 메시지의 간격을 조정 */
+.form-group {
+    margin-bottom: 15px;
+}
 
-        .user-info div {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-        }
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
 
-        .user-info div:not(:last-child) {
-            border-right: 1px solid #ddd;
-        }
+</style>
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            font-size: 16px;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            margin-bottom: 15px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #007bff;
-            background-color: #fff;
-            outline: none;
-        }
-
-        .btn {
-            width: 50%;
-            padding: 14px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
-
-    <script>
-        // 해당 섹션만 표시되도록 하는 함수
-        function showSection(sectionId) {
-            var sections = document.querySelectorAll('.section');
-            sections.forEach(function(section) {
-                section.classList.add('hidden');
-            });
-            var section = document.getElementById(sectionId);
-            section.classList.remove('hidden');
-        }
-
-        // 이메일 수정 섹션 보이기
-        function showEmailEdit() {
-            document.getElementById("email-edit-section").classList.remove("hidden");
-        }
-
-        // 전화번호 수정 섹션 보이기
-        function showPhoneEdit() {
-            document.getElementById("phone-edit-section").classList.remove("hidden");
-        }
-
-        // 비밀번호 변경 섹션 보이기
-        function showPasswordChange() {
-            document.getElementById("password-change-section").classList.remove("hidden");
-        }
-    </script>
 </head>
 
 <body>
+    <!-- Main content -->
+   <div class="container">
+    <h2>회원가입</h2> <!-- 제목 스타일을 마이페이지와 동일하게 변경 -->
+    <form id="join_form" action="./join" method="post">
+        <!-- Name Field -->
+  <div class="form-group">
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="name" class="form-control" required placeholder="이름을 입력하세요">
+    <div class="error-message" id="name-error"></div> <!-- 오류 메시지 -->
+</div>
 
-    <div class="container">
-        <!-- 왼쪽 사이드바 -->
-        <div class="sidebar">
-            <h3>마이페이지</h3>
-            <ul>
-                <li><a href="javascript:void(0);" onclick="showSection('view-section')">내 정보</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')">예약 내역</a></li>
-                <li><a href="javascript:void(0);" onclick="showSection('post-list')">내가 쓴 글</a></li>
-            </ul>
+
+        <!-- Username Field -->
+		
+        <div class="form-group">
+            <label for="userID">아이디:</label>
+            <input type="text" id="userID" name="userID" class="form-control" required placeholder="아이디를 입력하세요">
+            <div class="error-message" id="userID-error"></div>
+            <div class="success-message" id="userID-success"></div>
         </div>
 
-        <!-- 오른쪽 메인 콘텐츠 -->
-        <div class="content">
-            <h2>${sessionScope.user.name}님, 환영합니다!</h2>
 
-            <!-- 개인정보 표시 섹션 -->
-            <div class="section" id="view-section">
-                <h3 class="section-title">내 정보</h3>
-                <div class="user-info">
-                    <div>
-                        <p><strong>이메일</strong></p>
-                        <p>${sessionScope.user.email}</p>
-                        <button class="btn btn-secondary" onclick="showEmailEdit()">이메일 수정</button>
-                    </div>
-                    <div>
-                        <p><strong>전화번호</strong></p>
-                        <p>${sessionScope.user.phone}</p>
-                        <button class="btn btn-secondary" onclick="showPhoneEdit()">전화번호 수정</button>
-                    </div>
-                </div>
-                <button class="btn btn-secondary" onclick="showPasswordChange()">비밀번호 변경</button>
-            </div>
-
-            <!-- 이메일 수정 섹션 -->
-            <div class="section hidden" id="email-edit-section">
-                <h3 class="section-title">이메일 수정</h3>
-                <div class="form-group">
-                    <label for="email" class="form-label">이메일</label>
-                    <input type="email" class="form-control" id="email" name="email" value="${sessionScope.user.email}" required>
-                    <button type="button" class="btn btn-primary" onclick="alert('이메일 수정 완료!')">이메일 수정</button>
-                </div>
-            </div>
-
-            <!-- 전화번호 수정 섹션 -->
-            <div class="section hidden" id="phone-edit-section">
-                <h3 class="section-title">전화번호 수정</h3>
-                <div class="form-group">
-                    <label for="phone" class="form-label">전화번호</label>
-                    <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.user.phone}" required>
-                    <button type="button" class="btn btn-primary" onclick="alert('전화번호 수정 완료!')">전화번호 수정</button>
-                </div>
-            </div>
-
-            <!-- 비밀번호 변경 섹션 -->
-            <div class="section hidden" id="password-change-section">
-                <h3 class="section-title">비밀번호 변경</h3>
-                <div class="form-group">
-                    <label for="currentPassword" class="form-label">현재 비밀번호</label>
-                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword" class="form-label">새 비밀번호</label>
-                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword" class="form-label">비밀번호 확인</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="alert('비밀번호 변경 완료!')">비밀번호 변경</button>
-            </div>
-
-            <!-- 예약 내역 섹션 -->
-            <div class="section hidden" id="reservation-list">
-                <h3 class="section-title">예약 내역</h3>
-                <ul>
-                    <li>예약 내역 1</li>
-                    <li>예약 내역 2</li>
-                    <li>예약 내역 3</li>
-                </ul>
-            </div>
-
-            <!-- 내가 쓴 글 섹션 -->
-            <div class="section hidden" id="post-list">
-                <h3 class="section-title">내가 쓴 글</h3>
-                <ul>
-                    <li>글 1</li>
-                    <li>글 2</li>
-                    <li>글 3</li>
-                </ul>
-            </div>
+		
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" class="form-control" required placeholder="비밀번호를 입력하세요">
+            <div class="error-message" id="password-error"></div> <!-- 오류 메시지 -->
         </div>
-    </div>
 
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+            <label for="confirm_password">비밀번호 확인:</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required placeholder="비밀번호를 다시 입력하세요">
+            <div class="error-message" id="confirm_password-error"></div> <!-- 오류 메시지 -->
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" class="form-control" required placeholder="이메일을 입력하세요">
+            <div class="error-message" id="email-error"></div> <!-- 오류 메시지 -->
+        </div>
+
+        <!-- Phone Field -->
+        <div class="form-group">
+            <label for="phone">전화번호:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" required placeholder="전화번호를 입력하세요">
+            <div class="error-message" id="phone-error"></div> <!-- 오류 메시지 -->
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submit_button" type="submit" class="btn">회원가입</button>
+    </form>
+</div>
+
+
+    <!-- Import necessary JS files -->
+    <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+    <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import> <!-- Import Bootstrap JS -->
+    <script src="/resources/js/users/join.js"></script>
 </body>
 
 </html>

@@ -7,11 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 변경</title>
-    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import> <!-- Import Bootstrap CSS -->
-    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import> <!-- Import header -->
+    <c:import url="/WEB-INF/views/templates/boot_css.jsp"></c:import>
+    <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 
     <style>
-        /* General resets and body styling */
         body, html {
             height: 100%;
             margin: 0;
@@ -19,9 +18,8 @@
             background-color: #f4f4f4;
         }
 
-        /* Center the content */
         .container {
-            max-width: 500px; /* Reduced the width of the form to half of the page */
+            max-width: 500px;
             padding: 20px;
             background-color: #ffffff;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -30,7 +28,6 @@
             border-left: 4px solid #ffcc00;
         }
 
-        /* Title styling */
         h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -39,15 +36,13 @@
             font-size: 24px;
         }
 
-        /* Form field styling */
         .form-group {
-            margin-bottom: 20px; /* Reduced the bottom margin */
+            margin-bottom: 20px;
         }
 
-        /* Input field styling */
         input[type="password"] {
             width: 100%;
-            padding: 12px; /* Reduced padding to make the form more compact */
+            padding: 12px;
             border: 1px solid #ced4da;
             border-radius: 4px;
             font-size: 16px;
@@ -62,10 +57,9 @@
             background-color: #ffffff;
         }
 
-        /* Button styling */
         button {
             width: 100%;
-            padding: 12px; /* Reduced padding to make the form more compact */
+            padding: 12px;
             background-color: #ffcc00;
             color: white;
             border: none;
@@ -79,7 +73,6 @@
             background-color: #e6b800;
         }
 
-        /* Alert Box */
         .alert {
             background-color: #f8f9fa;
             border-color: #e2e3e5;
@@ -95,7 +88,6 @@
             border-color: #003366;
         }
 
-        /* Small screen adjustments */
         @media (max-width: 768px) {
             .container {
                 margin-top: 20px;
@@ -110,21 +102,17 @@
 
 <body>
 
-
-
-    <!-- Main content -->
     <div class="container">
         <h2>비밀번호 변경</h2>
 
-        <!-- Show alert if message is set -->
         <c:if test="${not empty message}">
             <script>
                 alert("${message}");
             </script>
         </c:if>
 
-        <!-- Password change form -->
-        <form action="./pwUpdate" method="post">
+        <!-- ✅ 여기에 정확한 form action 경로 반영 -->
+			<form action="./pwUpdate" method="post">
             <div class="form-group">
                 <label for="currentPassword">현재 비밀번호</label>
                 <input type="password" id="currentPassword" name="currentPassword" required placeholder="현재 비밀번호를 입력하세요" />
@@ -146,11 +134,10 @@
         </form>
     </div>
 
-    <!-- Import necessary JS files -->
     <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-    <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import> <!-- Import Bootstrap JS -->
-    <script src="/resources/js/users/login.js"></script> <!-- Custom JS if needed -->
-
+    <c:import url="/WEB-INF/views/templates/boot_js.jsp"></c:import>
+    <!-- 필요 없다면 login.js는 제거 가능 -->
+    <script src="/resources/js/users/login.js"></script>
 </body>
 
 </html>

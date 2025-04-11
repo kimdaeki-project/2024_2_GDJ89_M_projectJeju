@@ -32,7 +32,7 @@ public class UserController {
             return "redirect:/"; // 로그인 후 메인 페이지로 리다이렉트
         }
 
-        model.addAttribute("result", "다시 로그인을 시도해 주세요");
+        model.addAttribute("result", "ID 또는 비밀번호가 일치하지 않습니다.");
         model.addAttribute("path", "./login");
         return "commons/result";
     }
@@ -46,7 +46,7 @@ public class UserController {
     @RequestMapping(value = "join", method = RequestMethod.POST)
     public String join(UserDTO userDTO, HttpSession session) throws Exception {
         int result = userService.join(userDTO, session.getServletContext());
-        return "redirect:/"; // 회원가입 후 메인 페이지로 리다이렉트
+        return "redirect:/users/login"; // 회원가입 후 메인 페이지로 리다이렉트
     }
 
     // 로그아웃 처리
@@ -97,12 +97,57 @@ public class UserController {
 
         String result = userService.pwUpdate(user, currentPassword, newPassword, confirmPassword);
 
-        if (result.equals("success")) {
-            return "redirect:/users/mypage"; // 비밀번호 변경 후 마이페이지로 리다이렉트
+        if ("success".equals(result)) {
+            session.setAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
         } else {
-            model.addAttribute("message", result); // 오류 메시지 전달
-            return "users/pwUpdate"; // 비밀번호 수정 페이지로 돌아가기
+            session.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
         }
+        return "redirect:/users/mypage";
+    }
+ // 이메일 수정 페이지(GET)
+    @RequestMapping(value = "emailUpdate", method = RequestMethod.GET)
+    public String emailUpdate() throws Exception {
+        return "users/emailUpdate"; // 이메일 수정 페이지로 이동
+      
+    }
+
+    // 이메일 수정 처리(POST)
+    @RequestMapping(value = "emailUpdate", method = RequestMethod.POST)
+    public String emailUpdate(@RequestParam("newEmail") String newEmail,
+                              HttpSession session, Model model) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        String result = userService.emailUpdate(user, newEmail);
+
+        if ("success".equals(result)) {
+            session.setAttribute("msg", "이메일이 성공적으로 변경되었습니다.");
+        } else {
+            session.setAttribute("msg", "이메일 변경에 실패했습니다.");
+        }
+        return "redirect:/users/mypage";
+        
+        }
+ 
+    // 전화번호 수정 페이지(GET)
+    @RequestMapping(value = "phoneUpdate", method = RequestMethod.GET)
+    public String phoneUpdate() throws Exception {
+        return"redirect:/users/mypage"; // 전화번호 수정 페이지로 이동
+    }
+
+    // 전화번호 수정 처리(POST)
+    @RequestMapping(value = "phoneUpdate", method = RequestMethod.POST)
+    public String phoneUpdate(@RequestParam("newPhone") String newPhone,
+                              HttpSession session, Model model) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        String result = userService.phoneUpdate(user, newPhone);
+
+        if ("success".equals(result)) {
+            session.setAttribute("msg", "전화번호가 성공적으로 변경되었습니다.");
+        } else {
+            session.setAttribute("msg", "전화번호 변경에 실패했습니다.");
+        }
+        return "redirect:/users/profile";
     }
 
     // 회원탈퇴 페이지(GET)
@@ -147,17 +192,4 @@ public class UserController {
 }
 
 
-    // 사용자 목록 조회
-//    @RequestMapping(value = "getList", method = RequestMethod.GET)
-//    public String getList(HttpSession session, Model model) throws Exception {
-//        UserDTO user = (UserDTO) session.getAttribute("user");
-//
-//        if (user == null) {
-//            return "redirect:/users/login"; // 로그인되지 않으면 로그인 페이지로 리다이렉트
-//        }
-//
-//        // 사용자 목록을 model에 추가하여 JSP에서 사용
-//        model.addAttribute("list", userService.getList()); // 사용자 목록 추가
-//        return "users/getList"; // 사용자 목록 페이지
-//    }
 
