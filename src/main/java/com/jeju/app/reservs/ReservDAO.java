@@ -47,5 +47,21 @@ public class ReservDAO {
 	public int addBoarderList(List<BoardingInfo> boarders) throws Exception {
 		return sqlSession.insert(NAMESPACE+"addBoarderList", boarders);
 	}
+	
+	public List<ReservDTO> getReservationsList(UserDTO userDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getReservationsList", userDTO);
+	}
+	
+	public FlightDTO getFlightGo(ReservDTO reservDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getFlightGo", reservDTO);
+	}
+	
+	public FlightDTO getFlightCome(ReservDTO reservDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getFlightCome", reservDTO);
+	}
+	
+	public List<BoardingInfo> getBoardingInfo(ReservDTO reservDTO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getBoardingInfo", reservDTO);
+	}
 
 }

@@ -31,6 +31,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/reservation/info"/>
+			<mapping path="/reservation/getReservsList"/>
 
 			<!-- bean의 이름 -->
 			<beans:ref bean="loginCheckInterceptor"/>

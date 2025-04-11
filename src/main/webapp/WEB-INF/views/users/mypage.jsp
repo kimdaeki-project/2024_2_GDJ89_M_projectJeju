@@ -27,6 +27,8 @@
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
         }
 
         h2 {
@@ -192,6 +194,11 @@
         .toggle-section-btn:hover {
             background-color: #0056b3;
         }
+        .reservList {
+            text-align: center;
+            list-style: none;
+        }
+    </style>
 
         .post-list, .reservation-list {
             list-style-type: none;
@@ -231,12 +238,15 @@
             editSection.style.display = (editSection.style.display === "none" || editSection.style.display === "") ? "block" : "none";
             viewSection.style.display = (viewSection.style.display === "none" || viewSection.style.display === "") ? "block" : "none";
         }
+
+
     </script>
 </head>
 
 <body>
 
     <div class="container">
+
         <h2>마이페이지</h2>
 
         <!-- 개인정보 표시 섹션 -->
@@ -250,6 +260,41 @@
                 <div>
                     <p><strong>전화번호</strong></p>
                     <p>${sessionScope.user.phone}</p>
+==================================================================
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <h3>마이페이지</h3>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="showSection('view-section')">내 정보</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('reservation-list')" id="getReservations">예약 내역</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('post-list')">내가 쓴 글</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('liked-post-list')">좋아요한 글</a></li>
+            </ul>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="content">
+            <h2>${sessionScope.user.name}님, 환영합니다!</h2>
+
+            <!-- 내 정보 -->
+            <div class="section" id="view-section">
+                <h3 class="section-title">내 정보</h3>
+                <div class="user-info">
+                    <div>
+                        <p><strong>이메일</strong></p>
+                        <p>${sessionScope.user.email}</p>
+                        <button class="btn btn-secondary" onclick="showEmailEdit()">
+                            <i class="fas fa-envelope"></i> 이메일 수정
+                        </button>
+                    </div>
+                    <div>
+                        <p><strong>전화번호</strong></p>
+                        <p>${sessionScope.user.phone}</p>
+                        <button class="btn btn-secondary" onclick="showPhoneEdit()">
+                            <i class="fas fa-phone"></i> 전화번호 수정
+                        </button>
+                    </div>
+
                 </div>
             </div>
             <button class="edit-btn" onclick="toggleEditSection()">정보 수정하기</button>
@@ -287,6 +332,30 @@
             </form>
             <button class="btn btn-secondary" onclick="toggleEditSection()">수정 취소</button>
         </div>
+
+            <!-- 예약 내역 -->
+            <div class="section hidden" id="reservation-list">
+                <h3 class="section-title">예약 내역</h3>
+                <ul class="reservList" id="reserv">
+                    <li>
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span>예약내역을 불러오는 중입니다</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 내가 쓴 글 -->
+            <div class="section hidden" id="post-list">
+                <h3 class="section-title">내가 쓴 글</h3>
+                <ul>
+                    <li>글 1</li>
+                    <li>글 2</li>
+                    <li>글 3</li>
+                </ul>
+            </div>
+
 
         <!-- 예약 내역 확인 섹션 -->
         <div class="section">
