@@ -76,7 +76,7 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}
+			) <include refid="location2"></include> r BETWEEN 0 AND 10
 	</select>
 	
 	<select id="getDinerList" resultType="BoardDTO" parameterType="Pager">
@@ -151,7 +151,7 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}	
+			) <include refid="location2"></include> r BETWEEN 0 AND 10
 	</select>
 	
 	<select id="getHotelList" resultType="BoardDTO" parameterType="Pager">
@@ -227,7 +227,7 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
-			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}	
+			) <include refid="location2"></include> r BETWEEN 0 AND 10
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
@@ -350,7 +350,7 @@
 		)<include refid="location"></include>
 	</select>
 	
-	<select id="getTotalHeartCount1" resultType="Long" parameterType="Pager">
+	<select id="getTotalHeartCount1" resultType="Long" parameterType="Map">
 		SELECT COUNT(boardNum) FROM
 	(
 		SELECT rownum r, m.* FROM (
@@ -358,7 +358,7 @@
 			FROM board b
 			INNER JOIN heart h ON b.boardnum = h.boardnum
 			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
-		) m WHERE category = 1
+		) m WHERE category = 1 AND USERID=#{userID}
 	)
 	</select>
 	
@@ -370,7 +370,7 @@
 		)<include refid="location"></include>
 	</select>
 	
-	<select id="getTotalHeartCount2" resultType="Long" parameterType="Pager">
+	<select id="getTotalHeartCount2" resultType="Long" parameterType="Map">
 		SELECT COUNT(boardNum) FROM
 	(
 		SELECT rownum r, m.* FROM (
@@ -378,7 +378,7 @@
 			FROM board b
 			INNER JOIN heart h ON b.boardnum = h.boardnum
 			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
-		) m WHERE category = 2
+		) m WHERE category = 2 AND USERID=#{userID}
 	)
 	</select>	
 	
@@ -390,7 +390,7 @@
 		)<include refid="location"></include>
 	</select>
 	
-	<select id="getTotalHeartCount3" resultType="Long" parameterType="Pager">
+	<select id="getTotalHeartCount3" resultType="Long" parameterType="Map">
 		SELECT COUNT(boardNum) FROM
 	(
 		SELECT rownum r, m.* FROM (
@@ -398,7 +398,7 @@
 			FROM board b
 			INNER JOIN heart h ON b.boardnum = h.boardnum
 			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum
-		) m WHERE category = 3
+		) m WHERE category = 3 AND USERID=#{userID}
 	)
 	</select>	
 	

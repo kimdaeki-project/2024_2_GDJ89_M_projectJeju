@@ -72,15 +72,15 @@ public class HotelService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalHeartCount3(pager);
-		pager.cardMake(totalCount);
-		pager.makeNum();
-		
 		userDTO = (UserDTO)session.getAttribute("user");
 		System.out.println(userDTO.getUserID());
 		BoardDTO2 dto = new BoardDTO2();
 		dto.setUserID(userDTO.getUserID());
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		
+		
 		
 		map.put("userID", userDTO.getUserID());
 		map.put("searchKind", pager.getSearchKind());
@@ -90,6 +90,9 @@ public class HotelService {
 		map.put("locationKind", pager.getLocationKind());
 		map.put("kind", pager.getKind());
 		
+		Long totalCount = boardDAO.getTotalHeartCount3(map);
+		pager.cardMake(totalCount);
+		pager.makeNum();
 		
 		List<BoardDTO2> ar = boardDAO.getHotelHeartList(map);
 		

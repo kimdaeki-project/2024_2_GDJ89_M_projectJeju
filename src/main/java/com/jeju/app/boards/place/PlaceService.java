@@ -77,16 +77,14 @@ public class PlaceService {
 		System.out.println("service CardList");
 		
 		pager.setKind("k1");
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Long totalCount = boardDAO.getTotalHeartCount1(pager);
 		
-		pager.cardMake(totalCount);
-		pager.makeNum();
 		
 		userDTO = (UserDTO)session.getAttribute("user");
 		BoardDTO2 dto = new BoardDTO2();
 		dto.setUserID(userDTO.getUserID());
-		Map<String, Object> map = new HashMap<String, Object>();
+		
 		
 		map.put("userID", userDTO.getUserID());
 		map.put("search", pager.getSearch());
@@ -95,6 +93,11 @@ public class PlaceService {
 		map.put("kind", pager.getKind());
 		map.put("startNum", pager.getStartNum());
 		map.put("endNum", pager.getEndNum());
+		
+		Long totalCount = boardDAO.getTotalHeartCount1(map);
+		System.out.println(totalCount);
+		pager.cardMake(totalCount);
+		pager.makeNum();
 		
 		List<BoardDTO2> ar = boardDAO.getPlaceHeartList(map);
 		

@@ -70,20 +70,20 @@ public class BoardDAO {
 	public Long getTotalcount1(Pager pager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount1", pager);
 	}
-	public Long getTotalHeartCount1(Pager pager) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount1", pager);
+	public Long getTotalHeartCount1(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount1", map);
 	}
 	public Long getTotalcount2(Pager pager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount2", pager);
 	}
-	public Long getTotalHeartCount2(Pager pager) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount2", pager);
+	public Long getTotalHeartCount2(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount2", map);
 	}
 	public Long getTotalcount3(Pager pager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount3", pager);
 	}
-	public Long getTotalHeartCount3(Pager pager) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount3", pager);
+	public Long getTotalHeartCount3(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalHeartCount3", map);
 	}
 	
 	public int addFiles(BoardFileDTO boardFileDTO) throws Exception{
