@@ -54,6 +54,31 @@
 					</choose>
 	</select>
 	
+	<select id="getPlaceHeartList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(
+				SELECT rownum r, m.* FROM (
+					SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+					FROM board b
+					INNER JOIN heart h ON b.boardnum = h.boardnum
+					LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+					WHERE h.userid = #{userID} 
+				) m WHERE category = 1 AND 
+				<include refid="search"></include>
+				 <choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
 	<select id="getDinerList" resultType="BoardDTO" parameterType="Pager">
 		SELECT * FROM
 			(SELECT ROWNUM R, M.* FROM
@@ -104,6 +129,31 @@
 					</choose>
 	</select>
 	
+	<select id="getDinerHeartList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(
+				SELECT rownum r, m.* FROM (
+					SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+					FROM board b
+					INNER JOIN heart h ON b.boardnum = h.boardnum
+					LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+					WHERE h.userid = #{userID} 
+				) m WHERE category = 2 AND 
+				<include refid="search"></include>
+				 <choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}	
+	</select>
+	
 	<select id="getHotelList" resultType="BoardDTO" parameterType="Pager">
 		SELECT * FROM
 			(SELECT ROWNUM R, M.* FROM
@@ -135,6 +185,7 @@
 					SELECT * 
 					FROM BOARD WHERE CATEGORY = 3 AND
 					<include refid="search"></include>
+				
 				) M
 				<include refid="location"></include>
 			) A
@@ -152,6 +203,31 @@
 							ORDER BY BOARDDATE DESC
 						</otherwise>
 					</choose>
+	</select>
+	
+	<select id="getHotelHeartList" resultMap="getImageList" parameterType="Map">
+		SELECT * FROM
+			(
+				SELECT rownum r, m.* FROM (
+					SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+					FROM board b
+					INNER JOIN heart h ON b.boardnum = h.boardnum
+					LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+					WHERE h.userid = #{userID} 
+				) m WHERE category = 3 AND 
+				<include refid="search"></include>
+				 <choose>
+						<when test="searchKind eq 'sk2'">
+							ORDER BY FAVORITE DESC
+						</when>
+						<when test="searchKind eq 'sk3'">
+							ORDER BY BOARDHITS DESC
+						</when>
+						<otherwise>
+							ORDER BY BOARDDATE DESC
+						</otherwise>
+					</choose>
+			) <include refid="location2"></include> r BETWEEN #{startNum} AND #{endNum}	
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
@@ -232,10 +308,39 @@
 						WHERE LOCATION = '한림'
 					</when>
 					<otherwise>
-					
+						
 					</otherwise>
 				</choose>
 	</sql>
+
+	<sql id="location2">
+				<choose>
+					<when test="locationKind eq 'lo2'">
+						WHERE LOCATION = '제주시' AND
+					</when>
+					<when test="locationKind eq 'lo3'">
+						WHERE LOCATION = '애월' AND
+					</when>
+					<when test="locationKind eq 'lo4'">
+						WHERE LOCATION = '서귀포' AND
+					</when>
+					<when test="locationKind eq 'lo5'">
+						WHERE LOCATION = '남원' AND
+					</when>
+					<when test="locationKind eq 'lo6'">
+						WHERE LOCATION = '조천' AND
+					</when>
+					<when test="locationKind eq 'lo7'">
+						WHERE LOCATION = '중문' AND
+					</when>
+					<when test="locationKind eq 'lo8'">
+						WHERE LOCATION = '한림' AND
+					</when>
+					<otherwise>
+						WHERE
+					</otherwise>
+				</choose>
+	</sql>	
 	
 	<select id="getTotalCount1" resultType="Long" parameterType="Pager">
 		SELECT COUNT(BOARDNUM) FROM
@@ -243,6 +348,18 @@
 			SELECT * FROM BOARD WHERE BOARDNUM > 0 AND CATEGORY = 1 AND
 			<include refid="search"></include>
 		)<include refid="location"></include>
+	</select>
+	
+	<select id="getTotalHeartCount1" resultType="Long" parameterType="Pager">
+		SELECT COUNT(boardNum) FROM
+	(
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+		) m WHERE category = 1
+	)
 	</select>
 	
 	<select id="getTotalCount2" resultType="Long" parameterType="Pager">
@@ -253,6 +370,18 @@
 		)<include refid="location"></include>
 	</select>
 	
+	<select id="getTotalHeartCount2" resultType="Long" parameterType="Pager">
+		SELECT COUNT(boardNum) FROM
+	(
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum	
+		) m WHERE category = 2
+	)
+	</select>	
+	
 	<select id="getTotalCount3" resultType="Long" parameterType="Pager">
 		SELECT COUNT(BOARDNUM) FROM
 		(
@@ -260,6 +389,18 @@
 			<include refid="search"></include>
 		)<include refid="location"></include>
 	</select>
+	
+	<select id="getTotalHeartCount3" resultType="Long" parameterType="Pager">
+		SELECT COUNT(boardNum) FROM
+	(
+		SELECT rownum r, m.* FROM (
+			SELECT b.boardnum, b.boardtitle, b.BOARDCONTENTS, b.boarddate, b.BOARDHITS, b.FAVORITE, b.CATEGORY, b.location, b.userID, h.heart, i.filename
+			FROM board b
+			INNER JOIN heart h ON b.boardnum = h.boardnum
+			LEFT OUTER JOIN images i ON b.boardnum = i.boardnum
+		) m WHERE category = 3
+	)
+	</select>	
 	
 	<select id="getMaxHits" resultType="BoardDTO">
 		SELECT * FROM board WHERE boardHits = (SELECT max(boardhits) FROM board) OR BOARDHITS = (SELECT (MAX(BOARDHITS)-1) FROM BOARD)
@@ -303,6 +444,13 @@
 	
 	<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
 		SELECT * FROM IMAGES WHERE BOARDNUM=#{boardNum}
+	</select>
+	
+	<select id="getMyList" resultType="BoardDTO" parameterType="Map">
+		SELECT rownum r, m.* from
+		(
+			SELECT * FROM board WHERE userID=#{userID}
+		) m WHERE rownum BETWEEN #{startNum} AND #{endNum}
 	</select>
 	
 	<!-- 좋아요 기능 -->

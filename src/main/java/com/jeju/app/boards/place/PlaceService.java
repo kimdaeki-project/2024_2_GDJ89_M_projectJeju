@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jeju.app.boards.BoardDAO;
+import com.jeju.app.boards.BoardDAO2;
 import com.jeju.app.boards.BoardDTO;
 import com.jeju.app.boards.BoardDTO2;
 import com.jeju.app.boards.BoardFileDTO;
 import com.jeju.app.boards.comments.CommentDAO;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.users.UserDTO;
 
 @Service
 public class PlaceService {
@@ -22,6 +27,8 @@ public class PlaceService {
 	private BoardDAO boardDAO;
 	@Autowired
 	private CommentDAO commentDAO;
+	@Autowired
+	private BoardDAO2 boardDAO2;
 	
 	public List<BoardDTO> getList(Pager pager) throws Exception{
 		
@@ -61,6 +68,35 @@ public class PlaceService {
 		List<BoardDTO2> ar = boardDAO.getPlaceCardList(map);
 		
 		
+		
+		return ar;
+	}
+	
+	public List<BoardDTO2> getHeartList(Pager pager, HttpSession session, @RequestParam("userID") UserDTO userDTO) throws Exception{
+		
+		System.out.println("service CardList");
+		
+		pager.setKind("k1");
+		
+		Long totalCount = boardDAO.getTotalHeartCount1(pager);
+		
+		pager.cardMake(totalCount);
+		pager.makeNum();
+		
+		userDTO = (UserDTO)session.getAttribute("user");
+		BoardDTO2 dto = new BoardDTO2();
+		dto.setUserID(userDTO.getUserID());
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userID", userDTO.getUserID());
+		map.put("search", pager.getSearch());
+		map.put("searchKind", pager.getSearchKind());
+		map.put("locationKind", pager.getLocationKind());
+		map.put("kind", pager.getKind());
+		map.put("startNum", pager.getStartNum());
+		map.put("endNum", pager.getEndNum());
+		
+		List<BoardDTO2> ar = boardDAO.getPlaceHeartList(map);
 		
 		return ar;
 	}

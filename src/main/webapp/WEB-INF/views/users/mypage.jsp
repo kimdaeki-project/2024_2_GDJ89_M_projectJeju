@@ -288,17 +288,6 @@
             <button class="btn btn-secondary" onclick="toggleEditSection()">수정 취소</button>
         </div>
 
-        <!-- 내가 쓴 글 섹션 -->
-        <div class="section">
-            <h3 class="section-title">내가 쓴 글</h3>
-            <button class="toggle-section-btn" onclick="toggleSection('post-list')">내가 쓴 글 보기</button>
-            <ul id="post-list" class="post-list" style="display:none;">
-                <li class="post-item">글 제목 1</li>
-                <li class="post-item">글 제목 2</li>
-                <li class="post-item">글 제목 3</li>
-            </ul>
-        </div>
-
         <!-- 예약 내역 확인 섹션 -->
         <div class="section">
             <h3 class="section-title">예약 내역</h3>
@@ -309,10 +298,44 @@
                 <li class="reservation-item">예약 내역 3</li>
             </ul>
         </div>
+        
+        <!-- 내가 쓴 글 섹션 -->
+        <div class="section">
+            <h3 class="section-title">내가 쓴 글</h3>
+            <button class="toggle-section-btn" onclick="toggleSection('post-list')">내가 쓴 글 보기</button>
+            <ul id="post-list" class="post-list" style="display:none;">
+                <li class="post-item">
+                    <table class="table table-striped" id="tbl">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>제목</th>
+                                <th>작성일</th>
+                                <th>좋아요</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${list}" var="i" end="${pager.perPage}">
+					            <tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
+                                    <td>${i.boardNum}</td>
+                                    <td>${i.boardTitle}</td>
+                                    <td>${i.boardDate}</td>
+                                    <td>${i.favorite}</td>
+                                    <td>${i.boardHits}</td>
+					            </tr>
+				            </c:forEach>
+                            
+                        </tbody>
+                    </table>
+                    <button id="btnMore" type="submit">더보기</button>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-
+    <script src="/resources/js/users/mypage.js"></script>
 </body>
 
 </html>

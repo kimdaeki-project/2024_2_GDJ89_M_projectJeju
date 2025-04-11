@@ -19,6 +19,7 @@ import com.jeju.app.boards.BoardFileDTO;
 import com.jeju.app.boards.BoardService;
 import com.jeju.app.boards.comments.CommentDTO;
 import com.jeju.app.pages.Pager;
+import com.jeju.app.users.UserDTO;
 
 @Controller
 @RequestMapping(value = "/boards/place/*")
@@ -46,6 +47,16 @@ public class PlaceController {
 		System.out.println("place cardList");
 		
 		List<BoardDTO2> ar = placeService.getcardList(pager);
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", ar);
+	}
+	
+	@RequestMapping(value = "heartlist", method = RequestMethod.GET)
+	public void getHeartList(Model model, Pager pager, HttpSession session, UserDTO userDTO) throws Exception {
+		
+		System.out.println("place cardList");
+		List<BoardDTO2> ar = placeService.getHeartList(pager, session, userDTO);
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
