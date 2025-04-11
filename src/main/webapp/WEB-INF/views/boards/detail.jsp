@@ -68,10 +68,15 @@
 						</c:choose>
 						<form action="" method="post" style="width: 48px; float: left;">
 							<c:choose>
-								<c:when test="${heart.boardNum eq null or user.userID eq null}">
+								<c:when test="${heart.boardNum eq null}">
 									<button id="btnHeart" class="btn btn-outline-danger" type="submit" data-heart-num="${heart.heart}">
 										<img src="/resources/icon/heart.svg">
 									</button>		
+								</c:when>
+								<c:when test="${user.userID eq null}">
+									<button id="btnHeart" class="btn btn-danger" type="submit" data-heart-num="${heart.heart}" disabled>
+										<img src="/resources/icon/heart-fill.svg">
+									</button>
 								</c:when>
 								<c:otherwise>
 									<button id="btnHeart" class="btn btn-danger" type="submit" data-heart-num="${heart.heart}">
@@ -104,8 +109,15 @@
 					<input type="hidden" value="${dto.boardNum}" name="boardNum">
 				</div>
 				<div class="input-group mb-3" style="margin-top: 1%;">
-					<textarea class="form-control" placeholder="댓글 작성" id="boardContents" rows="3"></textarea>
-					<button class="btn btn-outline-secondary" type="submit" id="addComments" data-board-num="${dto.boardNum}">작성</button>
+					<c:choose>
+						<c:when test="${user.userID eq null}">
+							<textarea class="form-control" placeholder="로그인 후 이용하세요." id="boardContents" rows="3" disabled></textarea>
+						</c:when>
+						<c:otherwise>
+							<textarea class="form-control" placeholder="댓글 작성" id="boardContents" rows="3"></textarea>
+							<button class="btn btn-outline-secondary" type="submit" id="addComments" data-board-num="${dto.boardNum}">작성</button>	
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 

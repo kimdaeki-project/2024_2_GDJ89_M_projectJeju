@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jeju.app.pages.Pager;
+import com.jeju.app.users.UserDTO;
 
 @Service
 public class CommentService {
@@ -32,7 +35,11 @@ public class CommentService {
 		return ar;
 	}
 	
-	public int addComments(CommentDTO commentDTO) throws Exception{
+	public int addComments(CommentDTO commentDTO, HttpSession session) throws Exception{
+		
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		commentDTO.setUserID(userDTO.getUserID());
+		
 		return commentDAO.addComments(commentDTO);
 	}
 	

@@ -47,8 +47,16 @@
 						<span hidden>${dto.boardNum}</span>
 					</div>
 					<div style="float: right; display: inline-block; width: 180px;">
-						<a class="btn btn-primary" href="/qna/update?boardNum=${dto.boardNum}" id="up" data-board-num="${dto.boardNum}">수정</a>
-						<a id="btnDelete" class="btn btn-danger" href="./delete?boardNum=${dto.boardNum}">삭제</a>
+						<c:choose>
+							<c:when test="${user.userID eq null}">
+
+							</c:when>
+							<c:otherwise>
+								<a class="btn btn-primary" href="/qna/update?boardNum=${dto.boardNum}" id="up" data-board-num="${dto.boardNum}">수정</a>
+								<a id="btnDelete" class="btn btn-danger" href="./delete?boardNum=${dto.boardNum}">삭제</a>
+							</c:otherwise>
+						</c:choose>
+						
 					</div>
 				</div>
 				<div>
