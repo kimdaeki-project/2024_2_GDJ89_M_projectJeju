@@ -34,20 +34,21 @@ public class TestJackson extends Sample{
 	@Autowired
 	private ReservService reservService;
 	
-	@Test
-	public void getReservatonsList() throws Exception {
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUserID("test");
-		List<ReservDTO> ar = reservService.getReservationsList(userDTO);
-		System.out.println(ar.size());
-		System.out.println(ar.get(4).getBoarders().get(0).getName());
-		System.out.println(ar.get(0).getfGo().getDepPlandTime());
-	}
-	
 //	@Test
-//	public void deleteInsert() throws Exception {
-//		System.out.println(apisService.initFlightsList());
+//	public void getReservatonsList() throws Exception {
+//		UserDTO userDTO = new UserDTO();
+//		userDTO.setUserID("test");
+//		List<ReservDTO> ar = reservService.getReservationsList(userDTO);
+//		System.out.println(ar.size());
+//		System.out.println(ar.get(4).getBoarders().get(0).getName());
+//		System.out.println(ar.get(0).getfGo().getDepPlandTime());
 //	}
+	
+	@Test
+	public void deleteInsert() throws Exception {
+//		System.out.println(apisService.getAirlinesList());
+		System.out.println(apisService.initFlightsList());
+	}
 	
 //	@Test
 //	public void getListTest() throws Exception {

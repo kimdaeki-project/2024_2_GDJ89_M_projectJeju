@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let valid = true;
 
         // 아이디 유효성 검사
-        if (userID.value.trim().length < 8) {
-            userIDError.textContent = "아이디는 8자 이상 입력하세요";
+        if (userID.value.trim().length < 4) {
+            userIDError.textContent = "아이디는 4자 이상 입력하세요";
             userID.focus();
             valid = false;
         }
@@ -44,7 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         // 아이디 저장 여부 처리
+
         // if (rememberID.checked) {
         //     localStorage.setItem("rememberedUserID", userID.value);
         // } else {
