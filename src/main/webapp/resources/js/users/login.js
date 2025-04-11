@@ -45,11 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 아이디 저장 여부 처리
-        if (rememberID.checked) {
-            localStorage.setItem("rememberedUserID", userID.value);
-        } else {
-            localStorage.removeItem("rememberedUserID");
-        }
+        // if (rememberID.checked) {
+        //     localStorage.setItem("rememberedUserID", userID.value);
+        // } else {
+        //     localStorage.removeItem("rememberedUserID");
+        // }
 
         // 로그인 폼 제출
         loginForm.submit();

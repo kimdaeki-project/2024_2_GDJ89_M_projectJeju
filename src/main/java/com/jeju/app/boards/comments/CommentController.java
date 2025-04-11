@@ -2,6 +2,8 @@ package com.jeju.app.boards.comments;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +29,9 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value = "addComments", method = RequestMethod.POST)
-	public String addComments(Model model, CommentDTO commentDTO) throws Exception{
+	public String addComments(Model model, CommentDTO commentDTO, HttpSession session) throws Exception{
 		
-		int result = commentService.addComments(commentDTO);
+		int result = commentService.addComments(commentDTO, session);
 		model.addAttribute("result", result);
 		
 		return "commons/ajaxResult";
