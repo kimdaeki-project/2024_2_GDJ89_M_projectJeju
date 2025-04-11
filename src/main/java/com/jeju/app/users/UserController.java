@@ -1,13 +1,19 @@
 package com.jeju.app.users;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/users/*")
@@ -57,7 +63,6 @@ public class UserController {
         session.invalidate();
         return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
     }
-
     // 마이페이지(GET)
     @RequestMapping(value = "mypage", method = RequestMethod.GET)
     public String myPage(HttpSession session, Model model) {
@@ -147,7 +152,7 @@ public class UserController {
         } else {
             session.setAttribute("msg", "전화번호 변경에 실패했습니다.");
         }
-        return "redirect:/users/profile";
+        return "redirect:/users/mypage";
     }
 
     // 회원탈퇴 페이지(GET)
@@ -189,6 +194,17 @@ public class UserController {
             return "redirect:/users/mypage"; // 오류 발생 시 마이페이지로 리다이렉트
         }
     }
+
+	@RequestMapping(value = "checkID", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Boolean> checkID(@RequestBody UserDTO userDTO) {
+	    boolean exists = userService.checkIdExists(userDTO);
+	    Map<String, Boolean> result = new HashMap();
+	    result.put("exists", exists);
+	    return result;
+	}
+	
+
 }
 
 
