@@ -198,7 +198,6 @@
             text-align: center;
             list-style: none;
         }
-    </style>
 
         .post-list, .reservation-list {
             list-style-type: none;
@@ -247,20 +246,6 @@
 
     <div class="container">
 
-        <h2>마이페이지</h2>
-
-        <!-- 개인정보 표시 섹션 -->
-        <div class="section" id="view-section">
-            <h3 class="section-title">내 정보</h3>
-            <div class="user-info">
-                <div>
-                    <p><strong>이메일</strong></p>
-                    <p>${sessionScope.user.email}</p>
-                </div>
-                <div>
-                    <p><strong>전화번호</strong></p>
-                    <p>${sessionScope.user.phone}</p>
-==================================================================
         <!-- 사이드바 -->
         <div class="sidebar">
             <h3>마이페이지</h3>
