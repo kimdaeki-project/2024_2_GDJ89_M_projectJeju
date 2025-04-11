@@ -265,6 +265,8 @@ userCheck.addEventListener("click", ()=>{
               customerName: r,
             });
           })
+        }else {
+          alert("회원정보를 정확히 입력해주세요")
         }
       })
   }

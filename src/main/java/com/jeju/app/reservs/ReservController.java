@@ -51,11 +51,14 @@ public class ReservController {
 	
 	@RequestMapping(value = "userCheck", method = RequestMethod.POST)
 	public String userCheck(Model model, UserDTO userDTO) throws Exception {
-
 		// 유저 정보 확인
 		userDTO = reservService.userCheck(userDTO);
+		if(userDTO == null) {
+			model.addAttribute("result", "");
+		}else {
+			model.addAttribute("result", userDTO.getName());			
+		}
 		
-		model.addAttribute("result", userDTO.getName());
 		return "commons/ajaxResult";
 	}
 	
