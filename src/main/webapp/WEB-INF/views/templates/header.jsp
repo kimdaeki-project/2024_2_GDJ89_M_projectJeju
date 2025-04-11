@@ -112,10 +112,11 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             게시판
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/boards/diner/list">맛집</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="/boards/place/list">명소</a></li>
                             <li><a class="dropdown-item" href="/boards/hotel/list">숙소</a></li>
-                            <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
+                            <li><a class="dropdown-item" href="/boards/diner/list">맛집</a></li>
+
                         </ul>
                     </li>
                     <!-- 공통 메뉴 -->
