@@ -77,15 +77,17 @@ getReservs.addEventListener("click", ()=>{
     })
     .then(r=>r.json())
     .then(r=>{
-        console.log(r)
-        for(let a of r) {
-            const reserv = document.getElementById("reserv")
-            while(reserv.firstChild){
-                reserv.removeChild(reserv.firstChild)
-            }
-            try {
+        const reserv = document.getElementById("reserv")
+        while(reserv.firstChild){
+            reserv.removeChild(reserv.firstChild)
+        }
+
+        if(r.length == 0) {
+            alert("예약한 내역이 없습니다")
+        }else{
+            for(let a of r) {
+                
                 createList(reserv, a);
-            } catch (error) {
                 
             }
         }

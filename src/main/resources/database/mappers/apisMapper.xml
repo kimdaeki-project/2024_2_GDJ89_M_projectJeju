@@ -25,7 +25,7 @@
 		INSERT ALL
 			<foreach collection="list" item="dto">
 				INTO AIRLINE
-				VALUES (#{dto.airlineId}, #{dto.airlineNm})
+				VALUES (#{dto.airlineNm}, #{dto.airlineId})
 			</foreach>
 		SELECT * FROM DUAL
 	</insert>
