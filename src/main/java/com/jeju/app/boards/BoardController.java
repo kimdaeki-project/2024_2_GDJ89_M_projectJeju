@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -107,14 +108,23 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches) throws Exception{
-		int result = boardService.update(boardDTO, session, attaches);
+	public String update(BoardDTO boardDTO, HttpSession session, MultipartFile[] attaches, HttpServletRequest request) throws Exception{
 		
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		String userID = request.getParameter("userID");
+		System.out.println(userDTO.getUserID()+"session");
+		System.out.println(userID+"board");
+		if (userID.equals(userDTO.getUserID())) {
+			int result = boardService.update(boardDTO, session, attaches);
+		} else {
+			
+		}
 		return "redirect:./detail?boardNum="+boardDTO.getBoardNum();
+		
 	}
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete(BoardDTO boardDTO, HttpSession session, Model model) throws Exception{
+	public String delete(BoardDTO boardDTO, HttpSession session, Model model, HttpServletRequest request) throws Exception{
 		boardDTO = boardService.getDetail(boardDTO, false);
 		String path = "";
 		if(boardDTO.getCategory()==1) {
@@ -124,11 +134,22 @@ public class BoardController {
 		}else {
 			path = "hotel/list";
 		}
-		int result = boardService.delete(boardDTO, session);
-		String s = "삭제를 실패했습니다.";
-		if (result>0) {
-			s = "삭제를 성공했습니다.";	
+		String s = "";
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		String userID = request.getParameter("userID");
+		
+		if (userID.equals(userDTO.getUserID())) {
+			int result = boardService.delete(boardDTO, session);
+			if (result>0) {
+				s = "삭제를 성공했습니다.";	
+			}else {
+				s = "삭제를 실패했습니다.";
+			}
+		}else {
+			s = "글쓴이만 삭제할 수 있습니다.";
 		}
+		
+		
 		model.addAttribute("result", s);
 		model.addAttribute("path", path);
 		
