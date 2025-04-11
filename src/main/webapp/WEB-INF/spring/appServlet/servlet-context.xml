@@ -40,6 +40,11 @@
 			<!-- bean의 이름 -->
 			<beans:ref bean="loginCheckInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/boards/detail"/>
+			
+			<beans:ref bean="userCheckInterceptor"/>
+		</interceptor>
 
 	</interceptors>
 	

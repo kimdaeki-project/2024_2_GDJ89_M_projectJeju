@@ -20,7 +20,7 @@
 	<div style="margin-top: 100px;">
 		<div class="row col-md-8 offset-md-2">
 			<!-- contents 내용 작성 -->
-			 <h1>Test Add</h1>
+			 <h1>글 작성</h1>
 			 <form action="" class="align-items-center" method="post" enctype="multipart/form-data">
 				<div class="row col-12" style="margin-top: 20px; margin-left: 0px;">
 					<input type="hidden" value="${dto.boardNum}" name="boardNum">
@@ -51,6 +51,9 @@
 					
 				</div>
 				<div style="width: 20%; margin-top: 4%;" class="btn-group" role="group" aria-label="Basic example">
+					<c:if test="${pager.locationKind eq lo1}">
+						<button type="submit" id="btnAdd" class="btn btn-primary" disabled>글쓰기</button>	
+					</c:if>
 					<button type="submit" id="btnAdd" class="btn btn-primary">글쓰기</button>
 					<c:choose>
 						<c:when test="${dto.category eq 1}">
