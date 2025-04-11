@@ -25,6 +25,17 @@ public class UserDAO {
 	public int pwUpdate(UserDTO userDTO) throws Exception {
 		return sqlSession.update(NAMESPACE+"pwUpdate", userDTO);
 	}
+
+    // 이메일 수정
+    public int emailUpdate(UserDTO userDTO) throws Exception {
+        return sqlSession.update(NAMESPACE + "emailUpdate", userDTO);
+    }
+
+    // 전화번호 수정
+    public int phoneUpdate(UserDTO userDTO) throws Exception {
+        return sqlSession.update(NAMESPACE + "phoneUpdate", userDTO);
+    }
+
 	public int userDelete(UserDTO userDTO) throws Exception {
 		return sqlSession.delete(NAMESPACE+"userDelete", userDTO);
 	}

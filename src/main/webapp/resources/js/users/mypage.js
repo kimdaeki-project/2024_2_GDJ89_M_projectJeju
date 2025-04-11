@@ -53,42 +53,7 @@ function updatePhone() {
     toggleVisibility("phone-edit-section");
 }
 
-// 비밀번호 수정 처리
-function updatePassword() {
-    var currentPassword = document.getElementById('currentPassword').value;
-    var newPassword = document.getElementById('newPassword').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-    var messageElement = document.getElementById('password-message');
 
-    // 비밀번호가 올바르게 입력되었는지 확인
-    if (!currentPassword || !newPassword || !confirmPassword) {
-        messageElement.classList.add("error-message");
-        messageElement.classList.remove("success-message");
-        messageElement.textContent = '모든 필드를 입력해주세요.';
-        messageElement.style.display = 'block';
-        return;
-    }
-
-    if (newPassword !== confirmPassword) {
-        messageElement.classList.add("error-message");
-        messageElement.classList.remove("success-message");
-        messageElement.textContent = '새 비밀번호와 확인 비밀번호가 일치하지 않습니다.';
-        messageElement.style.display = 'block';
-        return;
-    }
-
-    // 비밀번호 수정 성공
-    messageElement.classList.add("success-message");
-    messageElement.classList.remove("error-message");
-    messageElement.textContent = '비밀번호 수정되었습니다!';
-    messageElement.style.display = 'block';
-
-    // 비밀번호 수정 섹션 닫기
-    toggleVisibility("password-edit-section");
-
-    // 비밀번호 수정 후 사용자에게 알림
-    alert('새 비밀번호로 로그인 하세요.');
-}
 
 // 이메일 형식 확인 (간단한 예시)
 function validateEmail(email) {

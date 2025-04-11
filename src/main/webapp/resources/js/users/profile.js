@@ -4,6 +4,6 @@ window.onload = function() {
     const updateSuccess = urlParams.get('updateSuccess');
 
     if (updateSuccess) {
-        alert('프로필이 성공적으로 업데이트되었습니다!');
+        alert('프로필이 성공적으로 수정되었습니다 !');
     }
 };

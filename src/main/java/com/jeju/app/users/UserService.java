@@ -23,7 +23,7 @@ import com.jeju.app.pages.Pager;
 @Service
 public class UserService {
 
-	@Autowired(required=false)
+	@Autowired
 	private UserDAO userDAO;
 	
 	@Autowired
@@ -74,9 +74,43 @@ public class UserService {
 	        userDTO.setPassword(newPassword);
 	        userDAO.pwUpdate(userDTO);
 
-	        return "success";
+	        return "";
 	        
 	    }
+	
+	public String emailUpdate(UserDTO userDTO, String newEmail) throws Exception {
+
+	    if (newEmail == null || newEmail.isEmpty()) {
+	        return "이메일을 입력해주세요.";
+	    }
+
+	    if (!newEmail.contains("@") || !newEmail.contains(".")) {
+	        return "유효한 이메일 형식이 아닙니다.";
+	    }
+
+	    userDTO.setEmail(newEmail);
+	    userDAO.emailUpdate(userDTO); // DAO에서 이메일 수정 처리
+
+	    return "/users/mypage";
+	}
+	public String phoneUpdate(UserDTO userDTO, String newPhone) throws Exception {
+
+	    if (newPhone == null || newPhone.isEmpty()) {
+	        return "전화번호를 입력해주세요.";
+	    }
+
+	    // 010-xxxx-xxxx 형식 검사
+	    if (!newPhone.matches("^01[016789]-?\\d{3,4}-?\\d{4}$")) {
+	        return "유효한 전화번호 형식이 아닙니다.";
+	    }
+
+	    userDTO.setPhone(newPhone);
+	    userDAO.phoneUpdate(userDTO); // DAO에서 전화번호 수정 처리
+
+	    return "/users/mypage";
+	}
+
+
 	
 	public int userDelete(UserDTO userDTO) throws Exception{
 		
@@ -85,6 +119,7 @@ public class UserService {
 	
 	
 	}
+
 	
 	public List<BoardDTO> getMyList(MyPager pager, HttpSession session, @RequestParam("userID") UserDTO userDTO) throws Exception{
 		
@@ -103,4 +138,5 @@ public class UserService {
 		
 		return ar;
 	}
+
 }
