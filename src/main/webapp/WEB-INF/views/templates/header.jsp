@@ -112,14 +112,22 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             게시판
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/boards/diner/list">맛집</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="/boards/place/list">명소</a></li>
                             <li><a class="dropdown-item" href="/boards/hotel/list">숙소</a></li>
-                            <li><a class="dropdown-item" href="/boards/place/list">명소 후기</a></li>
+                            <li><a class="dropdown-item" href="/boards/diner/list">맛집</a></li>
                         </ul>
                     </li>
                     <!-- 공통 메뉴 -->
-                    <li class="nav-item"><a class="nav-link active" href="/flights/search">AIR</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            AIR
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li class="nav-item"><a class="nav-link active" href="/flights/search">AIR</a></li>
+                            <li><a class="dropdown-item" href="/information/carplace">공항 별 주차장</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link active" href="/qna/list">QNA</a></li>
                     <li class="nav-item"><a class="nav-link active" href="/notice/list">NOTICE</a></li>
 

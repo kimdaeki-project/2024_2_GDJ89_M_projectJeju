@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+
         // 로그인 폼 제출
         loginForm.submit();
     });

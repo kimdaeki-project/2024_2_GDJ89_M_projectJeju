@@ -72,15 +72,13 @@ public class DinerService {
 		
 		pager.setKind("k1");
 		
-		Long totalCount = boardDAO.getTotalHeartCount2(pager);
-		
-		pager.cardMake(totalCount);
-		pager.makeNum();
-		
 		userDTO = (UserDTO)session.getAttribute("user");
 		BoardDTO2 dto = new BoardDTO2();
 		dto.setUserID(userDTO.getUserID());
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		
 		
 		map.put("userID", userDTO.getUserID());
 		map.put("searchKind", pager.getSearchKind());
@@ -90,6 +88,10 @@ public class DinerService {
 		map.put("kind", pager.getKind());
 		map.put("locationKind", pager.getLocationKind());
 		
+		Long totalCount = boardDAO.getTotalHeartCount2(map);
+		
+		pager.cardMake(totalCount);
+		pager.makeNum();
 		List<BoardDTO2> ar = boardDAO.getDinerHeartList(map);
 		
 		return ar;

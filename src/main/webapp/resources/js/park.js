@@ -26,7 +26,7 @@ function getParkDetail(code){
     fetch("https://cors-anywhere.herokuapp.com/http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT?serviceKey=UY0LceQLBv9nnI8YXrbNCDHXrZX5m%2ByqFe06WQ7WLL%2FliRvUp5DX9GaJqb4zHbvXtihjasHEhyoOTC8d57nkHQ%3D%3D&pageNo=1&numOfRows=20&schAirportCode="+code)
         .then(r=>r.text())
         .then(r=>{
-            if (code==''){
+            if (code=='x'){
                 airportNm.innerText="DATA가 없습니다."
                 stat.innerText="DATA가 없습니다."
                 per.innerText="DATA가 없습니다."
@@ -75,16 +75,16 @@ select.addEventListener('change', async ()=>{
         var code = 'GMP';
     }else if (select.value=='인천'){
         ps.keywordSearch('인천공항 근처 주차장', placesSearchCB);
-        var code = '';
+        var code = 'x';
     }else if (select.value=='광주'){
         ps.keywordSearch('광주공항 근처 주차장', placesSearchCB);
         var code = 'KWJ';
     }else if (select.value=='사천'){
         ps.keywordSearch('사천공항 근처 주차장', placesSearchCB);
-        var code = '';
+        var code = 'x';
     }else if (select.value=='무안'){
         ps.keywordSearch('무안공항 근처 주차장', placesSearchCB);
-        var code = '';
+        var code = 'x';
     }else if (select.value=='군산'){
         ps.keywordSearch('군산공항 근처 주차장', placesSearchCB);
         var code = 'KUV';
@@ -93,7 +93,7 @@ select.addEventListener('change', async ()=>{
         var code = 'RSU';
     }else if (select.value=='양양'){
         ps.keywordSearch('양양공항 근처 주차장', placesSearchCB);
-        var code = '';
+        var code = 'x';
     }else if (select.value=='김해'){
         ps.keywordSearch('김해공항 근처 주차장', placesSearchCB);
         var code = 'PUS';
@@ -111,7 +111,7 @@ select.addEventListener('change', async ()=>{
         var code = 'CJU'
     }else if (select.value=='포항'){
         ps.keywordSearch('포항공항 근처 주차장', placesSearchCB);
-        var code = '';
+        var code = 'x';
     }else if (select.value=='원주'){
         ps.keywordSearch('원주공항 근처 주차장', placesSearchCB);
         var code = 'WJU';

@@ -37,8 +37,12 @@ const di5 = document.getElementById("list5")
 const di6 = document.getElementById("list6")
 const di7 = document.getElementById("list7")
 const dis = [di1, di2, di3, di4, di5, di6, di7]
+const contentCheck =document.getElementById("accordionFlushExample")
 
-
+if(contentCheck.innerText == "") {
+  alert("조건에 맞는 항공편이 없습니다")
+  history.back();
+}
 
 function init (){
 
