@@ -1,4 +1,3 @@
-// 비밀번호 수정 처리 (별도 페이지/섹션 전용)
 function pwUpdate() {
     const currentPassword = document.getElementById('currentPassword').value;
     const newPassword = document.getElementById('newPassword').value;
@@ -15,22 +14,35 @@ function pwUpdate() {
         return;
     }
 
-    // 간단한 비밀번호 유효성 검사 (영문+숫자+특수문자 8자 이상)
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/;
     if (!pwRegex.test(newPassword)) {
         showMessage(messageElement, '비밀번호는 8자 이상이며, 영문/숫자/특수문자를 포함해야 합니다.', false);
         return;
     }
 
-    showMessage(messageElement, '비밀번호 수정되었습니다!', true);
-    toggleVisibility("password-edit-section");
-    alert('새 비밀번호로 로그인하세요.');
-}
-
-// 메시지 표시 유틸 함수
-function showMessage(element, message, success) {
-    element.classList.remove("success-message", "error-message");
-    element.classList.add(success ? "success-message" : "error-message");
-    element.textContent = message;
-    element.style.display = 'block';
+    // 서버로 현재 비밀번호 및 새 비밀번호 전송
+    fetch('/users/change-password', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            currentPassword: currentPassword,
+            newPassword: newPassword
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showMessage(messageElement, '비밀번호가 성공적으로 변경되었습니다.', true);
+            toggleVisibility("password-edit-section");
+            alert('새 비밀번호로 로그인하세요.');
+        } else {
+            showMessage(messageElement, data.message || '현재 비밀번호가 일치하지 않습니다.', false);
+        }
+    })
+    .catch(error => {
+        console.error('오류 발생:', error);
+        showMessage(messageElement, '서버 오류가 발생했습니다.', false);
+    });
 }

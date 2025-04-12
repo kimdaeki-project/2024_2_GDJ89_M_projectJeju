@@ -221,20 +221,30 @@
         <div class="content">
             <h2>${sessionScope.user.name}님, 환영합니다!</h2>
 
-            <!-- 내 정보 섹션 -->
-            <div class="section" id="view-section">
-                <h3 class="section-title">내 정보</h3>
-                <div class="user-info">
-                    <div>
-                        <p><strong>이메일</strong></p>
-                        <p>${sessionScope.user.email}</p>
-                    </div>
-                    <div>
-                        <p><strong>전화번호</strong></p>
-                        <p>${sessionScope.user.phone}</p>
-                    </div>
-                </div>
-            </div>
+<!-- 내 정보 섹션 -->
+<div class="section" id="view-section">
+    <h3 class="section-title">내 정보</h3>
+    <div class="user-info">
+        <div>
+            <p><strong>이메일</strong></p>
+            <p>${sessionScope.user.email}</p>
+        </div>
+        <div>
+            <p><strong>전화번호</strong></p>
+            <p>${sessionScope.user.phone}</p>
+        </div>
+    </div>
+
+    <!-- ✅ 여기 안쪽으로 버튼 이동 -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="${pageContext.request.contextPath}/users/userDelete" 
+           class="btn btn-secondary"
+           style="background-color: #dc3545; color: #fff; width: 200px; display: inline-block; padding: 14px; border-radius: 30px;">
+            회원 탈퇴
+        </a>
+    </div>
+</div>
+
 
             <!-- 정보 수정 섹션 -->
             <div class="section hidden" id="edit-section">
