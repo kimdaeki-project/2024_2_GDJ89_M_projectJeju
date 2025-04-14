@@ -84,9 +84,9 @@
         <input type="password" id="password" name="password" class="form-control" required>
 
         <button type="submit" class="btn-danger">탈퇴하기</button>
-    </form>
+    </form> 
 </div>
 
 <c:import url="/WEB-INF/views/templates/footer.jsp"/>
-</body>
+</body>    
 </html>

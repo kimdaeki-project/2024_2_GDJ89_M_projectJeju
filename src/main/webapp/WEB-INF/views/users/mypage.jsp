@@ -281,37 +281,12 @@
             <!-- 내가 쓴 글 섹션 -->
             <div class="section hidden" id="post-list">
                 <h3 class="section-title">내가 쓴 글</h3>
-                <ul id="post-list" class="post-list" style="list-style: none;">
-                    <li class="post-item">
-                        <table class="table table-striped" id="tbl">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>제목</th>
-                                    <th>작성일</th>
-                                    <th>좋아요</th>
-                                    <th>조회수</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${list}" var="i">
-                                    <tr onclick="location.href='/boards/detail?boardNum=${i.boardNum}'">
-                                        <td>${i.boardNum}</td>
-                                        <td>${i.boardTitle}</td>
-                                        <td>${i.boardDate}</td>
-                                        <td>${i.favorite}</td>
-                                        <td>${i.boardHits}</td>
-                                    </tr>
-                                </c:forEach>
-                                
-                            </tbody>
-                        </table>
-                    </li>
-
+                <ul>
+                    <li>글 제목 1</li>
+                    <li>글 제목 2</li>
+                    <li>글 제목 3</li>
                 </ul>
-    
             </div>
-
         
     </div>
 
