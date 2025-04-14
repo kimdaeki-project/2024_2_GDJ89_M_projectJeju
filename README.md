@@ -1,6 +1,6 @@
-##ProjectJeju
+## ProjectJeju
 
-교육원   : 구디아카데미 <br>
+교육원   : 구디아카데미
 
 강  사   : 김대기
 
