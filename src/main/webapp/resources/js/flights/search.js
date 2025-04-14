@@ -42,6 +42,8 @@ flightSearch.addEventListener("click", ()=>{
     
   if(adult.value+child.value+infant.value == 0) {
     alert("여정은 최소 한명의 탑승객이 있어야 합니다")
+  }else if(depPlandTime.value == "" || depPlandTimeToCome.value == ""){
+    alert("여행 일정을 입력해주세요")
   }else{
     
     let params = new FormData();
