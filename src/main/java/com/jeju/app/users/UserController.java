@@ -1,18 +1,19 @@
 package com.jeju.app.users;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.jeju.app.boards.BoardDTO;
-import com.jeju.app.pages.MyPager;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/users/*")
@@ -62,10 +63,9 @@ public class UserController {
         session.invalidate();
         return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
     }
-
     // 마이페이지(GET)
     @RequestMapping(value = "mypage", method = RequestMethod.GET)
-    public String myPage(HttpSession session, Model model, MyPager pager) {
+    public String myPage(HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 정보를 확인
         if (session.getAttribute("user") == null) {
             // 로그인하지 않았다면 로그인 페이지로 리다이렉트
@@ -77,10 +77,7 @@ public class UserController {
         try {
             // getDetail 메소드를 호출하여 사용자 상세 정보 조회
             UserDTO userDetail = userService.getDetail(userDTO);
-            List<BoardDTO> ar = userService.getMyList(pager, session, userDTO);
             model.addAttribute("userDetail", userDetail); // 사용자 상세 정보를 모델에 추가
-            model.addAttribute("pager", pager);
-            model.addAttribute("list", ar);
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("message", "사용자 정보를 불러오는 데 실패했습니다.");
@@ -155,7 +152,7 @@ public class UserController {
         } else {
             session.setAttribute("msg", "전화번호 변경에 실패했습니다.");
         }
-        return "redirect:/users/profile";
+        return "redirect:/users/mypage";
     }
 
     // 회원탈퇴 페이지(GET)
@@ -197,6 +194,17 @@ public class UserController {
             return "redirect:/users/mypage"; // 오류 발생 시 마이페이지로 리다이렉트
         }
     }
+
+	@RequestMapping(value = "checkID", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Boolean> checkID(@RequestBody UserDTO userDTO) {
+	    boolean exists = userService.checkIdExists(userDTO);
+	    Map<String, Boolean> result = new HashMap();
+	    result.put("exists", exists);
+	    return result;
+	}
+
+
 }
 
 
