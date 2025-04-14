@@ -26,8 +26,15 @@
         		<td>${c.boardDate}</td>
                 <input type="hidden" value="${dto.boardNum}" name="boardNum">
                 <td>
-                    <button class="btn btn-outline-primary updateComments" data-update-commentNum="${c.commentNum}" data-bs-toggle="modal" data-bs-target="#exampleModal">수정</button>
-                    <button class="btn btn-outline-danger deleteComments" data-delete-commentNum="${c.commentNum}">삭제</button> 
+                    <c:choose>
+                        <c:when test="${c.userID eq user.userID}">
+                            <button class="btn btn-outline-primary updateComments" data-update-commentNum="${c.commentNum}" data-bs-toggle="modal" data-bs-target="#exampleModal">수정</button>
+                            <button class="btn btn-outline-danger deleteComments" data-delete-commentNum="${c.commentNum}">삭제</button> 
+                        </c:when>
+                        <c:otherwise>
+                            
+                        </c:otherwise>
+                    </c:choose>
                 </td>
         	</tr>
         </c:forEach>

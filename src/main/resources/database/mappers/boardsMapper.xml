@@ -417,7 +417,7 @@
 	
  	<insert id="addFile" parameterType="BoardFileDTO">
 		INSERT INTO IMAGES
-		VALUES (file_seq.nextval, #{boardNum}, #{fileName}, #{oldName})
+		VALUES (file_seq.nextval, #{boardNum, jdbcType=VARCHAR}, #{fileName, jdbcType=VARCHAR}, #{oldName, jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="updateHits" parameterType="BoardDTO">

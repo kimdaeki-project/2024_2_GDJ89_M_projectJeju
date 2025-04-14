@@ -27,8 +27,13 @@ public class BoardService {
 	private FileManager fileManager;
 	
 	public int add(BoardDTO boardDTO, HttpSession session, MultipartFile files) throws Exception {
-		int result = boardDAO.add(boardDTO);
-			BoardFileDTO boardFileDTO = this.fileSave(files, session.getServletContext());
+			int result = boardDAO.add(boardDTO);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			if (files != null && !files.isEmpty()) {
+				boardFileDTO = this.fileSave(files, session.getServletContext());				
+			}else {
+				
+			}
 			System.out.println(boardFileDTO.getFileName()+"이름");
 			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
 			result = boardDAO.addFiles(boardFileDTO);

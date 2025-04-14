@@ -25,7 +25,7 @@
 				<div class="row col-12" style="margin-top: 20px; margin-left: 0px;">
 					<input type="hidden" value="${dto.boardNum}" name="boardNum">
 					<select id="loc" style="width:	 250px;" name="location" class="form-select">
-					    <option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>지역을 선택하세요.</option>
+					    <option value="lo1" ${pager.locationKind eq 'lo1' ? 'selected': ''}>전체 지역</option>
 					    <option value="제주시" ${pager.locationKind eq 'lo2' ? 'selected': ''}>제주시</option>
 						<option value="애월" ${pager.locationKind eq 'lo3' ? 'selected': ''}>애월</option>
 						<option value="서귀포" ${pager.locationKind eq 'lo4' ? 'selected': ''}>서귀포</option>
@@ -51,10 +51,14 @@
 					
 				</div>
 				<div style="width: 20%; margin-top: 4%;" class="btn-group" role="group" aria-label="Basic example">
-					<c:if test="${pager.locationKind eq lo1}">
-						<button type="submit" id="btnAdd" class="btn btn-primary" disabled>글쓰기</button>	
-					</c:if>
-					<button type="submit" id="btnAdd" class="btn btn-primary">글쓰기</button>
+					<c:choose>
+						<c:when test="ioc.value=lo1">
+							<button type="submit" id="btnAdd" class="btn btn-primary" disabled>지역을 선택하세요</button>
+						</c:when>
+						<c:otherwise>
+							<button type="submit" id="btnAdd" class="btn btn-primary">글쓰기</button>		
+						</c:otherwise>
+					</c:choose>
 					<c:choose>
 						<c:when test="${dto.category eq 1}">
 							<a class="btn btn-danger" href="/boards/place/list">취소</a>
