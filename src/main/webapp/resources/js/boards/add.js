@@ -1,6 +1,7 @@
 const locationResult = document.getElementById("locationResult");
 const loc = document.getElementById("loc");
-
+const summernote = document.getElementById("summernote");
+const title = document.getElementById("title");
 
 
 loc.addEventListener('change', ()=>{
@@ -15,5 +16,9 @@ loc.addEventListener('change', ()=>{
             locationResult.innerText='지역을 선택하세요.'
         }
     })
+})
+
+title.addEventListener('keydown', ()=>{
+    console.log(title.value)
 })
 

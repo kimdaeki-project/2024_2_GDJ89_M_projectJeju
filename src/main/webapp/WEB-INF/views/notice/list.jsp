@@ -62,8 +62,14 @@
 			  </li>
 			</ul>
 			  </nav>
-			  <
-				<a class="btn btn-success" href="add">글쓰기</a>
+			  <c:choose>
+				<c:when test="${user.userID eq 'admin'}">
+					<a class="btn btn-success" href="add">글쓰기</a>
+				</c:when>
+				<c:otherwise>
+					<button class="btn btn-success" disabled>관리자만 작성할 수 있습니다.</button>
+				</c:otherwise>
+			  </c:choose>
 			
 			
 			
