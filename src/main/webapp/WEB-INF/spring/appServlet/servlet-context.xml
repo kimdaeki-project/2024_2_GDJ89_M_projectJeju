@@ -35,7 +35,7 @@
 			<mapping path="/boards/place/heartlist"/>
 			<mapping path="/boards/diner/heartlist"/>
 			<mapping path="/boards/hotel/heartlist"/>
-			<mapping path="/boards/add"/>
+			<!-- <mapping path="/boards/add"/> -->
 			<mapping path="/boards/delete"/>
 			<mapping path="/qna/add"/>
 			<!-- bean의 이름 -->

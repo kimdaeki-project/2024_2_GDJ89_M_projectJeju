@@ -41,9 +41,15 @@
 					</select>
 					<span id="locationResult" style="color: red; width: 170px; padding-top: 6px;">지역을 선택하세요.</span>
 				</div>
-				<div class="col-12">
-					<input type="text" class="form-control" id="exampleInputEmail1" value="${dto.boardTitle}" name="boardTitle" aria-describedby="emailHelp" placeholder="제목" style="margin-bottom: 1%; margin-top: 7px;">
-				</div>
+				<div class="col-12 has-validation">
+					<div class="form-floating is-invalid">
+					  <input type="text" class="form-control is-invalid" id="floatingInputGroup2" placeholder="제목" name="boardTitle" value="${dto.boardTitle}" style="margin-bottom: 1%; margin-top: 7px;" required>
+					  <label for="floatingInputGroup2">제목</label>
+					</div>
+					<div class="invalid-feedback">
+					  제목을 입력하세요.
+					</div>
+				  </div>
 				<div>
 					<textarea id="summernote" name="boardContents" value="${dto.boardContents}">
 

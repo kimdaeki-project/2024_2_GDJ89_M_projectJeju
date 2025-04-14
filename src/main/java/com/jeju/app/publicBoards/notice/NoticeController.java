@@ -47,8 +47,17 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String add() throws Exception{
-		return "notice/add";
+	public String add(HttpSession session, Model model, PB_DTO dto) throws Exception{
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		if(userDTO.getUserID().equals("admin")) {
+			return "notice/add";		
+		}else {
+			String path = "list";
+			String s = "관리자만 작성할 수 있습니다.";
+			model.addAttribute("path", path);
+			model.addAttribute("result", s);
+			return "commons/result";
+		}
 	}
 	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
