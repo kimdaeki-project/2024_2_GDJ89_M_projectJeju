@@ -53,15 +53,15 @@
 			<div>
 				<div>
 					<div style="display: inline-block;">
-						<h1>${dto.boardTitle}</h1> 
+						<h1 id="up" data-board-num="${dto.boardNum}">${dto.boardTitle}</h1> 
 						<span hidden>${dto.boardNum}</span>
 					</div>
 					<div style="float: right; display: inline-block; width: 180px;">
 						
 						<c:choose>
 							<c:when test="${user.userID eq dto.userID}">
-								<a class="btn btn-primary" href="/boards/update?boardNum=${dto.boardNum}" id="up" data-board-num="${dto.boardNum}">수정</a>
-							<a id="btnDelete" class="btn btn-danger" href="./delete?boardNum=${dto.boardNum}">삭제</a>
+								<a class="btn btn-primary" href="/boards/update?boardNum=${dto.boardNum}&userID=${dto.userID}">수정</a>
+							<a id="btnDelete" class="btn btn-danger" href="./delete?boardNum=${dto.boardNum}&userID=${dto.userID}">삭제</a>
 							</c:when>
 							<c:otherwise>
 							</c:otherwise>

@@ -26,12 +26,12 @@ function getParkDetail(code){
     fetch("https://cors-anywhere.herokuapp.com/http://openapi.airport.co.kr/service/rest/AirportParkingCongestion/airportParkingCongestionRT?serviceKey=UY0LceQLBv9nnI8YXrbNCDHXrZX5m%2ByqFe06WQ7WLL%2FliRvUp5DX9GaJqb4zHbvXtihjasHEhyoOTC8d57nkHQ%3D%3D&pageNo=1&numOfRows=20&schAirportCode="+code)
         .then(r=>r.text())
         .then(r=>{
-            if (code=='x'){
-                airportNm.innerText="DATA가 없습니다."
-                stat.innerText="DATA가 없습니다."
-                per.innerText="DATA가 없습니다."
-                max.innerText="DATA가 없습니다."
-                park.innerText="DATA가 없습니다."
+            if (code==''){
+                airportNm.innerText="DATA가 없습니다.";
+                stat.innerText="DATA가 없습니다.";
+                per.innerText="DATA가 없습니다.";
+                max.innerText="DATA가 없습니다.";
+                park.innerText="DATA가 없습니다.";
             }
             let parser = new DOMParser();
         let Doc = parser.parseFromString(r, "text/xml");
@@ -69,56 +69,79 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places(); 
 
 
-select.addEventListener('change', async ()=>{
-    if (select.value=='김포'){
-        ps.keywordSearch('김포공항 근처 주차장', placesSearchCB);
-        var code = 'GMP';
-    }else if (select.value=='인천'){
-        ps.keywordSearch('인천공항 근처 주차장', placesSearchCB);
-        var code = 'x';
-    }else if (select.value=='광주'){
-        ps.keywordSearch('광주공항 근처 주차장', placesSearchCB);
-        var code = 'KWJ';
-    }else if (select.value=='사천'){
-        ps.keywordSearch('사천공항 근처 주차장', placesSearchCB);
-        var code = 'x';
-    }else if (select.value=='무안'){
-        ps.keywordSearch('무안공항 근처 주차장', placesSearchCB);
-        var code = 'x';
-    }else if (select.value=='군산'){
-        ps.keywordSearch('군산공항 근처 주차장', placesSearchCB);
-        var code = 'KUV';
-    }else if (select.value=='여수'){
-        ps.keywordSearch('여수공항 근처 주차장', placesSearchCB);
-        var code = 'RSU';
-    }else if (select.value=='양양'){
-        ps.keywordSearch('양양공항 근처 주차장', placesSearchCB);
-        var code = 'x';
-    }else if (select.value=='김해'){
-        ps.keywordSearch('김해공항 근처 주차장', placesSearchCB);
-        var code = 'PUS';
-    }else if (select.value=='울산'){
-        ps.keywordSearch('울산공항 근처 주차장', placesSearchCB);
-        var code = 'USN';
-    }else if (select.value=='대구'){
-        ps.keywordSearch('대구공항 근처 주차장', placesSearchCB);
-        var code = 'TAE';
-    }else if (select.value=='청주'){
-        ps.keywordSearch('청주공항 근처 주차장', placesSearchCB);
-        var code = 'CJJ';
-    }else if (select.value=='제주'){
-        ps.keywordSearch('제주공항 근처 주차장', placesSearchCB);
-        var code = 'CJU'
-    }else if (select.value=='포항'){
-        ps.keywordSearch('포항공항 근처 주차장', placesSearchCB);
-        var code = 'x';
-    }else if (select.value=='원주'){
-        ps.keywordSearch('원주공항 근처 주차장', placesSearchCB);
-        var code = 'WJU';
-    }
-    getParkDetail(code);
-})
+// select.addEventListener('change', async ()=>{
+//     if (select.value=='김포'){
+//         ps.keywordSearch('김포공항 근처 주차장', placesSearchCB);
+//         var code = 'GMP';
+//     }else if (select.value=='인천'){
+//         ps.keywordSearch('인천공항 근처 주차장', placesSearchCB);
+//         var code = '';
+//     }else if (select.value=='광주'){
+//         ps.keywordSearch('광주공항 근처 주차장', placesSearchCB);
+//         var code = 'KWJ';
+//     }else if (select.value=='사천'){
+//         ps.keywordSearch('사천공항 근처 주차장', placesSearchCB);
+//         var code = '';
+//     }else if (select.value=='무안'){
+//         ps.keywordSearch('무안공항 근처 주차장', placesSearchCB);
+//         var code = '';
+//     }else if (select.value=='군산'){
+//         ps.keywordSearch('군산공항 근처 주차장', placesSearchCB);
+//         var code = 'KUV';
+//     }else if (select.value=='여수'){
+//         ps.keywordSearch('여수공항 근처 주차장', placesSearchCB);
+//         var code = 'RSU';
+//     }else if (select.value=='양양'){
+//         ps.keywordSearch('양양공항 근처 주차장', placesSearchCB);
+//         var code = '';
+//     }else if (select.value=='김해'){
+//         ps.keywordSearch('김해공항 근처 주차장', placesSearchCB);
+//         var code = 'PUS';
+//     }else if (select.value=='울산'){
+//         ps.keywordSearch('울산공항 근처 주차장', placesSearchCB);
+//         var code = 'USN';
+//     }else if (select.value=='대구'){
+//         ps.keywordSearch('대구공항 근처 주차장', placesSearchCB);
+//         var code = 'TAE';
+//     }else if (select.value=='청주'){
+//         ps.keywordSearch('청주공항 근처 주차장', placesSearchCB);
+//         var code = 'CJJ';
+//     }else if (select.value=='제주'){
+//         ps.keywordSearch('제주공항 근처 주차장', placesSearchCB);
+//         var code = 'CJU'
+//     }else if (select.value=='포항'){
+//         ps.keywordSearch('포항공항 근처 주차장', placesSearchCB);
+//         var code = '';
+//     }else if (select.value=='원주'){
+//         ps.keywordSearch('원주공항 근처 주차장', placesSearchCB);
+//         var code = 'WJU';
+//     }
+//     getParkDetail(code);
+// })
     
+
+select.addEventListener('change', async () => {
+    let code = ''; // 기본값 설정
+
+    switch (select.value) {
+        case '김포': code = 'GMP'; break;
+        case '광주': code = 'KWJ'; break;
+        case '군산': code = 'KUV'; break;
+        case '여수': code = 'RSU'; break;
+        case '김해': code = 'PUS'; break;
+        case '울산': code = 'USN'; break;
+        case '대구': code = 'TAE'; break;
+        case '청주': code = 'CJJ'; break;
+        case '제주': code = 'CJU'; break;
+        case '원주': code = 'WJU'; break;
+    }
+
+    if (code !== '') {
+        getParkDetail(code);
+    }
+    ps.keywordSearch("", () => {}); // 이전 검색 초기화
+    ps.keywordSearch(select.value + '공항 근처 주차장', placesSearchCB);
+});
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {

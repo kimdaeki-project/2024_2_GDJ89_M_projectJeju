@@ -62,7 +62,8 @@
 			  </li>
 			</ul>
 			  </nav>
-				<!-- <a class="btn btn-success" href="add">글쓰기</a> -->
+			  <
+				<a class="btn btn-success" href="add">글쓰기</a>
 			
 			
 			
