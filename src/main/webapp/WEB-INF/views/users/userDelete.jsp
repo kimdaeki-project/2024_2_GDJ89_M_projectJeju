@@ -88,5 +88,5 @@
 </div>
 
 <c:import url="/WEB-INF/views/templates/footer.jsp"/>
-</body>
+</body>    
 </html>
