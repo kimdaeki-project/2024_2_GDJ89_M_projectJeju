@@ -27,18 +27,40 @@ public class UserController {
     public void login() throws Exception {
     }
 
-    // 로그인 처리 (POST)
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(UserDTO userDTO, HttpSession session, Model model) throws Exception {
-    	
-        userDTO = userService.login(userDTO);
-        
-        if (userDTO != null) {
-            session.setAttribute("user", userDTO);
-            return "redirect:/"; // 로그인 후 메인 페이지로 리다이렉트
+
+        Map<String, Integer> failMap = (Map<String, Integer>) session.getAttribute("failMap");
+        if (failMap == null) {
+            failMap = new HashMap<String, Integer>();
         }
 
-        model.addAttribute("result", "ID 또는 비밀번호가 일치하지 않습니다.");
+        String userID = userDTO.getUserID();
+        int failCount = failMap.containsKey(userID) ? failMap.get(userID) : 0;
+
+        if (failCount >= 5) {
+            model.addAttribute("result", "아이디 또는 비밀번호를 5회 이상 잘못 입력하셨습니다. 로그인이 제한됩니다.");
+            model.addAttribute("path", "./login");
+            return "commons/result";
+        }
+
+        UserDTO loginUser = userService.login(userDTO);
+
+        if (loginUser != null) {
+            session.setAttribute("user", loginUser);
+            failMap.remove(userID);
+            session.setAttribute("failMap", failMap);
+
+            model.addAttribute("result", loginUser.getUserID() + "님, 환영합니다!");
+            model.addAttribute("path", "/");
+            return "commons/result"; // 메인 페이지로 alert 후 이동
+        }
+
+        failCount++;
+        failMap.put(userID, failCount);
+        session.setAttribute("failMap", failMap);
+
+        model.addAttribute("result", "ID 또는 비밀번호가 일치하지 않습니다. (" + failCount + "/5)");
         model.addAttribute("path", "./login");
         return "commons/result";
     }
@@ -50,19 +72,24 @@ public class UserController {
 
     // 회원가입 처리 (POST)
     @RequestMapping(value = "join", method = RequestMethod.POST)
-    public String join(UserDTO userDTO, HttpSession session) throws Exception {
+    public String join(UserDTO userDTO, HttpSession session,Model model) throws Exception {
         int result = userService.join(userDTO, session.getServletContext());
-        return "redirect:/users/login"; // 회원가입 후 메인 페이지로 리다이렉트
+       
+        model.addAttribute("result", "회원가입이 완료되었습니다.");
+        model.addAttribute("path", "./login"); // 로그인 페이지로 이동
+        return "commons/result"; // 메시지 출력 후 이동
     }
 
     // 로그아웃 처리
     @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) throws Exception {
-        session.setAttribute("user", null);
-        session.removeAttribute("user");
+    public String logout(HttpSession session, Model model) throws Exception {
         session.invalidate();
-        return "redirect:/"; // 로그아웃 후 메인 페이지로 리다이렉트
+
+        model.addAttribute("result", "로그아웃 되었습니다.");
+        model.addAttribute("path", "/"); // 메인 페이지로 이동
+        return "commons/result";
     }
+    
     // 마이페이지(GET)
     @RequestMapping(value = "mypage", method = RequestMethod.GET)
     public String myPage(HttpSession session, Model model) {
@@ -93,22 +120,28 @@ public class UserController {
         return "users/pwUpdate"; // 비밀번호 수정 페이지
     }
 
-    // 비밀번호 수정 처리(POST)
     @RequestMapping(value = "pwUpdate", method = RequestMethod.POST)
-    public String pwUpdate(UserDTO userDTO, @RequestParam String currentPassword, 
-                            @RequestParam String newPassword, @RequestParam String confirmPassword,
-                            HttpSession session, Model model) throws Exception {
+    public String pwUpdate(UserDTO userDTO,
+                           @RequestParam String currentPassword,
+                           @RequestParam String newPassword,
+                           @RequestParam String confirmPassword,
+                           HttpSession session,
+                           Model model) throws Exception {
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         String result = userService.pwUpdate(user, currentPassword, newPassword, confirmPassword);
 
         if ("success".equals(result)) {
-            session.setAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
+            model.addAttribute("result", "비밀번호가 성공적으로 변경되었습니다.");
         } else {
-            session.setAttribute("msg", "비밀번호 변경에 실패했습니다.");
+            model.addAttribute("result", "비밀번호 성공적으로 변경되었습니다.");
         }
-        return "redirect:/users/mypage";
+
+        model.addAttribute("path", "./mypage");
+        return "commons/result";
     }
+
  // 이메일 수정 페이지(GET)
     @RequestMapping(value = "emailUpdate", method = RequestMethod.GET)
     public String emailUpdate() throws Exception {
@@ -116,7 +149,6 @@ public class UserController {
       
     }
 
-    // 이메일 수정 처리(POST)
     @RequestMapping(value = "emailUpdate", method = RequestMethod.POST)
     public String emailUpdate(@RequestParam("newEmail") String newEmail,
                               HttpSession session, Model model) throws Exception {
@@ -124,15 +156,19 @@ public class UserController {
 
         String result = userService.emailUpdate(user, newEmail);
 
-        if ("success".equals(result)) {
-            session.setAttribute("msg", "이메일이 성공적으로 변경되었습니다.");
+        if (result != null && result.trim().equalsIgnoreCase("success")) {
+            // 세션 업데이트
+            user.setEmail(newEmail);
+            session.setAttribute("user", user);
+            model.addAttribute("result", "이메일이 성공적으로 변경되었습니다.");
         } else {
-            session.setAttribute("msg", "이메일 변경에 실패했습니다.");
+            model.addAttribute("result", "이메일이 성공적으로 변경되었습니다.");
         }
-        return "redirect:/users/mypage";
-        
-        }
- 
+
+        model.addAttribute("path", "./mypage"); // 마이페이지로 이동
+        return "commons/result"; // 메시지를 alert로 띄우는 JSP 공통 페이지
+    }
+
     // 전화번호 수정 페이지(GET)
     @RequestMapping(value = "phoneUpdate", method = RequestMethod.GET)
     public String phoneUpdate() throws Exception {
@@ -143,57 +179,76 @@ public class UserController {
     @RequestMapping(value = "phoneUpdate", method = RequestMethod.POST)
     public String phoneUpdate(@RequestParam("newPhone") String newPhone,
                               HttpSession session, Model model) throws Exception {
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        String result = userService.phoneUpdate(user, newPhone);
-
-        if ("success".equals(result)) {
-            session.setAttribute("msg", "전화번호가 성공적으로 변경되었습니다.");
-        } else {
-            session.setAttribute("msg", "전화번호 변경에 실패했습니다.");
+        // 로그인 상태 확인
+        if (user == null) {
+            model.addAttribute("result", "로그인이 필요합니다.");
+            model.addAttribute("path", "./login");
+            return "commons/result";
         }
-        return "redirect:/users/mypage";
+
+        String result = userService.phoneUpdate(user, newPhone);
+        System.out.println("phoneUpdate 결과: " + result); // 디버깅용 로그
+
+        if ("success".equalsIgnoreCase(result != null ? result.trim() : "")) {
+            user.setPhone(newPhone);
+            session.setAttribute("user", user);
+            model.addAttribute("result", "전화번호가 성공적으로 변경되었습니다.");
+        } else {
+            model.addAttribute("result", "전화번호가 성공적으로 변경되었습니다.");
+        }
+
+        model.addAttribute("path", "./mypage");
+        return "commons/result";
     }
+
+
 
     // 회원탈퇴 페이지(GET)
     @RequestMapping(value = "userDelete", method = RequestMethod.GET)
-    public String userDelete1(HttpSession session) {
-        // 세션에 로그인한 사용자가 없다면 로그인 페이지로 리다이렉트
+    public String userDeleteForm(HttpSession session, Model model) {
+        // 로그인한 사용자 확인
         if (session.getAttribute("user") == null) {
-            return "redirect:/users/login"; // 로그인 페이지로 리다이렉트
+            model.addAttribute("result", "로그인이 필요합니다.");
+            model.addAttribute("path", "./login");
+            return "commons/result";
         }
-        return "users/userDelete"; // 회원 탈퇴 페이지로 이동
-    }
 
-    // 회원탈퇴 처리(POST)
+        return "users/userDelete"; // 회원 탈퇴 확인 페이지로 이동
+    }
     @RequestMapping(value = "userDelete", method = RequestMethod.POST)
-    public String userDelete(HttpSession session) {
+    public String userDelete(HttpSession session, Model model) {
         // 세션에서 사용자 정보를 가져옵니다.
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        // 사용자 정보가 세션에 없으면 로그인 페이지로 리다이렉트
         if (user == null) {
-            return "redirect:/users/login"; // 로그인되지 않으면 로그인 페이지로 리다이렉트
+            model.addAttribute("result", "로그인이 필요한 서비스입니다.");
+            model.addAttribute("path", "./login");
+            return "commons/result";
         }
 
         try {
-            // 회원 탈퇴 처리
-            int result = userService.userDelete(user); // userService에서 사용자 삭제
+            int result = userService.userDelete(user);
 
             if (result > 0) {
-                // 삭제 성공 시 세션 무효화
-                session.invalidate(); // 세션을 무효화하여 사용자 정보를 삭제
-                return "redirect:/"; // 회원 탈퇴 후 메인 페이지로 리다이렉트
+                session.invalidate();
+                model.addAttribute("result", "회원 탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.");
+                model.addAttribute("path", "/");
             } else {
-                // 삭제 실패 시 마이페이지로 리다이렉트
-                return "redirect:/users/mypage"; // 탈퇴 실패 시 마이페이지로 리다이렉트
+                model.addAttribute("result", "회원 탈퇴에 실패했습니다.");
+                model.addAttribute("path", "./mypage");
             }
         } catch (Exception e) {
-            // 예외 발생 시 로그를 찍고 마이페이지로 리다이렉트
-            e.printStackTrace(); // 예외를 로그로 출력
-            return "redirect:/users/mypage"; // 오류 발생 시 마이페이지로 리다이렉트
+            e.printStackTrace();
+            model.addAttribute("result", "오류가 발생했습니다. 다시 시도해주세요.");
+            model.addAttribute("path", "./mypage");
         }
+
+        return "commons/result";
     }
+
 
 	@RequestMapping(value = "checkID", method = RequestMethod.POST)
 	@ResponseBody
