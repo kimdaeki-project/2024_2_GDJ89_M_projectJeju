@@ -33,6 +33,7 @@ public class BoardController {
 		//user부분 C/S/DA/DT가 들어오면 구동
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		boardDTO.setUserID(userDTO.getUserID());
+		System.out.println(files.getOriginalFilename());
 		int result = boardService.add(boardDTO, session, files);
 		
 		return "redirect:./place/list";
@@ -69,9 +70,11 @@ public class BoardController {
 			HashSet<Long> num = new HashSet<Long>();
 			num.add(boardDTO.getBoardNum());
 			session.setAttribute("board", num);
+			System.out.println(boardDTO.getBoardHits());
 			check=true;
 		}
 		boardDTO=boardService.getDetail(boardDTO, check);
+		
 		model.addAttribute("dto", boardDTO);
 		
 		//좋아요 기능
@@ -100,11 +103,30 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public String update(BoardDTO boardDTO, Model model) throws Exception{
+	public String update(BoardDTO boardDTO, Model model, HttpSession session, HttpServletRequest request) throws Exception{
 		boardDTO = boardService.getDetail(boardDTO, false);
-		model.addAttribute("dto", boardDTO);
+		UserDTO userDTO = (UserDTO)session.getAttribute("user");
+		String userID = request.getParameter("userID");
+		if (userID.equals(userDTO.getUserID())) {
+			model.addAttribute("dto", boardDTO);
 		
 		return "boards/update";
+		}else {
+			String path = "";
+			if(boardDTO.getCategory()==1) {
+				path = "place/list";
+			} else if (boardDTO.getCategory()==2) {
+				path = "diner/list";
+			}else {
+				path = "hotel/list";
+			}
+			int result = 0;
+			String s = "글쓴이만 수정할 수 있습니다.";
+			model.addAttribute("result", s);
+			model.addAttribute("path", path);
+		}
+		
+		return "commons/result"; 
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
