@@ -123,7 +123,7 @@ public class UserService {
 	
 	public List<BoardDTO> getMyList(MyPager pager, HttpSession session, @RequestParam("userID") UserDTO userDTO) throws Exception{
 		
-		pager.setPerPage(5L);
+		pager.setPerPage(10L);
 		pager.makeNum();
 		
 		userDTO = (UserDTO)session.getAttribute("user");
